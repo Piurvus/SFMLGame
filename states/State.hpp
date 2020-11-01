@@ -5,6 +5,7 @@
 #include <SFML/Audio.hpp>
 #include <SFML/Network.hpp>
 #include <SFML/System.hpp>
+#include <memory>
 
 #include <vector>
 
@@ -20,9 +21,8 @@ namespace Engine
         virtual ~State();
 
         //  virtual = 0 means every inheritance has to implement those functions
-        virtual void init() = 0;
         virtual void processInput() = 0;
-        virtual void update(sf::Time deltaTime) = 0;
+        virtual void update() = 0;
         virtual void render() = 0;
     };
 };

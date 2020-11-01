@@ -5,7 +5,10 @@
 
 void Game::InitWindow()
 {
-    this->window = new sf::RenderWindow(sf::VideoMode(200, 200), "SFML works!");
+    //  read from file?
+    m_context->m_window->create(sf::VideoMode(200, 200), "SFML works!");
+    m_context->m_window->setFramerateLimit(120);
+    m_context->m_window->setVerticalSyncEnabled(false);
 }
 
 
@@ -13,54 +16,38 @@ void Game::InitWindow()
 
 Game::Game() 
 {
-    this->InitWindow();       
+    this->InitWindow();     
+    //  change Engine::State to a real state
+    m_context->m_states->add(std::make_unique<Engine::State>(m_context));
+
 }
 
 Game::~Game() 
 {
-    delete window;
 }
 
 
 //  GAME FLOW
 
-//  update deltatime
-void Game::updateDt()
-{
-    this->deltatime = this->clock.getElapsedTime().asSeconds();
-}
-
-//  update SFML Events
-void Game::updateEvents()
-{
-    while (this->window->pollEvent(this->event))
-            {
-                if (this->event.type == sf::Event::Closed)
-                    this->window->close();
-            }
-
-}
-
 
 void Game::run()
 {
-    while (this->window->isOpen())
+    sf::Clock clock;
+    sf::Time timeSinceLastFrame = sf::Time::Zero;
+
+
+    while (m_context->m_window->isOpen())
     {
-        this->update();
-        this->render();
-        this->updateDt();
+        timeSinceLastFrame += clock.restart();
+
+        while(timeSinceLastFrame > TIME_PER_FRAME)
+        {
+            timeSinceLastFrame -= TIME_PER_FRAME;
+
+            m_context->m_states->processStateChange();
+            m_context->m_states->getCurrent()->processInput();
+            m_context->m_states->getCurrent()->update();
+            m_context->m_states->getCurrent()->render();
+        }
     }
-}
-void Game::update()
-{
-    this->updateEvents();
-}
-void Game::render()
-{
-    this->window->clear();
-
-    // additional magic
-
-    this->window->display();
-
 }

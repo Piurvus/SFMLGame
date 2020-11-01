@@ -24,8 +24,15 @@ Game::~Game()
 
 //  GAME FLOW
 
+//  update deltatime
+void Game::updateDt()
+{
+    this->deltatime = this->clock.getElapsedTime().asSeconds();
+}
+
+//  update SFML Events
 void Game::updateEvents()
-    {
+{
     while (this->window->pollEvent(this->event))
             {
                 if (this->event.type == sf::Event::Closed)
@@ -33,12 +40,15 @@ void Game::updateEvents()
             }
 
 }
+
+
 void Game::run()
 {
     while (this->window->isOpen())
     {
         this->update();
         this->render();
+        this->updateDt();
     }
 }
 void Game::update()

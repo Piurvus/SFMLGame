@@ -1,9 +1,6 @@
 #pragma once
-#include <SFML/Window.hpp>
-#include <SFML/Graphics.hpp>
-#include <SFML/Audio.hpp>
-#include <SFML/Network.hpp>
-#include <SFML/System.hpp>
+
+#include <State.hpp>
 
 class Game {
 
@@ -12,6 +9,9 @@ private:
     //  Variables
     sf::RenderWindow *window;
     sf::Event event;
+    sf::Clock clock;
+
+    float deltatime;
 
 
     //  Init
@@ -23,6 +23,7 @@ public:
     virtual ~Game();
 
     //  Game flow
+    void updateDt();
     void updateEvents();
     void run();
     void update();

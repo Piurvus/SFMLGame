@@ -8,7 +8,7 @@ namespace Engine
 
     private:
         std::stack<std::unique_ptr<Engine::State>> m_stateStack;
-        std::unique_ptr<State> m_state;
+        std::unique_ptr<Engine::State> m_state;
 
         bool m_remove = false;
         bool m_add = false;
@@ -18,9 +18,9 @@ namespace Engine
         StateMan();
         ~StateMan();
 
-        void add(std::unique_ptr<State> toAdd, bool replace = false);
+        void add(std::unique_ptr<Engine::State> toAdd, bool replace = false);
         void popCurrent();
         void processStateChange();
-        std::unique_ptr<State> &getCurrent();
+        std::unique_ptr<Engine::State> &getCurrent();
     };
 };

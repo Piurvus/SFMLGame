@@ -20,7 +20,11 @@ namespace Engine
         State();
         virtual ~State();
 
+        void pause(){};
+        void start(){};
+
         //  virtual = 0 means every inheritance has to implement those functions
+        virtual void init() = 0;
         virtual void processInput() = 0;
         virtual void update() = 0;
         virtual void render() = 0;

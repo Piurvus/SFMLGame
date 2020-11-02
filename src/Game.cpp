@@ -14,7 +14,8 @@ void Game::InitWindow()
 
 //  CONSTRUCTOR/DESTRUCTOR
 
-Game::Game() 
+Game::Game():
+    m_context(std::make_shared<Context>())
 {
     this->InitWindow();     
     //  change Engine::State to a real state

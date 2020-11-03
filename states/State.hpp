@@ -17,8 +17,8 @@ namespace Engine
         std::vector<sf::Texture> textures;
 
     public:
-        State();
-        virtual ~State();
+        State(){};
+        virtual ~State(){};
 
         void pause(){};
         void start(){};
@@ -26,7 +26,7 @@ namespace Engine
         //  virtual = 0 means every inheritance has to implement those functions
         virtual void init() = 0;
         virtual void processInput() = 0;
-        virtual void update() = 0;
+        virtual void update(sf::Time deltaTime) = 0;
         virtual void render() = 0;
     };
 };

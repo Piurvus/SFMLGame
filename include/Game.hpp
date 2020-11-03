@@ -2,6 +2,7 @@
 
 #include "State.hpp"
 #include "StateMan.hpp"
+#include "Menu.hpp"
 
 struct Context
 {

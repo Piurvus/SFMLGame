@@ -19,7 +19,7 @@ Game::Game():
 {
     this->InitWindow();     
     //  change Engine::State to a real state
-    m_context->m_states->add(std::make_unique<Engine::State>(m_context));
+    m_context->m_states->add(std::make_unique<Menu>(m_context), false);
 
 }
 
@@ -47,7 +47,7 @@ void Game::run()
 
             m_context->m_states->processStateChange();
             m_context->m_states->getCurrent()->processInput();
-            m_context->m_states->getCurrent()->update();
+            m_context->m_states->getCurrent()->update(TIME_PER_FRAME);
             m_context->m_states->getCurrent()->render();
         }
     }

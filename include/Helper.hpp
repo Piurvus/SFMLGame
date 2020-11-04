@@ -1,10 +1,12 @@
 #pragma once
 #include "StateMan.hpp"
+#include "AssetMan.hpp"
 
 struct Context
 {
     std::unique_ptr<sf::RenderWindow> m_window;
     std::unique_ptr<Engine::StateMan> m_states;
+    std::unique_ptr<Engine::AssetMan> m_assets;
     //  assets
 
     Context()

@@ -1,6 +1,6 @@
 #pragma once
 #include "State.hpp"
-#include "Game.hpp"
+#include "Helper.hpp"
 
 class Menu : public Engine::State {
 private:

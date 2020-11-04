@@ -7,7 +7,7 @@ Engine::StateMan::StateMan() {
 Engine::StateMan::~StateMan() {
 
 }
-void Engine::StateMan::add(std::unique_ptr<State> toAdd, bool replace = false)
+void Engine::StateMan::add(std::unique_ptr<State> toAdd, bool replace)
 {
     m_add = true;
     m_state = std::move(toAdd);

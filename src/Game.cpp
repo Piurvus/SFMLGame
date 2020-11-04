@@ -36,7 +36,6 @@ void Game::run()
     sf::Clock clock;
     sf::Time timeSinceLastFrame = sf::Time::Zero;
 
-
     while (m_context->m_window->isOpen())
     {
         timeSinceLastFrame += clock.restart();

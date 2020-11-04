@@ -14,7 +14,6 @@ namespace Engine
     class State {
 
     private:
-        std::vector<sf::Texture> textures;
 
     public:
         State(){};

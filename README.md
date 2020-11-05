@@ -1,0 +1,2 @@
+# SFMLGame
+trying out sfml

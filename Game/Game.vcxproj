@@ -33,6 +33,9 @@
     <ClInclude Include="State.hpp" />
     <ClInclude Include="StateMan.hpp" />
   </ItemGroup>
+  <ItemGroup>
+    <Font Include="fonts\white_systemattic\White Systemattic.ttf" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>

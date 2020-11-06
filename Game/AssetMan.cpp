@@ -20,6 +20,11 @@ void Engine::AssetMan::addFont(unsigned int id, const std::string &filePath)
 
     //  if not loaded yet load it
     font->loadFromFile(filePath);
+
+    //  make sure there is enough space
+    while (id >= m_fonts.size())
+        m_fonts.push_back(nullptr);
+
     m_fonts[id] = std::move(font);
 }
 void Engine::AssetMan::addTexture(unsigned int id, const std::string &filePath)
@@ -32,6 +37,12 @@ void Engine::AssetMan::addTexture(unsigned int id, const std::string &filePath)
     
     //  load it
     texture->loadFromFile(filePath);
+
+    //  make sure there is enough space
+	while (id >= m_fonts.size())
+        m_fonts.push_back(nullptr);
+
+
     m_textures[id] = std::move(texture);
 
 }
@@ -39,10 +50,18 @@ void Engine::AssetMan::addTexture(unsigned int id, const std::string &filePath)
 
 const sf::Texture &Engine::AssetMan::getTexture(unsigned int id) const
 {
-    return *m_textures.at(id).get();
+    if (m_textures.size() > id)
+        return *m_textures.at(id).get();
+
+    //  dunno if this rlly works -> could be cause of error
+    return sf::Texture();
 } 
 const sf::Font &Engine::AssetMan::getFont(unsigned int id) const 
 {
+    if (m_fonts.size() > id)
+        return *m_fonts.at(id).get();
+
+    //  same as above
     return *m_fonts.at(id).get();
 }
 

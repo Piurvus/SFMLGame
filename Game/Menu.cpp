@@ -14,6 +14,8 @@ Menu::~Menu() {
 void Menu::init()
 {
     //  add and set fonts
+    context->m_assets->addFont(MAIN_FONT, "fonts/white_systemattic/White Systemattic.ttf");
+
 } 
 void Menu::update(sf::Time deltaTime)
 {

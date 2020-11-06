@@ -13,6 +13,7 @@ struct Context
     {
         m_window = std::make_unique<sf::RenderWindow>();
         m_states = std::make_unique<Engine::StateMan>();
+        m_assets = std::make_unique<Engine::AssetMan>();
     }
 };
 

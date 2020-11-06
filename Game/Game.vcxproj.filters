@@ -15,6 +15,9 @@
     <Filter Include="States">
       <UniqueIdentifier>{4974b9d6-7f63-4016-be97-9f6b1d5a780e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Ressourcendateien\Fonts">
+      <UniqueIdentifier>{09d5ea0f-5db4-49e8-be51-f47dd4efd763}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AssetMan.cpp">
@@ -52,5 +55,10 @@
     <ClInclude Include="StateMan.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="fonts\white_systemattic\White Systemattic.ttf">
+      <Filter>Ressourcendateien\Fonts</Filter>
+    </Font>
   </ItemGroup>
 </Project>

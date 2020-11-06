@@ -35,6 +35,9 @@
     <ClCompile Include="StateMan.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="GameState.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AssetMan.hpp">
@@ -54,6 +57,9 @@
     </ClInclude>
     <ClInclude Include="StateMan.hpp">
       <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="GameState.h">
+      <Filter>States</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

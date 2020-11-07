@@ -6,6 +6,7 @@
 #include <SFML/Network.hpp>
 #include <SFML/System.hpp>
 #include <memory>
+#include <queue>
 
 #include <vector>
 

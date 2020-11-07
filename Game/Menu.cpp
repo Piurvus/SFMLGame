@@ -4,11 +4,9 @@ Menu::Menu(std::shared_ptr<Context> &m_context) :
     m_context(m_context), playIsSelected(true), playIsClicked(false),
     exitIsSelected(false), exitIsClicked(false)
 {
-
 }
 
-Menu::~Menu() {
-
+Menu::~Menu(){ 
 }
 
 void Menu::init()

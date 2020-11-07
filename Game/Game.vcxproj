@@ -24,14 +24,17 @@
     <ClCompile Include="GameState.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Menu.cpp" />
+    <ClCompile Include="Player.cpp" />
     <ClCompile Include="StateMan.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AssetMan.hpp" />
+    <ClInclude Include="Entity.h" />
     <ClInclude Include="Game.hpp" />
     <ClInclude Include="GameState.h" />
     <ClInclude Include="Helper.hpp" />
     <ClInclude Include="Menu.hpp" />
+    <ClInclude Include="Player.h" />
     <ClInclude Include="State.hpp" />
     <ClInclude Include="StateMan.hpp" />
   </ItemGroup>

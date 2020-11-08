@@ -10,7 +10,7 @@ namespace m_Entity
 		std::queue<unsigned int> *keys;
 
 	public:
-		Player(Context& m_context, sf::Vector2f& pos) :Entity(m_context, pos, 100) {};
+		Player(std::shared_ptr<Context> m_context, sf::Vector2f& pos) : Entity(m_context, pos, 100) {};
 		~Player();
 
 		void render();

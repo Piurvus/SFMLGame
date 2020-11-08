@@ -6,6 +6,7 @@ class GameState : public Engine::State
 {
 private:
 	//	objects fonts etc..
+	std::shared_ptr<Context> m_context;
 
 public:
 	GameState(std::shared_ptr<Context>& m_context);

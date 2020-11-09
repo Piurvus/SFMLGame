@@ -1,12 +1,14 @@
 #include "Menu.hpp"
 
-Menu::Menu(std::shared_ptr<Context> &m_context) :
-    m_context(m_context), playIsSelected(true), playIsClicked(false),
+Menu::Menu(std::shared_ptr<Context>& m_context) :
+    m_context(m_context), event(sf::Event()), playIsSelected(true), playIsClicked(false),
     exitIsSelected(false), exitIsClicked(false)
 {
 }
 
-Menu::~Menu(){ 
+Menu::~Menu()
+{
+
 }
 
 void Menu::init()
@@ -19,7 +21,7 @@ void Menu::init()
     m_exitButton.setFont(m_context->m_assets->getFont(MAIN_FONT));
 
     m_gameTitle.setString("Bomberman");
-    m_gameTitle.setCharacterSize(0.35 * m_context->m_window->getSize().x);
+    m_gameTitle.setCharacterSize(static_cast<unsigned int>(0.35 * m_context->m_window->getSize().x));
     m_gameTitle.setFillColor(sf::Color(0, 100, 255));
     sf::FloatRect textRect = m_gameTitle.getLocalBounds();
     m_gameTitle.setOrigin(textRect.left + textRect.width / 2.0f,
@@ -28,7 +30,7 @@ void Menu::init()
 
 
     m_playButton.setString("Play");
-    m_playButton.setCharacterSize(0.15 * m_context->m_window->getSize().x);
+    m_playButton.setCharacterSize(static_cast<unsigned int>(0.15 * m_context->m_window->getSize().x));
     m_playButton.setFillColor(sf::Color(0, 155, 175));
     sf::FloatRect textRect2 = m_playButton.getLocalBounds();
     m_playButton.setOrigin(textRect2.left + textRect2.width / 2.0f,
@@ -37,7 +39,7 @@ void Menu::init()
 
 
     m_exitButton.setString("Exit");
-    m_exitButton.setCharacterSize(0.15 * m_context->m_window->getSize().x);
+    m_exitButton.setCharacterSize(static_cast<unsigned int>(0.15 * m_context->m_window->getSize().x));
     m_exitButton.setFillColor(sf::Color(0, 155, 175));
     sf::FloatRect textRect3 = m_exitButton.getLocalBounds();
     m_exitButton.setOrigin(textRect3.left + textRect3.width / 2.0f,
@@ -119,7 +121,5 @@ void Menu::processInput()
             }
         }
     }
-
-
 } 
 

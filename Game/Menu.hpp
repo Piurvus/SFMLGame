@@ -7,7 +7,7 @@ class Menu : public Engine::State {
 private:
 
     std::shared_ptr<Context> m_context;
-    
+
     sf::Event event;
 
     sf::Text m_gameTitle;

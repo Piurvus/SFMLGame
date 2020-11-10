@@ -1,7 +1,7 @@
 #include "GameState.h"
 
 GameState::GameState(std::shared_ptr<Context>& m_context) :
-	m_context(m_context), m_event(sf::Event())
+	m_context(m_context), m_event(sf::Event()), keys(std::make_shared<std::queue<unsigned int>>()), m_Player(nullptr)
 {
 	init();
 }
@@ -12,12 +12,14 @@ GameState::~GameState()
 
 void GameState::init()
 {
-	sf::Vector2f pos = { 200.f, 200.f };
-	m_entities.push_back(std::make_unique<m_Entity::Player>(m_context, pos));
+	std::shared_ptr<sf::Vector2f> pos = std::move(std::make_shared<sf::Vector2f>( 200.f, 200.f ));
+	m_Player = std::move(std::make_unique<m_Entity::Player>(m_context, pos));
 }
 
 void GameState::update(sf::Time deltaTime)
 {
+	if (m_Player != nullptr)
+		m_Player->update(deltaTime, keys);
 }
 
 void GameState::processInput()
@@ -28,7 +30,7 @@ void GameState::processInput()
 			m_context->m_window->close();
 		else if (m_event.type == sf::Event::KeyPressed)
 		{
-			keys.push(m_event.key.code);
+			keys->push(m_event.key.code);
 		}
 	}
 }
@@ -38,10 +40,12 @@ void GameState::render()
 	m_context->m_window->clear({ 200, 200, 200, 0 });
 
 	//	render all entities
-	for (auto it = m_entities.begin(); it != m_entities.end(); it++)
+/*	for (auto it = m_entities.begin(); it != m_entities.end(); it++)
 	{
 		it->get()->render();
 	}
-	
+	*/
+	if (m_Player!=nullptr)
+		m_Player->render();
 	m_context->m_window->display();
 }

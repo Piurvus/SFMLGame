@@ -7,15 +7,15 @@ namespace m_Entity
 	class Player : public Entity
 	{
 	private:
-		std::queue<unsigned int>* keys;
+		std::shared_ptr<std::queue<unsigned int>> keys;
 
 	public:
-		Player(std::shared_ptr<Context> m_context, sf::Vector2f& pos) : Entity(m_context, pos, 100), keys(nullptr) {};
+		Player(std::shared_ptr<Context> m_context, std::shared_ptr<sf::Vector2f> pos) : Entity(m_context, pos, 100), keys(nullptr) {};
 		~Player();
 
 		void render();
 		void update(sf::Time deltaTime);
-		void update(sf::Time deltaTime, std::queue<unsigned int>& keys);
+		void update(sf::Time deltaTime, std::shared_ptr<std::queue<unsigned int>> keys);
 
 	};
 };

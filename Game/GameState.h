@@ -10,8 +10,9 @@ private:
 	//	objects fonts etc..
 	std::shared_ptr<Context> m_context;
 	sf::Event m_event;
-	std::queue<unsigned int> keys;
-	std::vector<std::unique_ptr<Entity>> m_entities;
+	std::shared_ptr<std::queue<unsigned int>> keys;
+	std::unique_ptr<m_Entity::Player> m_Player;
+	//std::vector<std::unique_ptr<Entity>> m_entities;
 
 public:
 	GameState(std::shared_ptr<Context>& m_context);

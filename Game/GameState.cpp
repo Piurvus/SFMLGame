@@ -19,7 +19,9 @@ void GameState::init()
 void GameState::update(sf::Time deltaTime)
 {
 	if (m_Player != nullptr)
+	{
 		m_Player->update(deltaTime, keys);
+	}
 }
 
 void GameState::processInput()

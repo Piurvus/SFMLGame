@@ -16,32 +16,60 @@ void m_Entity::Player::render()
 
 void m_Entity::Player::update(sf::Time deltaTime)
 {
+    if (up)
+		this->pos->move({ 0, -10 });
+    if (down)
+		this->pos->move({ 0, 10 });
+    if (left)
+        this->pos->move({ -10, 0 });
+    if (right)
+        this->pos->move({ 10,0 });
+
 }
 void m_Entity::Player::update(sf::Time deltaTime, std::shared_ptr<std::queue<unsigned int>> keys)
 {
     this->keys = std::move(keys);
+    
     while (!this->keys->empty())
     {
+        
         int k = this->keys->front();
         switch (k)
         {
         case sf::Keyboard::Right:
-            this->pos->move({ 10, 0 });
+			right = true;
+            left = false;
+            up = false;
+            down = false;
             break;
         case sf::Keyboard::Left:
-            this->pos->move({ -10, 0 });
+			left = true;
+            right = false;
+            up = false;
+            down = false;
             break;
         case sf::Keyboard::Up:
-            this->pos->move({ 0, -10 });
+			up = true;
+            down = false;
+            left = false;
+            right = false;
             break;
         case sf::Keyboard::Down:
-            this->pos->move({ 0, 10 });
+			down = true;
+            left = false;
+            right = false;
+            up = false;
             break;
         default:
+            down = false;
+            up = false;
+            left = false;
+            right = false;
             break;
 
         }
         this->keys->pop();
     }
+    update(deltaTime);
 }
 

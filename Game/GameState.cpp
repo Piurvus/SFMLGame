@@ -34,6 +34,11 @@ void GameState::processInput()
 		{
 			keys->push(m_event.key.code);
 		}
+		else if (!sf::Keyboard::isKeyPressed(sf::Keyboard::Down) && !sf::Keyboard::isKeyPressed(sf::Keyboard::Up) &&
+			!sf::Keyboard::isKeyPressed(sf::Keyboard::Left) && !sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+		{
+			keys->push(100);
+		}
 	}
 }
 

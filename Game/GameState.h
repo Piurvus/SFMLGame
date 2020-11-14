@@ -12,6 +12,8 @@ private:
 	sf::Event m_event;
 	std::shared_ptr<std::queue<unsigned int>> keys;
 	std::unique_ptr<m_Entity::Player> m_Player;
+	std::shared_ptr<std::vector<std::vector<int>>> m_Field;
+	int squaresize;
 	//std::vector<std::unique_ptr<Entity>> m_entities;
 
 public:

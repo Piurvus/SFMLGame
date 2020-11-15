@@ -17,45 +17,44 @@ void m_Entity::Player::render()
 void m_Entity::Player::update(sf::Time deltaTime)
 {
     if (up)
-		this->pos->move({ 0, -10 });
+        this->pos->move({ 0, -speed });
     if (down)
-		this->pos->move({ 0, 10 });
+        this->pos->move({ 0, speed });
     if (left)
-        this->pos->move({ -10, 0 });
+        this->pos->move({ -speed, 0 });
     if (right)
-        this->pos->move({ 10,0 });
-
+        this->pos->move({ speed,0 });
 }
-void m_Entity::Player::update(sf::Time deltaTime, std::shared_ptr<std::queue<unsigned int>> keys)
+void m_Entity::Player::update(sf::Time deltaTime, std::shared_ptr<std::queue<unsigned int>> keys, std::shared_ptr<std::vector<std::vector<int>>> field)
 {
+    //  update the key strokes
     this->keys = std::move(keys);
-    
+
     while (!this->keys->empty())
     {
-        
         int k = this->keys->front();
         switch (k)
         {
         case sf::Keyboard::Right:
-			right = true;
+            right = true;
             left = false;
             up = false;
             down = false;
             break;
         case sf::Keyboard::Left:
-			left = true;
+            left = true;
             right = false;
             up = false;
             down = false;
             break;
         case sf::Keyboard::Up:
-			up = true;
+            up = true;
             down = false;
             left = false;
             right = false;
             break;
         case sf::Keyboard::Down:
-			down = true;
+            down = true;
             left = false;
             right = false;
             up = false;
@@ -66,10 +65,43 @@ void m_Entity::Player::update(sf::Time deltaTime, std::shared_ptr<std::queue<uns
             left = false;
             right = false;
             break;
-
         }
         this->keys->pop();
     }
+
+    //  check field
+    unsigned int square = m_context->m_window->getSize().y / field->size();
+
+    sf::Transform matrix = this->pos->getTransform();
+
+    auto position = matrix.transformPoint(this->pos->getPoint(0));
+    float diffX = static_cast<int>(position.x) % square /100.f;
+    float diffY = static_cast<int>(position.y) % square /100.f;
+
+    if (up || down)
+    {
+        if (diffX < 0.5 && diffX > 0.1)
+        {
+            this->pos->move({ -speed, 0 });
+        }
+        else if (diffX >= 0.5 && diffX < 0.9)
+        {
+            this->pos->move({ speed, 0 });
+        }
+    }
+    if (left || right)
+    {
+        if (diffY < 0.5 && diffY > 0.1)
+        {
+            this->pos->move({ 0, -speed});
+        }
+        else if (diffY >= 0.5 && diffY < 0.9)
+        {
+            this->pos->move({ 0, speed });
+        }
+
+    }
+
     update(deltaTime);
 }
 

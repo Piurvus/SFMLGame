@@ -8,6 +8,7 @@ m_Entity::Player::~Player()
 void m_Entity::Player::render()
 {
     //  m_context->m_window->draw()
+    this->pos->setFillColor({ 0, 50, 150 });
     m_context->m_window->draw(*pos);
 }
 
@@ -78,6 +79,29 @@ void m_Entity::Player::update(sf::Time deltaTime, std::shared_ptr<std::queue<uns
     float diffX = static_cast<int>(position.x) % square /100.f;
     float diffY = static_cast<int>(position.y) % square /100.f;
 
+
+    if (down && position.y/square +1 >= field->size())
+    {
+        down = false;
+    }
+    if (up && position.y / square == 0)
+    {
+        up = false;
+    }
+    if (left && position.x / square == 0)
+    {
+        left = false;
+    }
+    if (right && position.x / square + 1 > field->begin()->size())
+    {
+        right = false;
+    }
+    if (down && *((field->begin() + (static_cast<int>(position.y / square )+1))->begin()+ (static_cast<int>(position.x / square))) == 1)
+    {
+        down = false;
+    }
+
+   
     if (up || down)
     {
         if (diffX < 0.5 && diffX > 0.1)

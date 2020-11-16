@@ -20,6 +20,17 @@ void GameState::init()
 	std::vector<int> row = std::vector<int>(m_context->m_window->getSize().x / squaresize);
 	std::vector<std::vector<int>> field = std::vector<std::vector<int>>(m_context->m_window->getSize().y / squaresize, row);
 	m_Field = std::make_shared<std::vector<std::vector<int>>> (std::move(field));
+
+	for (unsigned int i = 0; i < m_Field->size(); i++)
+	{
+		for (unsigned int j = 0; j < (m_Field->begin() + i)->size(); j++)
+		{
+			if (j % 2 && i % 2)
+			{
+				*((m_Field->begin() + i)->begin()+j) = 1;
+			}
+		}
+	}
 }
 
 void GameState::update(sf::Time deltaTime)
@@ -78,18 +89,22 @@ void GameState::render()
 	m_context->m_window->draw(line);
 
 
-	for (auto i : *m_Field)
+	sf::RectangleShape obst;
+	obst.setSize({ static_cast<float>(squaresize), static_cast<float>(squaresize) });
+	obst.setFillColor({ 150, 255, 255 });
+
+	for (unsigned int i = 0; i < m_Field->size(); i++)
 	{
-		//m_context->m_window->draw()
+		for (unsigned int j = 0; j < (m_Field->begin()+i)->size(); j++)
+		{
+			if (*((m_Field->begin() + i)->begin() + j) == 1)
+			{
+				obst.setPosition({ static_cast<float>(i * squaresize), static_cast<float>(j * squaresize) });
+				m_context->m_window->draw(obst);
+			}
+		}
 	}
 
-
-	//	render all entities
-/*	for (auto it = m_entities.begin(); it != m_entities.end(); it++)
-	{
-		it->get()->render();
-	}
-	*/
 	if (m_Player!=nullptr)
 		m_Player->render();
 	m_context->m_window->display();

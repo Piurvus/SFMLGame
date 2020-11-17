@@ -60,6 +60,9 @@ void m_Entity::Player::update(sf::Time deltaTime, std::shared_ptr<std::queue<uns
             right = false;
             up = false;
             break;
+        case sf::Keyboard::Space:
+            bomb = true;
+            break;
         default:
             down = false;
             up = false;
@@ -79,6 +82,12 @@ void m_Entity::Player::update(sf::Time deltaTime, std::shared_ptr<std::queue<uns
     float diffX = static_cast<int>(position.x) % square /100.f;
     float diffY = static_cast<int>(position.y) % square /100.f;
 
+    if (bomb && bombs)
+    {
+        bombs--;
+        *((field->begin() + (static_cast<int>(position.x / square)))->begin() + (static_cast<int>(position.y / square))) = 20;
+        bomb = false;
+    }
 
     if (down && position.y/square +1 >= field->size())
     {
@@ -92,15 +101,62 @@ void m_Entity::Player::update(sf::Time deltaTime, std::shared_ptr<std::queue<uns
     {
         left = false;
     }
-    if (right && position.x / square + 1 > field->begin()->size())
+    if (right && position.x / square + 1 >= field->begin()->size())
     {
         right = false;
     }
-    if (down && *((field->begin() + (static_cast<int>(position.y / square )+1))->begin()+ (static_cast<int>(position.x / square))) == 1)
+    if (down && *((field->begin() + (static_cast<int>(position.x / square )))->begin()+ (static_cast<int>(position.y / square)+1)) >= 1)
     {
         down = false;
+        if (diffX < 0.5 && diffX > 0.1)
+        {
+            this->pos->move({ -speed, 0 });
+        }
+        else if (diffX >= 0.5 && diffX < 0.9)
+        {
+            this->pos->move({ speed, 0 });
+        }
+
+    }
+    if (up && *((field->begin() + (static_cast<int>(position.x / square)))->begin() + (static_cast<int>(position.y / square))) >= 1)
+    {
+        up = false;
+        if (diffX < 0.5 && diffX > 0.1)
+        {
+            this->pos->move({ -speed, 0 });
+        }
+        else if (diffX >= 0.5 && diffX < 0.9)
+        {
+            this->pos->move({ speed, 0 });
+        }
+
     }
 
+    if (right && *((field->begin() + (static_cast<int>(position.x / square)+1))->begin() + (static_cast<int>(position.y / square))) >= 1)
+    {
+        right = false;
+        if (diffY < 0.5 && diffY > 0.1)
+        {
+            this->pos->move({ 0, -speed});
+        }
+        else if (diffY >= 0.5 && diffY < 0.9)
+        {
+            this->pos->move({ 0, speed });
+        }
+    }
+
+    if (left && *((field->begin() + (static_cast<int>(position.x / square)))->begin() + (static_cast<int>(position.y / square))) >= 1)
+    {
+        left = false; 
+        if (diffY < 0.5 && diffY > 0.1)
+        {
+            this->pos->move({ 0, -speed});
+        }
+        else if (diffY >= 0.5 && diffY < 0.9)
+        {
+            this->pos->move({ 0, speed });
+        }
+    }
    
     if (up || down)
     {

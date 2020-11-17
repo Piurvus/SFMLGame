@@ -100,8 +100,16 @@ void GameState::render()
 			if (*((m_Field->begin() + i)->begin() + j) == 1)
 			{
 				obst.setPosition({ static_cast<float>(i * squaresize), static_cast<float>(j * squaresize) });
+				obst.setFillColor({ 150, 255, 255 });
 				m_context->m_window->draw(obst);
 			}
+			if (*((m_Field->begin() + i)->begin() + j) >= 10)
+			{
+				obst.setPosition({ static_cast<float>(i * squaresize), static_cast<float>(j * squaresize) });
+				obst.setFillColor({ 255, 150, 150 });
+				m_context->m_window->draw(obst);
+			}
+
 		}
 	}
 

@@ -18,6 +18,14 @@ void Engine::StateMan::popCurrent()
 {
     m_remove = true;
 }
+void Engine::StateMan::popCount(int count)
+{
+    for (int i = 0; i < count; i++)
+    {
+        m_remove = true;
+        processStateChange();
+    }
+}
 void Engine::StateMan::processStateChange()
 {
     if (m_remove && (!m_stateStack.empty()))

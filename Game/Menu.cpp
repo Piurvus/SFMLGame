@@ -65,6 +65,7 @@ void Menu::update(sf::Time deltaTime)
     if (playIsClicked)
     {
         m_context->m_states->add(std::make_unique<GameState>(m_context));
+        playIsClicked = false;
     }
     else if (exitIsClicked)
     {

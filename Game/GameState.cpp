@@ -2,7 +2,7 @@
 
 GameState::GameState(std::shared_ptr<Context>& m_context) :
 	m_context(m_context), m_event(sf::Event()), keys(std::make_shared<std::queue<unsigned int>>()), m_Player(nullptr),
-	m_Field(nullptr), squaresize(100)
+	m_Field(nullptr), squaresize(100), pause(false)
 {
 	init();
 }
@@ -35,6 +35,11 @@ void GameState::init()
 
 void GameState::update(sf::Time deltaTime)
 {
+	if (pause)
+	{
+		pause = false;
+		m_context->m_states->add(std::make_unique<Pause>(m_context));
+	}
 	if (m_Player != nullptr)
 	{
 		m_Player->update(deltaTime, keys, m_Field);
@@ -49,7 +54,12 @@ void GameState::processInput()
 			m_context->m_window->close();
 		else if (m_event.type == sf::Event::KeyPressed)
 		{
-			keys->push(m_event.key.code);
+			if (m_event.key.code == sf::Keyboard::Tab)
+				pause = true;
+			else
+			{
+				keys->push(m_event.key.code);
+			}
 		}
 		else if (!sf::Keyboard::isKeyPressed(sf::Keyboard::Down) && !sf::Keyboard::isKeyPressed(sf::Keyboard::Up) &&
 			!sf::Keyboard::isKeyPressed(sf::Keyboard::Left) && !sf::Keyboard::isKeyPressed(sf::Keyboard::Right))

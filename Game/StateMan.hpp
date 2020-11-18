@@ -20,6 +20,7 @@ namespace Engine
 
         void add(std::unique_ptr<Engine::State> toAdd, bool replace = false);
         void popCurrent();
+        void popCount(int count);
         void processStateChange();
         std::unique_ptr<Engine::State> &getCurrent();
     };

@@ -24,6 +24,7 @@
     <ClCompile Include="GameState.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Menu.cpp" />
+    <ClCompile Include="Pause.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="StateMan.cpp" />
   </ItemGroup>
@@ -34,6 +35,7 @@
     <ClInclude Include="GameState.h" />
     <ClInclude Include="Helper.hpp" />
     <ClInclude Include="Menu.hpp" />
+    <ClInclude Include="Pause.hpp" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="State.hpp" />
     <ClInclude Include="StateMan.hpp" />

@@ -3,6 +3,7 @@
 #include "Helper.hpp"
 #include "Entity.h"
 #include "Player.h"
+#include "Pause.hpp"
 
 class GameState : public Engine::State
 {
@@ -14,6 +15,7 @@ private:
 	std::unique_ptr<m_Entity::Player> m_Player;
 	std::shared_ptr<std::vector<std::vector<int>>> m_Field;
 	int squaresize;
+	bool pause;
 	//std::vector<std::unique_ptr<Entity>> m_entities;
 
 public:

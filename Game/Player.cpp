@@ -82,7 +82,7 @@ void m_Entity::Player::update(sf::Time deltaTime, std::shared_ptr<std::queue<uns
     float diffX = static_cast<int>(position.x) % square /100.f;
     float diffY = static_cast<int>(position.y) % square /100.f;
 
-    if (bomb && bombs)
+    if (bomb && bombs && *((field->begin() + (static_cast<int>(position.x / square )))->begin()+ (static_cast<int>(position.y / square))) == 0 )
     {
         bombs--;
         *((field->begin() + (static_cast<int>(position.x / square)))->begin() + (static_cast<int>(position.y / square))) = 20;
@@ -108,80 +108,57 @@ void m_Entity::Player::update(sf::Time deltaTime, std::shared_ptr<std::queue<uns
     if (down && *((field->begin() + (static_cast<int>(position.x / square )))->begin()+ (static_cast<int>(position.y / square)+1)) >= 1)
     {
         down = false;
-        if (diffX < 0.5 && diffX > 0.1)
-        {
-            this->pos->move({ -speed, 0 });
-        }
-        else if (diffX >= 0.5 && diffX < 0.9)
-        {
-            this->pos->move({ speed, 0 });
-        }
-
     }
     if (up && *((field->begin() + (static_cast<int>(position.x / square)))->begin() + (static_cast<int>(position.y / square))) >= 1)
     {
         up = false;
-        if (diffX < 0.5 && diffX > 0.1)
-        {
-            this->pos->move({ -speed, 0 });
-        }
-        else if (diffX >= 0.5 && diffX < 0.9)
-        {
-            this->pos->move({ speed, 0 });
-        }
-
     }
 
     if (right && *((field->begin() + (static_cast<int>(position.x / square)+1))->begin() + (static_cast<int>(position.y / square))) >= 1)
     {
         right = false;
-        if (diffY < 0.5 && diffY > 0.1)
-        {
-            this->pos->move({ 0, -speed});
-        }
-        else if (diffY >= 0.5 && diffY < 0.9)
-        {
-            this->pos->move({ 0, speed });
-        }
     }
 
     if (left && *((field->begin() + (static_cast<int>(position.x / square)))->begin() + (static_cast<int>(position.y / square))) >= 1)
     {
         left = false; 
-        if (diffY < 0.5 && diffY > 0.1)
-        {
-            this->pos->move({ 0, -speed});
-        }
-        else if (diffY >= 0.5 && diffY < 0.9)
-        {
-            this->pos->move({ 0, speed });
-        }
     }
-   
+    
     if (up || down)
     {
-        if (diffX < 0.5 && diffX > 0.1)
+        if (diffX < 0.35 && diffX > 0.1)
         {
             this->pos->move({ -speed, 0 });
         }
-        else if (diffX >= 0.5 && diffX < 0.9)
+        else if (diffX > 0.65 && diffX < 0.9)
         {
             this->pos->move({ speed, 0 });
+        }
+        else if (diffX >= 0.3 && diffX <= 0.7)
+        {
+            up = false;
+            down = false;
         }
     }
     if (left || right)
     {
-        if (diffY < 0.5 && diffY > 0.1)
+        if (diffY < 0.35 && diffY > 0.1)
         {
             this->pos->move({ 0, -speed});
         }
-        else if (diffY >= 0.5 && diffY < 0.9)
+        else if (diffY > 0.65 && diffY < 0.9)
         {
             this->pos->move({ 0, speed });
+        }
+        else if (diffY >= 0.3 && diffX <= 0.7)
+        {
+            left = false;
+            right = false;
         }
 
     }
 
     update(deltaTime);
+    bomb = false;
 }
 

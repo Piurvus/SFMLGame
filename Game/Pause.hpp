@@ -8,7 +8,7 @@ class Pause : public Engine::State
 private:
 	std::shared_ptr<Context> m_context;
 
-    bool restart, backtomenu, goback;
+    bool backtomenu, goback;
 
     sf::Event m_event;
 

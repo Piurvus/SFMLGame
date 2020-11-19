@@ -13,6 +13,7 @@ GameState::~GameState()
 
 void GameState::init()
 {
+	
 	std::shared_ptr<sf::Vector2f> pos = std::move(std::make_shared<sf::Vector2f>(squaresize*1.f, squaresize*1.f));
 	m_Player = std::move(std::make_unique<m_Entity::Player>(m_context, pos));
 
@@ -44,6 +45,10 @@ void GameState::update(sf::Time deltaTime)
 	{
 		m_Player->update(deltaTime, keys, m_Field);
 	}
+	for (unsigned int i = 0; i < m_Bombs.size(); i++)
+	{
+		m_Bombs[i].get()->update(deltaTime, m_Field);
+	}
 }
 
 void GameState::processInput()
@@ -73,8 +78,11 @@ void GameState::render()
 {
 	m_context->m_window->clear({ 200, 200, 200, 0 });
 
+	for (unsigned int i = 0; i < m_Bombs.size(); i++)
+	{
+		m_Bombs[i].get()->render();
+	}
 
-	
 	sf::VertexArray line(sf::LinesStrip, 2);
 	//	rows
 	for (unsigned int i = 0; i < m_Field->size(); i++)
@@ -95,7 +103,6 @@ void GameState::render()
 	}
 
 
-
 	m_context->m_window->draw(line);
 
 
@@ -113,13 +120,22 @@ void GameState::render()
 				obst.setFillColor({ 150, 255, 255 });
 				m_context->m_window->draw(obst);
 			}
+			//	creating the REAL bombs
+			if (*((m_Field->begin() + i)->begin() + j) == 20)
+			{
+				std::shared_ptr<sf::Vector2f> pos = std::move(std::make_shared<sf::Vector2f>(static_cast<float>(squaresize*i), static_cast<float>(squaresize*j)));
+				std::unique_ptr<Bomb> b = std::move(std::make_unique<Bomb>(m_context, pos));
+				m_Bombs.push_back(std::move(b));
+			}
+			
+			/*
 			if (*((m_Field->begin() + i)->begin() + j) >= 10)
 			{
 				obst.setPosition({ static_cast<float>(i * squaresize), static_cast<float>(j * squaresize) });
 				obst.setFillColor({ 255, 150, 150 });
 				m_context->m_window->draw(obst);
 			}
-
+			*/
 		}
 	}
 

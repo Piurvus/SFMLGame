@@ -1,6 +1,6 @@
 #include "Pause.hpp"
 
-Pause::Pause(std::shared_ptr<Context> context) : m_context(context), restart(false), backtomenu(false), m_event(sf::Event()),
+Pause::Pause(std::shared_ptr<Context> context) : m_context(context), backtomenu(false), m_event(sf::Event()),
                                                  goback(false)
 {
 	init();
@@ -24,11 +24,6 @@ void Pause::update(sf::Time deltaTime)
     {
         m_context->m_states->popCount(2);
     }
-    if (restart)
-    {
-        m_context->m_states->popCurrent();
-        //
-    }
 }
 
 void Pause::render()
@@ -51,20 +46,11 @@ void Pause::processInput()
             {
                 goback = true;
                 backtomenu = false;
-                restart = false;
-                break;
-            }
-            case sf::Keyboard::R:
-            {
-                goback = false;
-                restart = true;
-                backtomenu = false;
                 break;
             }
             case sf::Keyboard::Escape:
             {
                 goback = false;
-                restart = false;
                 backtomenu = true;
                 break;
             }

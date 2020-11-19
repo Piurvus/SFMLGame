@@ -47,6 +47,9 @@
     <ClCompile Include="Pause.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="Bomb.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AssetMan.hpp">
@@ -78,6 +81,9 @@
     </ClInclude>
     <ClInclude Include="Pause.hpp">
       <Filter>States</Filter>
+    </ClInclude>
+    <ClInclude Include="Bomb.h">
+      <Filter>Entities</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

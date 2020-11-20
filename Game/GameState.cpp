@@ -48,6 +48,15 @@ void GameState::update(sf::Time deltaTime)
 	for (unsigned int i = 0; i < m_Bombs.size(); i++)
 	{
 		m_Bombs[i].get()->update(deltaTime, m_Field);
+		if (m_Bombs[i]->goesBoom())
+		{
+			//	action happening here
+			m_Bombs[i]->getPos();
+
+
+
+			m_Bombs.erase(m_Bombs.begin() + i);
+		}
 	}
 }
 
@@ -80,7 +89,7 @@ void GameState::render()
 
 	for (unsigned int i = 0; i < m_Bombs.size(); i++)
 	{
-		m_Bombs[i].get()->render();
+		m_Bombs[i]->render();
 	}
 
 	sf::VertexArray line(sf::LinesStrip, 2);
@@ -124,8 +133,10 @@ void GameState::render()
 			if (*((m_Field->begin() + i)->begin() + j) == 20)
 			{
 				std::shared_ptr<sf::Vector2f> pos = std::move(std::make_shared<sf::Vector2f>(static_cast<float>(squaresize*i), static_cast<float>(squaresize*j)));
-				std::unique_ptr<Bomb> b = std::move(std::make_unique<Bomb>(m_context, pos));
+				sf::Vector2f poss = { static_cast<float>(squaresize * i), static_cast<float>(squaresize * j) };
+				std::unique_ptr<Bomb> b = std::move(std::make_unique<Bomb>(m_context, pos, squaresize, poss));
 				m_Bombs.push_back(std::move(b));
+				*((m_Field->begin() + i)->begin() + j) = 19;
 			}
 			
 			/*

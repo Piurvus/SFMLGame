@@ -1,8 +1,10 @@
 #include "Bomb.h"
 
-Bomb::Bomb(std::shared_ptr<Context> context, std::shared_ptr<sf::Vector2f> poss) :
-    Entity(context, poss, 100), left(false), right(false), up(false), down(false), speed(10.f)
+Bomb::Bomb(std::shared_ptr<Context> context, std::shared_ptr<sf::Vector2f> poss, unsigned int squaresize, sf::Vector2f pos) :
+    Entity(context, poss, 100), left(false), right(false), up(false), down(false), speed(10.f), squaresize(squaresize), position(sf::RectangleShape())
 {
+    position.setSize({ static_cast<float>(squaresize), static_cast<float>(squaresize) });
+    position.setPosition({ pos });
 }
 
 Bomb::~Bomb()
@@ -60,7 +62,8 @@ void Bomb::update(sf::Time deltaTime)
     {
         this->pos->move({ -speed, 0 });
     }
-    health--;
+    if (health >= 0)
+        health--;
 }
 
 void Bomb::update(sf::Time deltaTime, std::shared_ptr<std::vector<std::vector<int>>> m_Field)
@@ -80,17 +83,18 @@ void Bomb::update(sf::Time deltaTime, std::shared_ptr<std::vector<std::vector<in
 void Bomb::render()
 {
     if (health > 80)
-        this->pos->setFillColor({ 150, 100, 100 });
+        this->position.setFillColor({ 150, 100, 100 });
     else if (health > 60)
-        this->pos->setFillColor({ 200, 100, 100 });
+        this->position.setFillColor({ 200, 100, 100 });
     else if (health > 40)
-        this->pos->setFillColor({ 220, 120, 120 });
+        this->position.setFillColor({ 220, 120, 120 });
     else if (health > 20)
-        this->pos->setFillColor({ 240, 150, 150 });
+        this->position.setFillColor({ 240, 150, 150 });
     else
-        this->pos->setFillColor({ 255, 180, 180 });
-    
-    this->m_context->m_window->draw(*this->pos);
+        this->position.setFillColor({ 255, 180, 180 });
+   
+
+    this->m_context->m_window->draw(this->position);
 }
 
 bool Bomb::goesBoom()

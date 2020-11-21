@@ -1,7 +1,8 @@
 #include "Bomb.h"
 
-Bomb::Bomb(std::shared_ptr<Context> context, std::shared_ptr<sf::Vector2f> poss, unsigned int squaresize, sf::Vector2f pos) :
-    Entity(context, poss, 100), left(false), right(false), up(false), down(false), speed(10.f), squaresize(squaresize), position(sf::RectangleShape())
+Bomb::Bomb(std::shared_ptr<Context> context, std::shared_ptr<sf::Vector2f> poss, unsigned int squaresize, sf::Vector2f pos, unsigned int strength) :
+    Entity(context, poss, 100), left(false), right(false), up(false), down(false), speed(10.f), squaresize(squaresize), position(sf::RectangleShape()),
+    strength(strength)
 {
     position.setSize({ static_cast<float>(squaresize), static_cast<float>(squaresize) });
     position.setPosition({ pos });
@@ -46,6 +47,8 @@ void Bomb::getHit(int dir)
 
 void Bomb::update(sf::Time deltaTime)
 {
+    //  collision with player and other bombs or walls?
+
     if (up)
     {
         this->pos->move({ 0, -speed });
@@ -68,16 +71,22 @@ void Bomb::update(sf::Time deltaTime)
 
 void Bomb::update(sf::Time deltaTime, std::shared_ptr<std::vector<std::vector<int>>> m_Field)
 {
-    //  get old position so we can delete this entry later maybe?
-
-    //  stop bombs if necessary
-    //if ()
+    //  save old position
 
     update(deltaTime);
 
-    //  set positions in the field
+    //  delete old position in field and add the new
 
+}
 
+const sf::Vector2i Bomb::getPos() const
+{
+    return {static_cast<int>(this->position.getOrigin().x/squaresize), static_cast<int>(this->position.getOrigin().y/squaresize)};
+}
+
+const int Bomb::getStrength() const
+{
+    return strength;
 }
 
 void Bomb::render()
@@ -97,7 +106,7 @@ void Bomb::render()
     this->m_context->m_window->draw(this->position);
 }
 
-bool Bomb::goesBoom()
+bool Bomb::goesBoom() const
 {
     return health <= 0;
 }

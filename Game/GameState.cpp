@@ -48,10 +48,40 @@ void GameState::update(sf::Time deltaTime)
 	for (unsigned int i = 0; i < m_Bombs.size(); i++)
 	{
 		m_Bombs[i].get()->update(deltaTime, m_Field);
+
+		//	the BOMB GOES puf
 		if (m_Bombs[i]->goesBoom())
 		{
 			//	action happening here
-			m_Bombs[i]->getPos();
+
+			//	first we get the dates
+			sf::Vector2i pos = m_Bombs[i]->getPos();	//	position already /sqaURE
+			int strength = m_Bombs[i]->getStrength();	
+
+			int startx = (pos.x - strength >= 0) ? pos.x - strength : 0;
+			int endx = (pos.x + strength <= m_context->m_window->getSize().x / squaresize) ? pos.x + strength : m_context->m_window->getSize().x / squaresize;
+
+			int starty = (pos.y - strength >= 0) ? pos.y - strength : 0;
+			int endy = (pos.y + strength <= m_context->m_window->getSize().y / squaresize) ? pos.y + strength : m_context->m_window->getSize().y / squaresize;
+
+			//	loop through each position and see if there is something
+			//	if there is react with it
+
+
+
+
+
+			//	delete bomb from map
+			
+
+			//	bomb has to go visually puuf
+
+
+
+			//	reaction with other bombs
+
+
+
 
 
 
@@ -134,7 +164,7 @@ void GameState::render()
 			{
 				std::shared_ptr<sf::Vector2f> pos = std::move(std::make_shared<sf::Vector2f>(static_cast<float>(squaresize*i), static_cast<float>(squaresize*j)));
 				sf::Vector2f poss = { static_cast<float>(squaresize * i), static_cast<float>(squaresize * j) };
-				std::unique_ptr<Bomb> b = std::move(std::make_unique<Bomb>(m_context, pos, squaresize, poss));
+				std::unique_ptr<Bomb> b = std::move(std::make_unique<Bomb>(m_context, pos, squaresize, poss, 3));	//	power of the bomb
 				m_Bombs.push_back(std::move(b));
 				*((m_Field->begin() + i)->begin() + j) = 19;
 			}

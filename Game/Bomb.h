@@ -28,4 +28,5 @@ public:
 	const int getStrength() const;
 
 	bool goesBoom() const;
+	void goBoom();
 };

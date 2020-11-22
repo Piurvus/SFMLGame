@@ -56,26 +56,49 @@ void GameState::update(sf::Time deltaTime)
 
 			//	first we get the dates
 			sf::Vector2i pos = m_Bombs[i]->getPos();	//	position already /sqaURE
+
+			//	bomb spot to explosion color ==18
+			*((m_Field->begin() + pos.y)->begin() + pos.x) = 18;
+
 			int strength = m_Bombs[i]->getStrength();	
 
-			int startx = (pos.x - strength >= 0) ? pos.x - strength : 0;
-			int endx = (pos.x + strength <= m_context->m_window->getSize().x / squaresize) ? pos.x + strength : m_context->m_window->getSize().x / squaresize;
-
-			int starty = (pos.y - strength >= 0) ? pos.y - strength : 0;
-			int endy = (pos.y + strength <= m_context->m_window->getSize().y / squaresize) ? pos.y + strength : m_context->m_window->getSize().y / squaresize;
-
+			m_Bombs.erase(m_Bombs.begin() + i);
 			//	loop through each position and see if there is something
-			//	if there is react with it
 
 
+			for (unsigned int k = (pos.x - strength>=0)? pos.x-strength:0; k <= pos.x+strength; k++)
+			{
+				if (!(pos.y % 2) && k < m_Field->size())
+				{
+					if (*((m_Field->begin() + pos.y)->begin() + k) == 19)
+					{
+						for (int j = 0; j < m_Bombs.size(); j++)
+						{
+							if (m_Bombs[j]->getPos().x == k)
+								m_Bombs[j]->goBoom();
+						}
+					}
+					*((m_Field->begin() + pos.y)->begin() + k) = 18;
+				}
+			}
+
+			for (unsigned int k = (pos.y - strength >= 0) ? pos.y - strength : 0; k <= pos.y + strength; k++)
+			{
+				if (!(pos.x % 2) && k < m_Field->begin()->size())
+				{
+					if (*((m_Field->begin() + k)->begin() + pos.x) == 19)
+					{
+						for (int j = 0; j < m_Bombs.size(); j++)
+						{
+							if (m_Bombs[j]->getPos().y == k)
+								m_Bombs[j]->goBoom();
+						}
+					}
 
 
-
-			//	delete bomb from map
-			
-
-			//	bomb has to go visually puuf
-
+					*((m_Field->begin() + k)->begin() + pos.x) = 18;
+				}
+			}
 
 
 			//	reaction with other bombs
@@ -85,7 +108,6 @@ void GameState::update(sf::Time deltaTime)
 
 
 
-			m_Bombs.erase(m_Bombs.begin() + i);
 		}
 	}
 }
@@ -169,14 +191,16 @@ void GameState::render()
 				*((m_Field->begin() + i)->begin() + j) = 19;
 			}
 			
-			/*
-			if (*((m_Field->begin() + i)->begin() + j) >= 10)
+			if (*((m_Field->begin() + i)->begin() + j) >= 5 &&*((m_Field->begin() + i)->begin() + j) <= 18)
 			{
 				obst.setPosition({ static_cast<float>(i * squaresize), static_cast<float>(j * squaresize) });
-				obst.setFillColor({ 255, 150, 150 });
+				obst.setFillColor({ 150, 150, 255 });
 				m_context->m_window->draw(obst);
+				*((m_Field->begin() + i)->begin() + j) -= 1;
+				if (*((m_Field->begin() + i)->begin() + j) == 4)
+					*((m_Field->begin() + i)->begin() + j) = 0;
 			}
-			*/
+			
 		}
 	}
 

@@ -81,7 +81,7 @@ void Bomb::update(sf::Time deltaTime, std::shared_ptr<std::vector<std::vector<in
 
 const sf::Vector2i Bomb::getPos() const
 {
-    return {static_cast<int>(this->position.getOrigin().x/squaresize), static_cast<int>(this->position.getOrigin().y/squaresize)};
+    return {static_cast<int>(this->position.getGlobalBounds().top/squaresize), static_cast<int>(this->position.getGlobalBounds().left/squaresize)};
 }
 
 const int Bomb::getStrength() const
@@ -109,4 +109,9 @@ void Bomb::render()
 bool Bomb::goesBoom() const
 {
     return health <= 0;
+}
+
+void Bomb::goBoom()
+{
+    health = 0;
 }

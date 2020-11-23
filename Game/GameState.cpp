@@ -65,30 +65,35 @@ void GameState::update(sf::Time deltaTime)
 			m_Bombs.erase(m_Bombs.begin() + i);
 			//	loop through each position and see if there is something
 
+			sf::Vector2i plpos = m_Player->getPos(squaresize);
 
-			for (unsigned int k = (pos.x - strength>=0)? pos.x-strength:0; k <= pos.x+strength; k++)
+			//	vertical boom
+			for (int k = (pos.x - strength>=0)? pos.x-strength:0; k <= pos.x+strength; k++)
 			{
-				if (!(pos.y % 2) && k < m_Field->size())
+				if (!(pos.y % 2) && k < static_cast<int>(m_Field->size()))
 				{
 					if (*((m_Field->begin() + pos.y)->begin() + k) == 19)
 					{
-						for (int j = 0; j < m_Bombs.size(); j++)
+						for (unsigned int j = 0; j < m_Bombs.size(); j++)
 						{
 							if (m_Bombs[j]->getPos().x == k)
 								m_Bombs[j]->goBoom();
 						}
 					}
 					*((m_Field->begin() + pos.y)->begin() + k) = 18;
+					if (*((m_Field->begin() + plpos.y)->begin() + plpos.x) >= 5 && *((m_Field->begin() + plpos.y)->begin() + plpos.x) <= 18)
+						m_Player->kill();
 				}
 			}
 
-			for (unsigned int k = (pos.y - strength >= 0) ? pos.y - strength : 0; k <= pos.y + strength; k++)
+			//	horizontal boom
+			for (int k = (pos.y - strength >= 0) ? pos.y - strength : 0; k <= pos.y + strength; k++)
 			{
-				if (!(pos.x % 2) && k < m_Field->begin()->size())
+				if (!(pos.x % 2) && k < static_cast<int>(m_Field->begin()->size()))
 				{
 					if (*((m_Field->begin() + k)->begin() + pos.x) == 19)
 					{
-						for (int j = 0; j < m_Bombs.size(); j++)
+						for (unsigned int j = 0; j < m_Bombs.size(); j++)
 						{
 							if (m_Bombs[j]->getPos().y == k)
 								m_Bombs[j]->goBoom();
@@ -97,6 +102,9 @@ void GameState::update(sf::Time deltaTime)
 
 
 					*((m_Field->begin() + k)->begin() + pos.x) = 18;
+					if (*((m_Field->begin() + plpos.y)->begin() + plpos.x) >= 5 && *((m_Field->begin() + plpos.y)->begin() + plpos.x) <= 18)
+						m_Player->kill();
+
 				}
 			}
 

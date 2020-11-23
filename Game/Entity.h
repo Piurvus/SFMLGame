@@ -18,4 +18,7 @@ public:
 	virtual void update(sf::Time deltaTime) = 0;
 	virtual void render() = 0;
 
+	const sf::Vector2i getPos(int squaresize) const
+	{ return { static_cast<int>(this->pos->getGlobalBounds().top / squaresize), static_cast<int>(this->pos->getGlobalBounds().left / squaresize) }; };
+
 };

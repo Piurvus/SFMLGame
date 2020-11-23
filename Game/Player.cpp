@@ -7,9 +7,12 @@ m_Entity::Player::~Player()
 
 void m_Entity::Player::render()
 {
-    //  m_context->m_window->draw()
-    this->pos->setFillColor({ 0, 50, 150 });
-    m_context->m_window->draw(*pos);
+    if (!this->isDead())
+    {
+        //  m_context->m_window->draw()
+        this->pos->setFillColor({ 0, 50, 150 });
+        m_context->m_window->draw(*pos);
+    }
 }
 
 
@@ -28,6 +31,9 @@ void m_Entity::Player::update(sf::Time deltaTime)
 }
 void m_Entity::Player::update(sf::Time deltaTime, std::shared_ptr<std::queue<unsigned int>> keys, std::shared_ptr<std::vector<std::vector<int>>> field)
 {
+    if (this->isDead())
+        return;
+
     //  update the key strokes
     this->keys = std::move(keys);
 
@@ -160,5 +166,15 @@ void m_Entity::Player::update(sf::Time deltaTime, std::shared_ptr<std::queue<uns
 
     update(deltaTime);
     bomb = false;
+}
+
+void m_Entity::Player::kill()
+{
+    this->dead = true;
+}
+
+const bool m_Entity::Player::isDead() const
+{
+    return this->dead;
 }
 

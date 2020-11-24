@@ -32,8 +32,9 @@ void m_Entity::Player::update(sf::Time deltaTime)
 void m_Entity::Player::update(sf::Time deltaTime, std::shared_ptr<std::queue<unsigned int>> keys, std::shared_ptr<std::vector<std::vector<int>>> field)
 {
     if (this->isDead())
+    {
         return;
-
+    }
     //  update the key strokes
     this->keys = std::move(keys);
 
@@ -114,20 +115,32 @@ void m_Entity::Player::update(sf::Time deltaTime, std::shared_ptr<std::queue<uns
     if (down && *((field->begin() + (static_cast<int>(position.x / square )))->begin()+ (static_cast<int>(position.y / square)+1)) >= 1)
     {
         down = false;
+        if (*((field->begin() + (static_cast<int>(position.x / square)))->begin() + (static_cast<int>(position.y / square) + 1)) == 19)
+            *((field->begin() + (static_cast<int>(position.x / square)))->begin() + (static_cast<int>(position.y / square) + 1)) = 23;
     }
+
+    //  moving bombs?   right, left, down, up
     if (up && *((field->begin() + (static_cast<int>(position.x / square)))->begin() + (static_cast<int>(position.y / square))) >= 1)
     {
         up = false;
+        if (*((field->begin() + (static_cast<int>(position.x / square)))->begin() + (static_cast<int>(position.y / square) + 1)) == 19)
+            *((field->begin() + (static_cast<int>(position.x / square)))->begin() + (static_cast<int>(position.y / square) + 1)) = 24;
     }
 
     if (right && *((field->begin() + (static_cast<int>(position.x / square)+1))->begin() + (static_cast<int>(position.y / square))) >= 1)
     {
         right = false;
+        if (*((field->begin() + (static_cast<int>(position.x / square) + 1))->begin() + (static_cast<int>(position.y / square))) == 19)
+            *((field->begin() + (static_cast<int>(position.x / square) + 1))->begin() + (static_cast<int>(position.y / square))) = 21;
+
     }
 
     if (left && *((field->begin() + (static_cast<int>(position.x / square)))->begin() + (static_cast<int>(position.y / square))) >= 1)
     {
         left = false; 
+        if (*((field->begin() + (static_cast<int>(position.x / square)))->begin() + (static_cast<int>(position.y / square))) == 19)
+            *((field->begin() + (static_cast<int>(position.x / square)))->begin() + (static_cast<int>(position.y / square))) = 22;
+
     }
     
     if (up || down)

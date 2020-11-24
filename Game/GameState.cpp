@@ -43,6 +43,11 @@ void GameState::update(sf::Time deltaTime)
 	}
 	if (m_Player != nullptr)
 	{
+		if (m_Player->isDead())
+		{
+			std::shared_ptr<sf::Vector2f> pos = std::move(std::make_shared<sf::Vector2f>(squaresize*1.f, squaresize*1.f));
+			m_Player = std::move(std::make_unique<m_Entity::Player>(m_context, pos));
+		}
 		m_Player->update(deltaTime, keys, m_Field);
 	}
 	for (unsigned int i = 0; i < m_Bombs.size(); i++)
@@ -99,6 +104,16 @@ void GameState::update(sf::Time deltaTime)
 								m_Bombs[j]->goBoom();
 						}
 					}
+
+					//	
+					if (*((m_Field->begin() + k)->begin() + pos.x) >= 21 && *((m_Field->begin() + k)->begin() + pos.x) <= 24)
+					{/*
+						Bomb* hit;
+						
+						hit->getHit(*((m_Field->begin() + k)->begin() + pos.x) - 21);
+					*/}
+
+
 
 
 					*((m_Field->begin() + k)->begin() + pos.x) = 18;

@@ -106,12 +106,7 @@ void GameState::update(sf::Time deltaTime)
 					}
 
 					//	
-					if (*((m_Field->begin() + k)->begin() + pos.x) >= 21 && *((m_Field->begin() + k)->begin() + pos.x) <= 24)
-					{/*
-						Bomb* hit;
-						
-						hit->getHit(*((m_Field->begin() + k)->begin() + pos.x) - 21);
-					*/}
+					
 
 
 
@@ -122,16 +117,34 @@ void GameState::update(sf::Time deltaTime)
 
 				}
 			}
-
-
 			//	reaction with other bombs
-
-
-
-
-
-
 		}
+		for (unsigned int i = 0; i < m_Field->size(); i++)
+		{
+			for (unsigned int k = 0; k < (m_Field->begin() + i)->size(); k++)
+			{
+				if (*((m_Field->begin() + k)->begin() + i) >= 21 && *((m_Field->begin() + k)->begin() + i) <= 24)
+				{
+					unsigned int index = 9999;
+					for (unsigned int i = 0; i < m_Bombs.size(); i++)
+					{
+						sf::Vector2i pos = m_Bombs[i]->getPos();
+						if (pos.x == k && pos.y == i)
+						{
+							index = i;
+							break;
+						}
+					}
+
+					m_Bombs[i]->getHit(*((m_Field->begin() + k)->begin() + i) - 21);
+					*((m_Field->begin() + k)->begin() + i) = 19;
+				}
+
+
+			}
+		}
+
+
 	}
 }
 

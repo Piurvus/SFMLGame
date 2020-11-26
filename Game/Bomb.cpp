@@ -14,56 +14,57 @@ Bomb::~Bomb()
 
 void Bomb::getHit(int dir)
 {
-    //  have to implement a stop mechanism i guess ,o,
-    if (dir == 0)
+    //  have to implement a stop mechanism i guess ,o,  right left, down up
+    switch (dir)
     {
-        this->right = true;
-        this->left = false;
-        this->up = false;
-        this->down = false;
-    }
-    else if (dir == 1)
-    {
-		this->right = false;
-        this->left = true;
-        this->up = false;
-        this->down = false;
-    }
-    else if (dir == 2)
-    {
-        this->right = false;
-        this->left = false;
-        this->up = false;
-        this->down = true;
-    }
-    else
-    {
-        this->right = false;
-        this->left = false;
-        this->up = true;
-        this->down = false;
+    case 0:
+        right = true;
+        left = false;
+        up = false;
+        down = false;
+        break;
+    case 1:
+        right = false;
+        left = true;
+        up = false;
+        down = false;
+        break;
+    case 2:
+        right = false;
+        left = false;
+        up = false;
+        down = true;
+    case 3: 
+        right = false;
+        left = false;
+        up = true;
+        down = false;
+        break;
+    default:
+        right = true;
+        up = true;
     }
 }
+
 
 void Bomb::update(sf::Time deltaTime)
 {
     //  collision with player and other bombs or walls?
-
     if (up)
     {
-        this->pos->move({ 0, -speed });
+        this->position.move({ 0, -speed });
     }
     else if (down)
     {
-        this->pos->move({ 0, speed });
+        this->position.move({ 0, speed });
     }
     else if (right)
     {
-        this->pos->move({ speed, 0 });
+        this->position.move({ speed, 0 });
     }
     else if (left)
     {
-        this->pos->move({ -speed, 0 });
+        this->position.move({ -speed, 0 });
     }
     if (health >= 0)
         health--;

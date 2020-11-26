@@ -8,7 +8,6 @@ private:
 	float speed;
 	int squaresize;
 	const unsigned int strength;
-
 	sf::RectangleShape position;
 
 public:

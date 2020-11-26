@@ -1,4 +1,5 @@
 #include "GameState.h"
+#include <iostream>
 
 GameState::GameState(std::shared_ptr<Context>& m_context) :
 	m_context(m_context), m_event(sf::Event()), keys(std::make_shared<std::queue<unsigned int>>()), m_Player(nullptr),
@@ -104,46 +105,35 @@ void GameState::update(sf::Time deltaTime)
 								m_Bombs[j]->goBoom();
 						}
 					}
-
-					//	
-					
-
-
-
-
 					*((m_Field->begin() + k)->begin() + pos.x) = 18;
 					if (*((m_Field->begin() + plpos.y)->begin() + plpos.x) >= 5 && *((m_Field->begin() + plpos.y)->begin() + plpos.x) <= 18)
 						m_Player->kill();
 
 				}
 			}
-			//	reaction with other bombs
 		}
-		for (unsigned int i = 0; i < m_Field->size(); i++)
+
+		//	reaction with other bombs
+		for (unsigned int x = 0; x < m_Field->size(); x++)
 		{
-			for (unsigned int k = 0; k < (m_Field->begin() + i)->size(); k++)
+			for (unsigned int y = 0; y < (m_Field->begin() + x)->size(); y++)
 			{
-				if (*((m_Field->begin() + k)->begin() + i) >= 21 && *((m_Field->begin() + k)->begin() + i) <= 24)
+				int* fieldvalue = &(*((m_Field->begin() + x)->begin() + y));	//	idk dont ask
+
+				if (*fieldvalue >= 21 && *fieldvalue <= 24)
 				{
-					unsigned int index = 9999;
 					for (unsigned int i = 0; i < m_Bombs.size(); i++)
 					{
-						sf::Vector2i pos = m_Bombs[i]->getPos();
-						if (pos.x == k && pos.y == i)
+						if (m_Bombs[i]->getPos().x == x && m_Bombs[i]->getPos().y == y)
 						{
-							index = i;
-							break;
+							std::cout << ">YE";
+							m_Bombs[i]->getHit(*fieldvalue - 21);
 						}
 					}
-
-					m_Bombs[i]->getHit(*((m_Field->begin() + k)->begin() + i) - 21);
-					*((m_Field->begin() + k)->begin() + i) = 19;
+					*fieldvalue = 19;
 				}
-
-
 			}
 		}
-
 
 	}
 }

@@ -3,7 +3,7 @@
 
 GameState::GameState(std::shared_ptr<Context>& m_context) :
 	m_context(m_context), m_event(sf::Event()), keys(std::make_shared<std::queue<unsigned int>>()), m_Player(nullptr),
-	m_Field(nullptr), squaresize(100), pause(false)
+	m_Field(nullptr), m_gamefield(std::vector<std::vector<int>>()), squaresize(100), pause(false)
 {
 	init();
 }
@@ -23,6 +23,26 @@ void GameState::init()
 	std::vector<std::vector<int>> field = std::vector<std::vector<int>>(m_context->m_window->getSize().y / squaresize, row);
 	m_Field = std::make_shared<std::vector<std::vector<int>>> (std::move(field));
 
+	//	new field
+	row = std::vector<int>(m_context->m_window->getSize().x);
+	std::vector<std::vector<int>> m_gamefield = std::vector<std::vector<int>>(m_context->m_window->getSize().y, row);
+
+	for (unsigned int y = 0; y < m_context->m_window->getSize().y / squaresize; y++)
+		for (unsigned int x = 0; x < m_context->m_window->getSize().x / squaresize; x++)
+		{
+			if (y % 2 && x % 2)
+			{
+				for (unsigned int i = 0; i < squaresize; i++)
+				{
+					for (unsigned int j = 0; j < squaresize; j++)
+					{
+						m_gamefield[y * squaresize + i][x * squaresize + j] = 99;
+					}
+				}
+			}
+		}
+
+	/*
 	for (unsigned int i = 0; i < m_Field->size(); i++)
 	{
 		for (unsigned int j = 0; j < (m_Field->begin() + i)->size(); j++)
@@ -33,6 +53,7 @@ void GameState::init()
 			}
 		}
 	}
+	*/
 }
 
 void GameState::update(sf::Time deltaTime)
@@ -197,6 +218,24 @@ void GameState::render()
 	obst.setSize({ static_cast<float>(squaresize), static_cast<float>(squaresize) });
 	obst.setFillColor({ 150, 255, 255 });
 
+	//	new field drawing
+	for (unsigned int y = 0; y < m_context->m_window->getSize().y/squaresize; y++)
+	{
+		for (unsigned int x = 0; x < m_context->m_window->getSize().x/squaresize; x++)
+		{
+			if(m_gamefield.size() > 0)
+			{
+				//if (m_gamefield[0][0] == 99)
+				{
+					obst.setPosition({ static_cast<float>(y * squaresize), static_cast<float>(x * squaresize) });
+					obst.setFillColor({ 150, 255, 255 });
+					m_context->m_window->draw(obst);
+				}
+			}
+		}
+	}
+
+	//	old field
 	for (unsigned int i = 0; i < m_Field->size(); i++)
 	{
 		for (unsigned int j = 0; j < (m_Field->begin()+i)->size(); j++)

@@ -25,22 +25,24 @@ void GameState::init()
 
 	//	new field
 	row = std::vector<int>(m_context->m_window->getSize().x);
-	std::vector<std::vector<int>> m_gamefield = std::vector<std::vector<int>>(m_context->m_window->getSize().y, row);
+	m_gamefield = std::vector<std::vector<int>>(m_context->m_window->getSize().y, row);
 
 	for (unsigned int y = 0; y < m_context->m_window->getSize().y / squaresize; y++)
+	{
 		for (unsigned int x = 0; x < m_context->m_window->getSize().x / squaresize; x++)
 		{
 			if (y % 2 && x % 2)
 			{
-				for (unsigned int i = 0; i < squaresize; i++)
+				for (int i = 0; i < squaresize; i++)
 				{
-					for (unsigned int j = 0; j < squaresize; j++)
+					for (int j = 0; j < squaresize; j++)
 					{
 						m_gamefield[y * squaresize + i][x * squaresize + j] = 99;
 					}
 				}
 			}
 		}
+	}
 
 	/*
 	for (unsigned int i = 0; i < m_Field->size(); i++)
@@ -219,15 +221,15 @@ void GameState::render()
 	obst.setFillColor({ 150, 255, 255 });
 
 	//	new field drawing
-	for (unsigned int y = 0; y < m_context->m_window->getSize().y/squaresize; y++)
+	for (unsigned int y = 0; y < m_gamefield.size(); y+= squaresize)
 	{
-		for (unsigned int x = 0; x < m_context->m_window->getSize().x/squaresize; x++)
+		for (unsigned int x = 0; x < (m_gamefield.begin()+y)->size(); x+=squaresize)
 		{
 			if(m_gamefield.size() > 0)
 			{
-				//if (m_gamefield[0][0] == 99)
+				if (m_gamefield[y][x] == 99)
 				{
-					obst.setPosition({ static_cast<float>(y * squaresize), static_cast<float>(x * squaresize) });
+					obst.setPosition({ static_cast<float>(x), static_cast<float>(y) });
 					obst.setFillColor({ 150, 255, 255 });
 					m_context->m_window->draw(obst);
 				}

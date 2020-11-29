@@ -20,9 +20,10 @@ namespace m_Entity
 																						up(false), down(false), speed(10.f), bomb(false), bombs(9), dead(false){};
 		~Player();
 
+		const bool putBomb() const;
 		void render();
 		void update(sf::Time deltaTime);
-		void update(sf::Time deltaTime, std::shared_ptr<std::queue<unsigned int>> keys, std::shared_ptr<std::vector<std::vector<int>>> m_Field);
+		void update(sf::Time deltaTime, std::shared_ptr<std::queue<unsigned int>> keys, std::vector<std::vector<int>>& field);
 		void kill();
 		const bool isDead() const;
 	};

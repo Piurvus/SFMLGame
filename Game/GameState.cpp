@@ -72,10 +72,16 @@ void GameState::update(sf::Time deltaTime)
 			std::shared_ptr<sf::Vector2f> pos = std::move(std::make_shared<sf::Vector2f>(squaresize*1.f, squaresize*1.f));
 			m_Player = std::move(std::make_unique<m_Entity::Player>(m_context, pos));
 		}
-		m_Player->update(deltaTime, keys, m_Field);
+		m_Player->update(deltaTime, keys, m_gamefield);
+		if (m_Player->putBomb())
+		{
+			sf::Vector2i pos = m_Player->getPos(squaresize);
+			
+		}
 	}
 	for (unsigned int i = 0; i < m_Bombs.size(); i++)
 	{
+		/*
 		m_Bombs[i].get()->update(deltaTime, m_Field);
 
 		//	the BOMB GOES puf
@@ -157,6 +163,7 @@ void GameState::update(sf::Time deltaTime)
 				}
 			}
 		}
+		*/
 
 	}
 }
@@ -195,19 +202,19 @@ void GameState::render()
 
 	sf::VertexArray line(sf::LinesStrip, 2);
 	//	rows
-	for (unsigned int i = 0; i < m_Field->size(); i++)
+	for (unsigned int i = 0; i < m_context->m_window->getSize().y; i+=squaresize)
 	{
-		line[0].position = sf::Vector2f(0.f, static_cast<float>(i*squaresize));
-		line[1].position = sf::Vector2f(static_cast<float>(m_context->m_window->getSize().x), static_cast<float>(i*squaresize));
+		line[0].position = sf::Vector2f(0.f, static_cast<float>(i));
+		line[1].position = sf::Vector2f(static_cast<float>(m_context->m_window->getSize().x), static_cast<float>(i));
 
 		m_context->m_window->draw(line);
 	}
 
 	//	columns
-	for (unsigned int i = 0; i < m_Field->begin()->size(); i++)
+	for (unsigned int i = 0; i < m_context->m_window->getSize().x; i+=squaresize)
 	{
-		line[0].position = sf::Vector2f(static_cast<float>(i*squaresize), 0.f);
-		line[1].position = sf::Vector2f(static_cast<float>(i*squaresize), static_cast<float>(m_context->m_window->getSize().y));
+		line[0].position = sf::Vector2f(static_cast<float>(i), 0.f);
+		line[1].position = sf::Vector2f(static_cast<float>(i), static_cast<float>(m_context->m_window->getSize().y));
 
 		m_context->m_window->draw(line);
 	}
@@ -236,7 +243,7 @@ void GameState::render()
 			}
 		}
 	}
-
+/*
 	//	old field
 	for (unsigned int i = 0; i < m_Field->size(); i++)
 	{
@@ -270,7 +277,7 @@ void GameState::render()
 			
 		}
 	}
-
+*/
 	if (m_Player!=nullptr)
 		m_Player->render();
 	m_context->m_window->display();

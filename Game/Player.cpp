@@ -5,6 +5,11 @@ m_Entity::Player::~Player()
 {
 }
 
+const bool m_Entity::Player::putBomb() const
+{
+    return bomb;
+}
+
 void m_Entity::Player::render()
 {
     if (!this->isDead())
@@ -29,7 +34,7 @@ void m_Entity::Player::update(sf::Time deltaTime)
     if (right)
         this->pos->move({ speed,0 });
 }
-void m_Entity::Player::update(sf::Time deltaTime, std::shared_ptr<std::queue<unsigned int>> keys, std::shared_ptr<std::vector<std::vector<int>>> field)
+void m_Entity::Player::update(sf::Time deltaTime, std::shared_ptr<std::queue<unsigned int>> keys, std::vector<std::vector<int>> &field)
 {
     if (this->isDead())
     {
@@ -80,6 +85,7 @@ void m_Entity::Player::update(sf::Time deltaTime, std::shared_ptr<std::queue<uns
         this->keys->pop();
     }
 
+    /*
     //  check field
     unsigned int square = m_context->m_window->getSize().y / field->size();
 
@@ -176,7 +182,7 @@ void m_Entity::Player::update(sf::Time deltaTime, std::shared_ptr<std::queue<uns
         }
 
     }
-
+    */
     update(deltaTime);
     bomb = false;
 }

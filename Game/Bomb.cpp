@@ -70,7 +70,7 @@ void Bomb::update(sf::Time deltaTime)
         health--;
 }
 
-void Bomb::update(sf::Time deltaTime, std::shared_ptr<std::vector<std::vector<int>>> m_Field)
+void Bomb::update(sf::Time deltaTime, std::vector<std::vector<int>> &m_Field)
 {
     //  save old position
 

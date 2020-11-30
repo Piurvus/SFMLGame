@@ -5,9 +5,15 @@ m_Entity::Player::~Player()
 {
 }
 
-const bool m_Entity::Player::putBomb() const
+const bool m_Entity::Player::putBomb()
 {
-    return bomb;
+    if (bomb && bombs)
+    {
+        bomb = false;
+        bombs--;
+        return true;
+    }
+    return false;
 }
 
 void m_Entity::Player::render()
@@ -73,7 +79,7 @@ void m_Entity::Player::update(sf::Time deltaTime, std::shared_ptr<std::queue<uns
             up = false;
             break;
         case sf::Keyboard::Space:
-            bomb = true;
+			bomb = true;
             break;
         default:
             down = false;
@@ -84,6 +90,7 @@ void m_Entity::Player::update(sf::Time deltaTime, std::shared_ptr<std::queue<uns
         }
         this->keys->pop();
     }
+
 
     /*
     //  check field
@@ -184,7 +191,6 @@ void m_Entity::Player::update(sf::Time deltaTime, std::shared_ptr<std::queue<uns
     }
     */
     update(deltaTime);
-    bomb = false;
 }
 
 void m_Entity::Player::kill()

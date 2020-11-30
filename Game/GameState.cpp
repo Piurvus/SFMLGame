@@ -75,15 +75,21 @@ void GameState::update(sf::Time deltaTime)
 		m_Player->update(deltaTime, keys, m_gamefield);
 		if (m_Player->putBomb())
 		{
-			sf::Vector2i pos = m_Player->getPos(squaresize);
-			
+			sf::Vector2f poss = m_Player->getPos();
+			std::shared_ptr<sf::Vector2f> pos = std::move(std::make_shared<sf::Vector2f>((poss.y), (poss.x)));
+			std::unique_ptr<Bomb> b = std::move(std::make_unique<Bomb>(m_context, pos, squaresize, *pos, 3));	//	power of the bomb
+			m_Bombs.push_back(std::move(b));
+
 		}
 	}
+
+	
+
 	for (unsigned int i = 0; i < m_Bombs.size(); i++)
 	{
+		
+		m_Bombs[i].get()->update(deltaTime, m_gamefield);
 		/*
-		m_Bombs[i].get()->update(deltaTime, m_Field);
-
 		//	the BOMB GOES puf
 		if (m_Bombs[i]->goesBoom())
 		{

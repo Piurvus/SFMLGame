@@ -20,7 +20,7 @@ public:
 
 	void render();
 	void update(sf::Time deltaTime);
-	void update(sf::Time deltaTime, std::shared_ptr<std::vector<std::vector<int>>> m_Field);
+	void update(sf::Time deltaTime, std::vector<std::vector<int>> &m_Field);
 
 
 	const sf::Vector2i getPos() const;

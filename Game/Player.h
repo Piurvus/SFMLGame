@@ -20,7 +20,7 @@ namespace m_Entity
 																						up(false), down(false), speed(10.f), bomb(false), bombs(9), dead(false){};
 		~Player();
 
-		const bool putBomb() const;
+		const bool putBomb();
 		void render();
 		void update(sf::Time deltaTime);
 		void update(sf::Time deltaTime, std::shared_ptr<std::queue<unsigned int>> keys, std::vector<std::vector<int>>& field);

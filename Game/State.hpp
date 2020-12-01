@@ -7,6 +7,7 @@
 #include <SFML/System.hpp>
 #include <memory>
 #include <queue>
+#include <cmath>
 
 #include <vector>
 

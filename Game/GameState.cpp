@@ -43,19 +43,6 @@ void GameState::init()
 			}
 		}
 	}
-
-	/*
-	for (unsigned int i = 0; i < m_Field->size(); i++)
-	{
-		for (unsigned int j = 0; j < (m_Field->begin() + i)->size(); j++)
-		{
-			if (j % 2 && i % 2)
-			{
-				*((m_Field->begin() + i)->begin()+j) = 1;
-			}
-		}
-	}
-	*/
 }
 
 void GameState::update(sf::Time deltaTime)
@@ -72,11 +59,12 @@ void GameState::update(sf::Time deltaTime)
 			std::shared_ptr<sf::Vector2f> pos = std::move(std::make_shared<sf::Vector2f>(squaresize*1.f, squaresize*1.f));
 			m_Player = std::move(std::make_unique<m_Entity::Player>(m_context, pos));
 		}
-		m_Player->update(deltaTime, keys, m_gamefield);
+		m_Player->update(deltaTime, keys, m_gamefield, squaresize);
 		if (m_Player->putBomb())
 		{
 			sf::Vector2f poss = m_Player->getPos();
-			std::shared_ptr<sf::Vector2f> pos = std::move(std::make_shared<sf::Vector2f>((poss.y), (poss.x)));
+			std::shared_ptr<sf::Vector2f> pos = std::move(std::make_shared<sf::Vector2f>
+			(round(poss.y/squaresize)*squaresize, round(poss.x/squaresize)*squaresize));
 			std::unique_ptr<Bomb> b = std::move(std::make_unique<Bomb>(m_context, pos, squaresize, *pos, 3));	//	power of the bomb
 			m_Bombs.push_back(std::move(b));
 
@@ -249,41 +237,6 @@ void GameState::render()
 			}
 		}
 	}
-/*
-	//	old field
-	for (unsigned int i = 0; i < m_Field->size(); i++)
-	{
-		for (unsigned int j = 0; j < (m_Field->begin()+i)->size(); j++)
-		{
-			if (*((m_Field->begin() + i)->begin() + j) == 1)
-			{
-				obst.setPosition({ static_cast<float>(i * squaresize), static_cast<float>(j * squaresize) });
-				obst.setFillColor({ 150, 255, 255 });
-				m_context->m_window->draw(obst);
-			}
-			//	creating the REAL bombs
-			if (*((m_Field->begin() + i)->begin() + j) == 20)
-			{
-				std::shared_ptr<sf::Vector2f> pos = std::move(std::make_shared<sf::Vector2f>(static_cast<float>(squaresize*i), static_cast<float>(squaresize*j)));
-				sf::Vector2f poss = { static_cast<float>(squaresize * i), static_cast<float>(squaresize * j) };
-				std::unique_ptr<Bomb> b = std::move(std::make_unique<Bomb>(m_context, pos, squaresize, poss, 3));	//	power of the bomb
-				m_Bombs.push_back(std::move(b));
-				*((m_Field->begin() + i)->begin() + j) = 19;
-			}
-			
-			if (*((m_Field->begin() + i)->begin() + j) >= 5 &&*((m_Field->begin() + i)->begin() + j) <= 18)
-			{
-				obst.setPosition({ static_cast<float>(i * squaresize), static_cast<float>(j * squaresize) });
-				obst.setFillColor({ 150, 150, 255 });
-				m_context->m_window->draw(obst);
-				*((m_Field->begin() + i)->begin() + j) -= 1;
-				if (*((m_Field->begin() + i)->begin() + j) == 4)
-					*((m_Field->begin() + i)->begin() + j) = 0;
-			}
-			
-		}
-	}
-*/
 	if (m_Player!=nullptr)
 		m_Player->render();
 	m_context->m_window->display();

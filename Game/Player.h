@@ -23,7 +23,7 @@ namespace m_Entity
 		const bool putBomb();
 		void render();
 		void update(sf::Time deltaTime);
-		void update(sf::Time deltaTime, std::shared_ptr<std::queue<unsigned int>> keys, std::vector<std::vector<int>>& field);
+		void update(sf::Time deltaTime, std::shared_ptr<std::queue<unsigned int>> keys, std::vector<std::vector<int>>& field, unsigned int square);
 		void kill();
 		const bool isDead() const;
 	};

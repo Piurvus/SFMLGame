@@ -31,6 +31,7 @@ void m_Entity::Player::render()
 
 void m_Entity::Player::update(sf::Time deltaTime)
 {
+    //  hier evtl ins field zurück runden?
     if (up)
         this->pos->move({ 0, -speed });
     if (down)
@@ -40,7 +41,7 @@ void m_Entity::Player::update(sf::Time deltaTime)
     if (right)
         this->pos->move({ speed,0 });
 }
-void m_Entity::Player::update(sf::Time deltaTime, std::shared_ptr<std::queue<unsigned int>> keys, std::vector<std::vector<int>> &field)
+void m_Entity::Player::update(sf::Time deltaTime, std::shared_ptr<std::queue<unsigned int>> keys, std::vector<std::vector<int>> &field, unsigned int square)
 {
     if (this->isDead())
     {
@@ -92,104 +93,36 @@ void m_Entity::Player::update(sf::Time deltaTime, std::shared_ptr<std::queue<uns
     }
 
 
-    /*
-    //  check field
-    unsigned int square = m_context->m_window->getSize().y / field->size();
-
     sf::Transform matrix = this->pos->getTransform();
 
     auto position = matrix.transformPoint(this->pos->getPoint(0));
-    float diffX = static_cast<int>(position.x) % square /100.f;
-    float diffY = static_cast<int>(position.y) % square /100.f;
 
-    if (bomb && bombs && *((field->begin() + (static_cast<int>(position.x / square )))->begin()+ (static_cast<int>(position.y / square))) == 0 )
-    {
-        bombs--;
-        *((field->begin() + (static_cast<int>(position.x / square)))->begin() + (static_cast<int>(position.y / square))) = 20;
-        bomb = false;
-    }
-
-    if (down && position.y/square +1 >= field->size())
-    {
-        down = false;
-    }
-    if (up && position.y / square == 0)
-    {
-        up = false;
-    }
-    if (left && position.x / square == 0)
-    {
-        left = false;
-    }
-    if (right && position.x / square + 1 >= field->begin()->size())
-    {
-        right = false;
-    }
-    if (down && *((field->begin() + (static_cast<int>(position.x / square )))->begin()+ (static_cast<int>(position.y / square)+1)) >= 1)
-    {
-        down = false;
-        if (*((field->begin() + (static_cast<int>(position.x / square)))->begin() + (static_cast<int>(position.y / square) + 1)) == 19)
-            *((field->begin() + (static_cast<int>(position.x / square)))->begin() + (static_cast<int>(position.y / square) + 1)) = 23;
-    }
-
-    //  moving bombs?   right, left, down, up
-    if (up && *((field->begin() + (static_cast<int>(position.x / square)))->begin() + (static_cast<int>(position.y / square))) >= 1)
-    {
-        up = false;
-        if (*((field->begin() + (static_cast<int>(position.x / square)))->begin() + (static_cast<int>(position.y / square) + 1)) == 19)
-            *((field->begin() + (static_cast<int>(position.x / square)))->begin() + (static_cast<int>(position.y / square) + 1)) = 24;
-    }
-
-    if (right && *((field->begin() + (static_cast<int>(position.x / square)+1))->begin() + (static_cast<int>(position.y / square))) >= 1)
-    {
-        right = false;
-        if (*((field->begin() + (static_cast<int>(position.x / square) + 1))->begin() + (static_cast<int>(position.y / square))) == 19)
-            *((field->begin() + (static_cast<int>(position.x / square) + 1))->begin() + (static_cast<int>(position.y / square))) = 21;
-
-    }
-
-    if (left && *((field->begin() + (static_cast<int>(position.x / square)))->begin() + (static_cast<int>(position.y / square))) >= 1)
-    {
-        left = false; 
-        if (*((field->begin() + (static_cast<int>(position.x / square)))->begin() + (static_cast<int>(position.y / square))) == 19)
-            *((field->begin() + (static_cast<int>(position.x / square)))->begin() + (static_cast<int>(position.y / square))) = 22;
-
-    }
     
-    if (up || down)
+
+
+
+
+
+
+    if (up)
     {
-        if (diffX < 0.35 && diffX > 0.1)
-        {
-            this->pos->move({ -speed, 0 });
-        }
-        else if (diffX > 0.65 && diffX < 0.9)
-        {
-            this->pos->move({ speed, 0 });
-        }
-        else if (diffX >= 0.3 && diffX <= 0.7)
+        if(position.y < 1 || position.x + square >= field[0].size())
+            up = false;
+		
+        else if (field[position.y - 1][position.x + 0.25 * square] || field[position.y - 1][position.x + 0.75 * square])
         {
             up = false;
-            down = false;
+            if (!field[position.y - 1][position.x + 0.25 * square])
+                this->pos->move({ -speed, 0 });
+            else if (!field[position.y - 1][position.x + 0.75 * square])
+                this->pos->move({ speed, 0 });
         }
     }
-    if (left || right)
-    {
-        if (diffY < 0.35 && diffY > 0.1)
-        {
-            this->pos->move({ 0, -speed});
-        }
-        else if (diffY > 0.65 && diffY < 0.9)
-        {
-            this->pos->move({ 0, speed });
-        }
-        else if (diffY >= 0.3 && diffX <= 0.7)
-        {
-            left = false;
-            right = false;
-        }
 
-    }
-    */
+
+
+
+
     update(deltaTime);
 }
 

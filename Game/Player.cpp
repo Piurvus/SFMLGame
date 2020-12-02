@@ -118,6 +118,21 @@ void m_Entity::Player::update(sf::Time deltaTime, std::shared_ptr<std::queue<uns
                 this->pos->move({ speed, 0 });
         }
     }
+    if (down)
+    {
+        if(position.y+square >= field.size()-10 || position.x + square >= field[0].size())
+            down = false;
+		
+        else if (field[position.y+square + 1][position.x + 0.25 * square] || field[position.y+square + 1][position.x + 0.75 * square])
+        {
+            down = false;
+            if (!field[position.y+square + 1][position.x + 0.25 * square])
+                this->pos->move({ -speed, 0 });
+            else if (!field[position.y+ square + 1][position.x + 0.75 * square])
+                this->pos->move({ speed, 0 });
+        }
+    }
+
 
 
 

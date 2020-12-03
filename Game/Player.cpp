@@ -120,7 +120,7 @@ void m_Entity::Player::update(sf::Time deltaTime, std::shared_ptr<std::queue<uns
     }
     if (down)
     {
-        if(position.y+square >= field.size()-10 || position.x + square >= field[0].size())
+        if(position.y+square >= field.size()-1 || position.x + square >= field[0].size())
             down = false;
 		
         else if (field[position.y+square + 1][position.x + 0.25 * square] || field[position.y+square + 1][position.x + 0.75 * square])
@@ -132,6 +132,39 @@ void m_Entity::Player::update(sf::Time deltaTime, std::shared_ptr<std::queue<uns
                 this->pos->move({ speed, 0 });
         }
     }
+
+    if (left)
+    {
+		 if(position.x < 1 || position.y + square >= field.size())
+            left = false;
+		
+
+        else if (field[position.y + 0.25*square][position.x - 1] || field[position.y + 0.75 * square][position.x - 1])
+        {
+            left = false;
+            if (!field[position.y+ 0.25 * square][position.x - 1])
+                this->pos->move({ 0, -speed });
+            else if (!field[position.y + 0.75 * square][position.x - 1])
+                this->pos->move({ 0, speed });
+        }
+    }
+
+	if (right)
+		{
+            if(position.y+square >= field.size()-1 || position.x + square >= field[0].size())
+				right = false;
+			
+			else if (field[position.y + 0.25*square][position.x + square + 1] || field[position.y + 0.75 * square][position.x + square + 1])
+			{
+				right = false;
+				if (!field[position.y+ 0.25 * square][position.x + square + 1])
+					this->pos->move({ 0, -speed });
+				else if (!field[position.y + 0.75 * square][position.x + square + 1])
+					this->pos->move({ 0, speed });
+			}
+		}
+
+
 
 
 

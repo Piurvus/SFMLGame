@@ -109,12 +109,13 @@ void m_Entity::Player::update(sf::Time deltaTime, std::shared_ptr<std::queue<uns
         if(position.y < 1 || position.x + square >= field[0].size())
             up = false;
 		
-        else if (field[position.y - 1][position.x + 0.25 * square] || field[position.y - 1][position.x + 0.75 * square])
+        else if (field[static_cast<unsigned int>(position.y - 1)][static_cast<unsigned int>(position.x + 0.25 * square)] || 
+            field[static_cast<unsigned int>(position.y - 1)][static_cast<unsigned int>(position.x + 0.75 * square)])
         {
             up = false;
-            if (!field[position.y - 1][position.x + 0.25 * square])
+            if (!field[static_cast<unsigned int>(position.y - 1)][static_cast<unsigned int>(position.x + 0.25 * square)])
                 this->pos->move({ -speed, 0 });
-            else if (!field[position.y - 1][position.x + 0.75 * square])
+            else if (!field[static_cast<unsigned int>(position.y - 1)][static_cast<unsigned int>(position.x + 0.75 * square)])
                 this->pos->move({ speed, 0 });
         }
     }
@@ -123,12 +124,13 @@ void m_Entity::Player::update(sf::Time deltaTime, std::shared_ptr<std::queue<uns
         if(position.y+square >= field.size()-1 || position.x + square >= field[0].size())
             down = false;
 		
-        else if (field[position.y+square + 1][position.x + 0.25 * square] || field[position.y+square + 1][position.x + 0.75 * square])
+        else if (field[static_cast<unsigned int>(position.y+square + 1)][static_cast<unsigned int>(position.x + 0.25 * square)] || 
+            field[static_cast<unsigned int>(position.y+square + 1)][static_cast<unsigned int>(position.x + 0.75 * square)])
         {
             down = false;
-            if (!field[position.y+square + 1][position.x + 0.25 * square])
+            if (!field[static_cast<unsigned int>(position.y+square + 1)][static_cast<unsigned int>(position.x + 0.25 * square)])
                 this->pos->move({ -speed, 0 });
-            else if (!field[position.y+ square + 1][position.x + 0.75 * square])
+            else if (!field[static_cast<unsigned int>(position.y+ square + 1)][static_cast<unsigned int>(position.x + 0.75 * square)])
                 this->pos->move({ speed, 0 });
         }
     }
@@ -139,12 +141,13 @@ void m_Entity::Player::update(sf::Time deltaTime, std::shared_ptr<std::queue<uns
             left = false;
 		
 
-        else if (field[position.y + 0.25*square][position.x - 1] || field[position.y + 0.75 * square][position.x - 1])
+        else if (field[static_cast<unsigned int>(position.y + 0.25*square)][static_cast<unsigned int>(position.x - 1)] || 
+            field[static_cast<unsigned int>(position.y + 0.75 * square)][static_cast<unsigned int>(position.x - 1)])
         {
             left = false;
-            if (!field[position.y+ 0.25 * square][position.x - 1])
+            if (!field[static_cast<unsigned int>(position.y+ 0.25 * square)][static_cast<unsigned int>(position.x - 1)])
                 this->pos->move({ 0, -speed });
-            else if (!field[position.y + 0.75 * square][position.x - 1])
+            else if (!field[static_cast<unsigned int>(position.y + 0.75 * square)][static_cast<unsigned int>(position.x - 1)])
                 this->pos->move({ 0, speed });
         }
     }
@@ -154,12 +157,13 @@ void m_Entity::Player::update(sf::Time deltaTime, std::shared_ptr<std::queue<uns
             if(position.y+square >= field.size()-1 || position.x + square >= field[0].size())
 				right = false;
 			
-			else if (field[position.y + 0.25*square][position.x + square + 1] || field[position.y + 0.75 * square][position.x + square + 1])
+			else if (field[static_cast<unsigned int>(position.y + 0.25*square)][static_cast<unsigned int>(position.x + square + 1)] || 
+                field[static_cast<unsigned int>(position.y + 0.75 * square)][static_cast<unsigned int>(position.x + square + 1)])
 			{
 				right = false;
-				if (!field[position.y+ 0.25 * square][position.x + square + 1])
+				if (!field[static_cast<unsigned int>(position.y+ 0.25 * square)][static_cast<unsigned int>(position.x + square + 1)])
 					this->pos->move({ 0, -speed });
-				else if (!field[position.y + 0.75 * square][position.x + square + 1])
+				else if (!field[static_cast<unsigned int>(position.y + 0.75 * square)][static_cast<unsigned int>(position.x + square + 1)])
 					this->pos->move({ 0, speed });
 			}
 		}

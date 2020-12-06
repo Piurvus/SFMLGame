@@ -67,6 +67,10 @@ void GameState::update(sf::Time deltaTime)
 			(round(poss.y/squaresize)*squaresize, round(poss.x/squaresize)*squaresize));
 			std::unique_ptr<Bomb> b = std::move(std::make_unique<Bomb>(m_context, pos, squaresize, *pos, 3));	//	power of the bomb
 			m_Bombs.push_back(std::move(b));
+			//	collision with the bombs
+			for (int i = 0; i < squaresize; i++)
+				for (int j = 0; j < squaresize; j++)
+					m_gamefield[static_cast<unsigned int>(pos->y+i)][static_cast<unsigned int>(pos->x+j)] = 50;
 
 		}
 	}

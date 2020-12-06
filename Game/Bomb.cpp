@@ -72,11 +72,24 @@ void Bomb::update(sf::Time deltaTime)
 
 void Bomb::update(sf::Time deltaTime, std::vector<std::vector<int>> &m_Field)
 {
-    //  save old position
-
+    if (up || down || left || right)
+    {
+        sf::Vector2i position = this->getPos();
+        for (int i = 0; i < squaresize; i++)
+            for (int j = 0; j < squaresize; j++)
+                m_Field[position.y + i][position.x + j] = 0;
+    }
     update(deltaTime);
 
     //  delete old position in field and add the new
+    if (up || down || left || right)
+    {
+        sf::Vector2i position = this->getPos();
+        for (int i = 0; i < squaresize; i++)
+            for (int j = 0; j < squaresize; j++)
+                m_Field[position.y + i][position.x + j] = 50;
+
+    }
 
 }
 

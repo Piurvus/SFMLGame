@@ -113,13 +113,6 @@ void m_Entity::Player::update(sf::Time deltaTime, std::shared_ptr<std::queue<uns
 
     auto position = matrix.transformPoint(this->pos->getPoint(0));
 
-    
-
-
-
-
-
-
     if (up)
     {
         if(position.y < 1 || position.x + square >= field[0].size())

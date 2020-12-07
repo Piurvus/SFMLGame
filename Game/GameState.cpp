@@ -71,7 +71,36 @@ void GameState::update(sf::Time deltaTime)
 			for (int i = 0; i < squaresize; i++)
 				for (int j = 0; j < squaresize; j++)
 					m_gamefield[static_cast<unsigned int>(pos->y+i)][static_cast<unsigned int>(pos->x+j)] = 50;
+		}
 
+		// r, l, d, u
+		int dir = m_Player->hitBomb();
+		if (dir)
+		{
+			sf::Vector2i pos = m_Player->getPos(squaresize);
+			for (int i = 0; i < m_Bombs.size(); i++)
+			{
+				switch (dir)
+				{
+				case 1:
+					if (m_Bombs[i]->getPos().x == pos.x && m_Bombs[i]->getPos().y == pos.y+1)
+						m_Bombs[i]->getHit(dir - 1);
+					break;
+				case 2:
+					if (m_Bombs[i]->getPos().x == pos.x && m_Bombs[i]->getPos().y == pos.y-1)
+						m_Bombs[i]->getHit(dir - 1);
+					break;
+				case 3:
+					if (m_Bombs[i]->getPos().x == pos.x+1 && m_Bombs[i]->getPos().y == pos.y)
+						m_Bombs[i]->getHit(dir - 1);
+					std::cout << "down";
+					break;
+				case 4:
+					if (m_Bombs[i]->getPos().x == pos.x-1 && m_Bombs[i]->getPos().y == pos.y)
+						m_Bombs[i]->getHit(dir - 1);
+					break;
+				}
+			}
 		}
 	}
 

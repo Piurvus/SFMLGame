@@ -34,6 +34,7 @@ void Bomb::getHit(int dir)
         left = false;
         up = false;
         down = true;
+        break;
     case 3: 
         right = false;
         left = false;
@@ -41,8 +42,9 @@ void Bomb::getHit(int dir)
         down = false;
         break;
     default:
-        right = true;
-        up = true;
+        //right = true;
+        //up = true;
+        break;
     }
 }
 

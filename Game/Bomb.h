@@ -22,7 +22,6 @@ public:
 	void update(sf::Time deltaTime);
 	void update(sf::Time deltaTime, std::vector<std::vector<int>> &m_Field);
 
-
 	const sf::Vector2i getPos() const;
 	const int getStrength() const;
 

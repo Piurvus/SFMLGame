@@ -122,6 +122,11 @@ void m_Entity::Player::update(sf::Time deltaTime, std::shared_ptr<std::queue<uns
             field[static_cast<unsigned int>(position.y - 1)][static_cast<unsigned int>(position.x + 0.75 * square)])
         {
             up = false;
+            //  Bomb collision
+            if (field[static_cast<unsigned int>(position.y - 1)][static_cast<unsigned int>(position.x + 0.25 * square)] == 50 ||
+                field[static_cast<unsigned int>(position.y - 1)][static_cast<unsigned int>(position.x + 0.75 * square)] == 50)
+                hitbomb = 4;
+
         }
     }
     if (down)
@@ -132,6 +137,11 @@ void m_Entity::Player::update(sf::Time deltaTime, std::shared_ptr<std::queue<uns
         else if (field[static_cast<unsigned int>(position.y+square + 1)][static_cast<unsigned int>(position.x + 0.25 * square)] || 
             field[static_cast<unsigned int>(position.y+square + 1)][static_cast<unsigned int>(position.x + 0.75 * square)])
         {
+            //  Bomb collision
+            if (field[static_cast<unsigned int>(position.y + square + 1)][static_cast<unsigned int>(position.x + 0.25 * square)] == 50 ||
+                field[static_cast<unsigned int>(position.y + square + 1)][static_cast<unsigned int>(position.x + 0.75 * square)] == 50)
+                hitbomb = 3;
+
             down = false;
         }
     }
@@ -145,6 +155,11 @@ void m_Entity::Player::update(sf::Time deltaTime, std::shared_ptr<std::queue<uns
         else if (field[static_cast<unsigned int>(position.y + 0.25*square)][static_cast<unsigned int>(position.x - 1)] || 
             field[static_cast<unsigned int>(position.y + 0.75 * square)][static_cast<unsigned int>(position.x - 1)])
         {
+            //  Bomb collision
+            if (field[static_cast<unsigned int>(position.y + 0.25 * square)][static_cast<unsigned int>(position.x - 1)] == 50 ||
+                field[static_cast<unsigned int>(position.y + 0.75 * square)][static_cast<unsigned int>(position.x - 1)] == 50)
+                hitbomb = 2;
+
             left = false;
         }
     }
@@ -157,16 +172,14 @@ void m_Entity::Player::update(sf::Time deltaTime, std::shared_ptr<std::queue<uns
 			else if (field[static_cast<unsigned int>(position.y + 0.25*square)][static_cast<unsigned int>(position.x + square + 1)] || 
                 field[static_cast<unsigned int>(position.y + 0.75 * square)][static_cast<unsigned int>(position.x + square + 1)])
 			{
-				right = false;
+                //  Bomb collision
+                if (field[static_cast<unsigned int>(position.y + 0.25 * square)][static_cast<unsigned int>(position.x + square + 1)] ||
+                    field[static_cast<unsigned int>(position.y + 0.75 * square)][static_cast<unsigned int>(position.x + square + 1)])
+                    hitbomb = 1;
+
+                right = false;
             }
 		}
-
-
-
-
-
-
-
 
     update(deltaTime);
 }
@@ -179,5 +192,12 @@ void m_Entity::Player::kill()
 const bool m_Entity::Player::isDead() const
 {
     return this->dead;
+}
+
+const int m_Entity::Player::hitBomb()
+{
+    int buf = hitbomb;
+    hitbomb = 0;
+    return buf;
 }
 

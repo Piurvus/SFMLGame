@@ -76,6 +76,12 @@ void Bomb::update(sf::Time deltaTime, std::vector<std::vector<int>> &m_Field)
 {
     sf::Vector2i poss = this->getPos();
 
+    if (right && ((poss.y + 1) * squaresize >= m_Field.size() || m_Field[poss.x * squaresize][(poss.y + 1) * squaresize]))
+        right = false;
+
+    int width = this->position.getGlobalBounds().left;
+
+
     if (up || down || left || right)
     {
         for (int i = 0; i < squaresize; i++)

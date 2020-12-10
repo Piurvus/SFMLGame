@@ -79,9 +79,12 @@ void Bomb::update(sf::Time deltaTime, std::vector<std::vector<int>> &m_Field)
     if (right && ((poss.y + 1) * squaresize >= m_Field.size() || m_Field[poss.x * squaresize][(poss.y + 1) * squaresize]))
         right = false;
 
-    int width = this->position.getGlobalBounds().left;
-
-
+    if (left && (poss.y == 0 || m_Field[poss.x * squaresize][poss.y *squaresize -1]))
+    {
+        if (this->position.getGlobalBounds().left >= poss.y*squaresize+speed);
+        else
+            left = false;
+    }
     if (up || down || left || right)
     {
         for (int i = 0; i < squaresize; i++)

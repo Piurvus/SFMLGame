@@ -108,89 +108,26 @@ void GameState::update(sf::Time deltaTime)
 
 	for (unsigned int i = 0; i < m_Bombs.size(); i++)
 	{
-		
+
 		m_Bombs[i].get()->update(deltaTime, m_gamefield);
-		/*
+
 		//	the BOMB GOES puf
 		if (m_Bombs[i]->goesBoom())
 		{
-			//	action happening here
 
-			//	first we get the dates
-			sf::Vector2i pos = m_Bombs[i]->getPos();	//	position already /sqaURE
+			//	first connect with other bombs and objects
 
-			//	bomb spot to explosion color ==18
-			*((m_Field->begin() + pos.y)->begin() + pos.x) = 18;
 
-			int strength = m_Bombs[i]->getStrength();	
 
+			//	then create the visual for boom
+			//	maybe in the bomb class
+			//	in render if this->goesBoom()
+			//					boom--; and draw different stuff
+
+
+			//	if boom is complete we can erase the bomb
 			m_Bombs.erase(m_Bombs.begin() + i);
-			//	loop through each position and see if there is something
-
-			sf::Vector2i plpos = m_Player->getPos(squaresize);
-
-			//	vertical boom
-			for (int k = (pos.x - strength>=0)? pos.x-strength:0; k <= pos.x+strength; k++)
-			{
-				if (!(pos.y % 2) && k < static_cast<int>(m_Field->size()))
-				{
-					if (*((m_Field->begin() + pos.y)->begin() + k) == 19)
-					{
-						for (unsigned int j = 0; j < m_Bombs.size(); j++)
-						{
-							if (m_Bombs[j]->getPos().x == k)
-								m_Bombs[j]->goBoom();
-						}
-					}
-					*((m_Field->begin() + pos.y)->begin() + k) = 18;
-					if (*((m_Field->begin() + plpos.y)->begin() + plpos.x) >= 5 && *((m_Field->begin() + plpos.y)->begin() + plpos.x) <= 18)
-						m_Player->kill();
-				}
-			}
-
-			//	horizontal boom
-			for (int k = (pos.y - strength >= 0) ? pos.y - strength : 0; k <= pos.y + strength; k++)
-			{
-				if (!(pos.x % 2) && k < static_cast<int>(m_Field->begin()->size()))
-				{
-					if (*((m_Field->begin() + k)->begin() + pos.x) == 19)
-					{
-						for (unsigned int j = 0; j < m_Bombs.size(); j++)
-						{
-							if (m_Bombs[j]->getPos().y == k)
-								m_Bombs[j]->goBoom();
-						}
-					}
-					*((m_Field->begin() + k)->begin() + pos.x) = 18;
-					if (*((m_Field->begin() + plpos.y)->begin() + plpos.x) >= 5 && *((m_Field->begin() + plpos.y)->begin() + plpos.x) <= 18)
-						m_Player->kill();
-
-				}
-			}
 		}
-
-		//	reaction with other bombs
-		for (unsigned int x = 0; x < m_Field->size(); x++)
-		{
-			for (unsigned int y = 0; y < (m_Field->begin() + x)->size(); y++)
-			{
-				int* fieldvalue = &(*((m_Field->begin() + x)->begin() + y));	//	idk dont ask
-
-				if (*fieldvalue >= 21 && *fieldvalue <= 24)
-				{
-					for (unsigned int i = 0; i < m_Bombs.size(); i++)
-					{
-						if (m_Bombs[i]->getPos().x == x && m_Bombs[i]->getPos().y == y)
-						{
-							std::cout << ">YE";
-							m_Bombs[i]->getHit(*fieldvalue - 21);
-						}
-					}
-					*fieldvalue = 19;
-				}
-			}
-		}
-		*/
 
 	}
 }

@@ -96,7 +96,9 @@ void m_Entity::Player::update(sf::Time deltaTime, std::shared_ptr<std::queue<uns
             up = false;
             break;
         case sf::Keyboard::Space:
-			bomb = true;
+            //  todo see if this works
+            if (!field[this->getPos(square).y][this->getPos(square).x])
+			    bomb = true;
             break;
         default:
             down = false;

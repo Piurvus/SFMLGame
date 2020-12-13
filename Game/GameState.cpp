@@ -3,7 +3,7 @@
 
 GameState::GameState(std::shared_ptr<Context>& m_context) :
 	m_context(m_context), m_event(sf::Event()), keys(std::make_shared<std::queue<unsigned int>>()), m_Player(nullptr),
-	m_Field(nullptr), m_gamefield(std::vector<std::vector<int>>()), squaresize(100), pause(false)
+	m_gamefield(std::vector<std::vector<int>>()), squaresize(100), pause(false)
 {
 	init();
 }
@@ -21,7 +21,6 @@ void GameState::init()
 	//	gamefield
 	std::vector<int> row = std::vector<int>(m_context->m_window->getSize().x / squaresize);
 	std::vector<std::vector<int>> field = std::vector<std::vector<int>>(m_context->m_window->getSize().y / squaresize, row);
-	m_Field = std::make_shared<std::vector<std::vector<int>>> (std::move(field));
 
 	//	new field
 	row = std::vector<int>(m_context->m_window->getSize().x);
@@ -78,7 +77,7 @@ void GameState::update(sf::Time deltaTime)
 		if (dir)
 		{
 			sf::Vector2i pos = m_Player->getPos(squaresize);
-			for (int i = 0; i < m_Bombs.size(); i++)
+			for (unsigned int i = 0; i < m_Bombs.size(); i++)
 			{
 				switch (dir)
 				{
@@ -114,10 +113,35 @@ void GameState::update(sf::Time deltaTime)
 		//	the BOMB GOES puf
 		if (m_Bombs[i]->goesBoom())
 		{
-
+			sf::Vector2i pos = m_Bombs[i]->getPos();
+			int power = m_Bombs[i]->getStrength();
+			
 			//	first connect with other bombs and objects
 
+			//	first search horizontal
+			if (!(pos.x % 2))
+			{
+				for (int k = pos.y - power+1; k < pos.y + power; k++) {
+					if (k < 0)
+						continue;
+					else if (k >= m_gamefield[0].size())
+						break;
+					//	set to beam
 
+					//	maybe make shock class for the beam? so we can shock[i]->render(); and collision test and so forth,,,,
+
+					//	look for other objects in the way
+					for (unsigned int j = 0; j < m_Bombs.size(); j++) {
+						if (j == i)
+							continue;
+						//std::cout <<"K: " << k << " " << m_Bombs[j]->getPos().y << std::endl;
+						if (m_Bombs[j]->getPos().x == pos.x && m_Bombs[j]->getPos().y == k)
+							m_Bombs[j]->goBoom();
+					}
+
+
+				}
+			}
 
 			//	then create the visual for boom
 			//	maybe in the bomb class
@@ -126,6 +150,10 @@ void GameState::update(sf::Time deltaTime)
 
 
 			//	if boom is complete we can erase the bomb
+			//	first delete pos tho in field
+			for (int k = 0; k < squaresize; k++)
+				for (int j = 0; j < squaresize; j++)
+					m_gamefield[pos.x*squaresize + k][pos.y*squaresize + j] = 0;
 			m_Bombs.erase(m_Bombs.begin() + i);
 		}
 
@@ -203,6 +231,16 @@ void GameState::render()
 					obst.setPosition({ static_cast<float>(x), static_cast<float>(y) });
 					obst.setFillColor({ 150, 255, 255 });
 					m_context->m_window->draw(obst);
+				}
+				if (m_gamefield[y][x] >= 24 && m_gamefield[y][x] <= 44)
+				{
+					obst.setPosition({ static_cast<float>(x), static_cast<float>(y) });
+					obst.setFillColor({ 150, 150, 255 });
+					m_context->m_window->draw(obst);
+					if (m_gamefield[y][x] == 24)
+						m_gamefield[y][x] = 0;
+					else
+						m_gamefield[y][x]--;
 				}
 			}
 		}

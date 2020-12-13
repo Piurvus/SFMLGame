@@ -19,7 +19,7 @@ namespace m_Entity
 
 	public:
 		Player(std::shared_ptr<Context> m_context, std::shared_ptr<sf::Vector2f> pos) : Entity(m_context, pos, 100), keys(nullptr), left(false), right(false),
-																						up(false), down(false), speed(10.f), bomb(false), bombs(9), dead(false), square(0),
+																						up(false), down(false), speed(10.f), bomb(false), bombs(999), dead(false), square(0),
 																						hitbomb(0){};
 		~Player();
 

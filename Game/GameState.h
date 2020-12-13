@@ -15,8 +15,6 @@ private:
 	std::shared_ptr<std::queue<unsigned int>> keys;
 	std::unique_ptr<m_Entity::Player> m_Player;
 	//	for sprites?
-	std::shared_ptr<std::vector<std::vector<int>>> m_Field;
-	//	for collision?
 	std::vector<std::vector<int>> m_gamefield;
 	std::vector<std::unique_ptr<Bomb>> m_Bombs;
 	int squaresize;

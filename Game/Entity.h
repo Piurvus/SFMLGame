@@ -12,7 +12,13 @@ protected:
 	int health;
 
 public:
-	Entity(std::shared_ptr<Context> context, std::shared_ptr<sf::Vector2f> poss, unsigned int health) :m_context(context), pos(std::make_unique<sf::RectangleShape>(*poss)), health(health) {};
+	Entity(std::shared_ptr<Context> context, std::shared_ptr<sf::Vector2f> poss, unsigned int health, unsigned int squaresize) :
+		m_context(context), pos(std::make_unique<sf::RectangleShape>(*poss)), health(health)
+	{
+		this->pos->setSize({ static_cast<float>(squaresize), static_cast<float>(squaresize) });
+		this->pos->setPosition({ *poss });
+
+	};
 	virtual ~Entity(){};
 
 	virtual void update(sf::Time deltaTime) = 0;

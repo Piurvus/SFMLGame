@@ -1,7 +1,7 @@
 #include "Bomb.h"
 
 Bomb::Bomb(std::shared_ptr<Context> context, std::shared_ptr<sf::Vector2f> poss, unsigned int squaresize, sf::Vector2f pos, unsigned int strength) :
-    Entity(context, poss, 100), left(false), right(false), up(false), down(false), speed(10.f), squaresize(squaresize), position(sf::RectangleShape()),
+    Entity(context, poss, 100, squaresize), left(false), right(false), up(false), down(false), speed(10.f), squaresize(squaresize), position(sf::RectangleShape()),
     strength(strength)
 {
     position.setSize({ static_cast<float>(squaresize), static_cast<float>(squaresize) });

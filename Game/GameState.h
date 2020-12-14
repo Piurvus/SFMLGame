@@ -5,6 +5,7 @@
 #include "Player.h"
 #include "Pause.hpp"
 #include "Bomb.h"
+#include "Shock.h"
 
 class GameState : public Engine::State
 {
@@ -19,6 +20,7 @@ private:
 	std::vector<std::unique_ptr<Bomb>> m_Bombs;
 	int squaresize;
 	bool pause;
+	std::vector<std::unique_ptr<Shock>> m_Shock;
 	//std::vector<std::unique_ptr<Entity>> m_entities;
 
 public:

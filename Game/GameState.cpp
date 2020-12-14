@@ -16,7 +16,7 @@ void GameState::init()
 {
 	
 	std::shared_ptr<sf::Vector2f> pos = std::move(std::make_shared<sf::Vector2f>(squaresize*1.f, squaresize*1.f));
-	m_Player = std::move(std::make_unique<m_Entity::Player>(m_context, pos));
+	m_Player = std::move(std::make_unique<m_Entity::Player>(m_context, pos, squaresize));
 
 	//	gamefield
 	std::vector<int> row = std::vector<int>(m_context->m_window->getSize().x / squaresize);
@@ -103,7 +103,13 @@ void GameState::update(sf::Time deltaTime)
 		}
 	}
 
-	
+	for (unsigned int i = 0; i < m_Shock.size(); i++)
+	{
+		/*if (m_Shock[i]->done())
+			m_Shock.erase(m_Shock.begin() + i--);
+			*/
+		m_Shock[i]->update(deltaTime);
+	}
 
 	for (unsigned int i = 0; i < m_Bombs.size(); i++)
 	{
@@ -126,9 +132,17 @@ void GameState::update(sf::Time deltaTime)
 						continue;
 					else if (k >= m_gamefield[0].size())
 						break;
-					//	set to beam
-
 					//	maybe make shock class for the beam? so we can shock[i]->render(); and collision test and so forth,,,,
+
+					std::shared_ptr<sf::Vector2f> position = std::move(std::make_shared<sf::Vector2f>( static_cast<float>(pos.x), static_cast<float>(k) ));
+
+					//std::unique_ptr<Shock> shock = std::move(std::make_unique<Shock>(m_context, position, 100));
+
+					m_Shock.push_back(std::move(std::make_unique<Shock>(m_context, position, 100, squaresize)));
+
+
+					if (round(m_Player->getPos().x/squaresize) == pos.x && round(m_Player->getPos().y/squaresize) == k)
+						m_Player->kill();
 
 					//	look for other objects in the way
 					for (unsigned int j = 0; j < m_Bombs.size(); j++) {
@@ -138,16 +152,27 @@ void GameState::update(sf::Time deltaTime)
 						if (m_Bombs[j]->getPos().x == pos.x && m_Bombs[j]->getPos().y == k)
 							m_Bombs[j]->goBoom();
 					}
-
-
 				}
 			}
+			if (!(pos.y % 2))
+			{
+				for (int k = pos.x - power + 1; k < pos.x + power; k++) {
+					if (k < 0)
+						continue;
+					else if (k >= m_gamefield[0].size())
+						break;
+				
+					if (round(m_Player->getPos().x/squaresize) == k && round(m_Player->getPos().y/squaresize) == pos.y)
+						m_Player->kill();
 
-			//	then create the visual for boom
-			//	maybe in the bomb class
-			//	in render if this->goesBoom()
-			//					boom--; and draw different stuff
-
+					for (unsigned int j = 0; j < m_Bombs.size(); j++) {
+						if (j == i)
+							continue;
+						if (m_Bombs[j]->getPos().y == pos.y && m_Bombs[j]->getPos().x == k)
+							m_Bombs[j]->goBoom();
+					}
+				}
+			}
 
 			//	if boom is complete we can erase the bomb
 			//	first delete pos tho in field
@@ -192,6 +217,11 @@ void GameState::render()
 		m_Bombs[i]->render();
 	}
 
+	for (unsigned int i = 0; i < m_Shock.size(); i++)
+	{
+		m_Shock[i]->render();
+	}
+
 	sf::VertexArray line(sf::LinesStrip, 2);
 	//	rows
 	for (unsigned int i = 0; i < m_context->m_window->getSize().y; i+=squaresize)
@@ -231,16 +261,6 @@ void GameState::render()
 					obst.setPosition({ static_cast<float>(x), static_cast<float>(y) });
 					obst.setFillColor({ 150, 255, 255 });
 					m_context->m_window->draw(obst);
-				}
-				if (m_gamefield[y][x] >= 24 && m_gamefield[y][x] <= 44)
-				{
-					obst.setPosition({ static_cast<float>(x), static_cast<float>(y) });
-					obst.setFillColor({ 150, 150, 255 });
-					m_context->m_window->draw(obst);
-					if (m_gamefield[y][x] == 24)
-						m_gamefield[y][x] = 0;
-					else
-						m_gamefield[y][x]--;
 				}
 			}
 		}

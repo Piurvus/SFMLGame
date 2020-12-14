@@ -50,6 +50,9 @@
     <ClCompile Include="Bomb.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="Shock.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AssetMan.hpp">
@@ -83,6 +86,9 @@
       <Filter>States</Filter>
     </ClInclude>
     <ClInclude Include="Bomb.h">
+      <Filter>Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Shock.h">
       <Filter>Entities</Filter>
     </ClInclude>
   </ItemGroup>

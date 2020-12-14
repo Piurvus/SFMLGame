@@ -18,9 +18,13 @@ namespace m_Entity
 		int hitbomb;
 
 	public:
-		Player(std::shared_ptr<Context> m_context, std::shared_ptr<sf::Vector2f> pos) : Entity(m_context, pos, 100), keys(nullptr), left(false), right(false),
-																						up(false), down(false), speed(10.f), bomb(false), bombs(999), dead(false), square(0),
-																						hitbomb(0){};
+		Player(std::shared_ptr<Context> m_context, std::shared_ptr<sf::Vector2f> pos, unsigned int squaresize) : 
+			Entity(m_context, pos, 100, squaresize), keys(nullptr), left(false), right(false),
+			up(false), down(false), speed(10.f), bomb(false), bombs(999), dead(false), square(0),
+			hitbomb(0){};
+		//	really confused why is this even needed???? buggy code lol
+		Player(std::shared_ptr<Context> m_context, std::shared_ptr<sf::Vector2f> pos) :
+			Player(m_context, pos, 100) {};
 		~Player();
 
 		const bool putBomb();

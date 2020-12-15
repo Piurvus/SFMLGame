@@ -66,12 +66,20 @@ void GameState::update(sf::Time deltaTime)
 			(round(poss.y/squaresize)*squaresize, round(poss.x/squaresize)*squaresize));
 			std::unique_ptr<Bomb> b = std::move(std::make_unique<Bomb>(m_context, pos, squaresize, *pos, 3));	//	power of the bomb
 			m_Bombs.push_back(std::move(b));
+
 			//	collision with the bombs
 			for (int i = 0; i < squaresize; i++)
 				for (int j = 0; j < squaresize; j++)
 					m_gamefield[static_cast<unsigned int>(pos->y+i)][static_cast<unsigned int>(pos->x+j)] = 50;
 		}
-
+		
+		/*	
+			todo:
+			- implement better logic for hitting bombs (you need to be able to move back to the square of the bomb without hitting it
+			- you should be able to move with the bomb if you hit it (combos)
+			- ...
+		*/
+		
 		// r, l, d, u
 		int dir = m_Player->hitBomb();
 		if (dir)
@@ -105,10 +113,10 @@ void GameState::update(sf::Time deltaTime)
 
 	for (unsigned int i = 0; i < m_Shock.size(); i++)
 	{
-		/*if (m_Shock[i]->done())
+		if (m_Shock[i]->done())
 			m_Shock.erase(m_Shock.begin() + i--);
-			*/
-		m_Shock[i]->update(deltaTime);
+		else	
+			m_Shock[i]->update(deltaTime);
 	}
 
 	for (unsigned int i = 0; i < m_Bombs.size(); i++)
@@ -134,11 +142,12 @@ void GameState::update(sf::Time deltaTime)
 						break;
 					//	maybe make shock class for the beam? so we can shock[i]->render(); and collision test and so forth,,,,
 
-					std::shared_ptr<sf::Vector2f> position = std::move(std::make_shared<sf::Vector2f>( static_cast<float>(pos.x), static_cast<float>(k) ));
+					std::shared_ptr<sf::Vector2f> position = std::move(std::make_shared<sf::Vector2f>
+						( static_cast<float>(k*squaresize), static_cast<float>(pos.x*squaresize) ));
 
 					//std::unique_ptr<Shock> shock = std::move(std::make_unique<Shock>(m_context, position, 100));
 
-					m_Shock.push_back(std::move(std::make_unique<Shock>(m_context, position, 100, squaresize)));
+					m_Shock.push_back(std::move(std::make_unique<Shock>(m_context, position, 25, squaresize)));
 
 
 					if (round(m_Player->getPos().x/squaresize) == pos.x && round(m_Player->getPos().y/squaresize) == k)
@@ -161,7 +170,13 @@ void GameState::update(sf::Time deltaTime)
 						continue;
 					else if (k >= m_gamefield[0].size())
 						break;
-				
+
+
+					std::shared_ptr<sf::Vector2f> position = std::move(std::make_shared<sf::Vector2f>
+						( static_cast<float>(pos.y*squaresize), static_cast<float>(k*squaresize) ));
+
+					m_Shock.push_back(std::move(std::make_unique<Shock>(m_context, position, 25, squaresize)));
+
 					if (round(m_Player->getPos().x/squaresize) == k && round(m_Player->getPos().y/squaresize) == pos.y)
 						m_Player->kill();
 

@@ -84,27 +84,27 @@ void GameState::update(sf::Time deltaTime)
 		int dir = m_Player->hitBomb();
 		if (dir)
 		{
-			sf::Vector2i pos = m_Player->getPos(squaresize);
+			sf::Vector2f pos = m_Player->getPos();
 			for (unsigned int i = 0; i < m_Bombs.size(); i++)
 			{
 				switch (dir)
 				{
 				case 1:
-					if (m_Bombs[i]->getPos().x == pos.x && m_Bombs[i]->getPos().y == pos.y+1)
+					if (m_Bombs[i]->getPos().x == round(pos.x/squaresize) && m_Bombs[i]->getPos().y == round(pos.y/squaresize)+1)
 						m_Bombs[i]->getHit(dir - 1);
 					break;
 				case 2:
-					if (m_Bombs[i]->getPos().x == pos.x && m_Bombs[i]->getPos().y == pos.y-1)
+					if (m_Bombs[i]->getPos().x == round(pos.x/squaresize) && m_Bombs[i]->getPos().y == round(pos.y/squaresize)-1)
 						m_Bombs[i]->getHit(dir - 1);
 					break;
 				case 3:
-					if (m_Bombs[i]->getPos().x == pos.x+1 && m_Bombs[i]->getPos().y == pos.y)
+					if (m_Bombs[i]->getPos().x == round(pos.x/squaresize)+1 && m_Bombs[i]->getPos().y == round(pos.y/squaresize))
 						m_Bombs[i]->getHit(dir - 1);
-					std::cout << "down";
 					break;
 				case 4:
-					if (m_Bombs[i]->getPos().x == pos.x-1 && m_Bombs[i]->getPos().y == pos.y)
+					if (m_Bombs[i]->getPos().x == round(pos.x/squaresize)-1 && m_Bombs[i]->getPos().y == round(pos.y/squaresize))
 						m_Bombs[i]->getHit(dir - 1);
+					std::cout << "up" << std::endl;
 					break;
 				}
 			}

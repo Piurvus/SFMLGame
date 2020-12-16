@@ -1,4 +1,5 @@
 #include "Player.h"
+#include <iostream>
 
 
 m_Entity::Player::~Player()
@@ -121,11 +122,12 @@ void m_Entity::Player::update(sf::Time deltaTime, std::shared_ptr<std::queue<uns
         else if (field[static_cast<unsigned int>(position.y - 1)][static_cast<unsigned int>(position.x + 0.25 * square)] || 
             field[static_cast<unsigned int>(position.y - 1)][static_cast<unsigned int>(position.x + 0.75 * square)])
         {
-            up = false;
             //  Bomb collision
             if (field[static_cast<unsigned int>(position.y - 1)][static_cast<unsigned int>(position.x + 0.25 * square)] == 50 ||
                 field[static_cast<unsigned int>(position.y - 1)][static_cast<unsigned int>(position.x + 0.75 * square)] == 50)
                 hitbomb = 4;
+            else
+                up = false;
 
         }
     }
@@ -141,8 +143,8 @@ void m_Entity::Player::update(sf::Time deltaTime, std::shared_ptr<std::queue<uns
             if (field[static_cast<unsigned int>(position.y + square + 1)][static_cast<unsigned int>(position.x + 0.25 * square)] == 50 ||
                 field[static_cast<unsigned int>(position.y + square + 1)][static_cast<unsigned int>(position.x + 0.75 * square)] == 50)
                 hitbomb = 3;
-
-            down = false;
+            else
+                down = false;
         }
     }
 
@@ -159,8 +161,8 @@ void m_Entity::Player::update(sf::Time deltaTime, std::shared_ptr<std::queue<uns
             if (field[static_cast<unsigned int>(position.y + 0.25 * square)][static_cast<unsigned int>(position.x - 1)] == 50 ||
                 field[static_cast<unsigned int>(position.y + 0.75 * square)][static_cast<unsigned int>(position.x - 1)] == 50)
                 hitbomb = 2;
-
-            left = false;
+            else
+                left = false;
         }
     }
 
@@ -173,11 +175,11 @@ void m_Entity::Player::update(sf::Time deltaTime, std::shared_ptr<std::queue<uns
                 field[static_cast<unsigned int>(position.y + 0.75 * square)][static_cast<unsigned int>(position.x + square + 1)])
 			{
                 //  Bomb collision
-                if (field[static_cast<unsigned int>(position.y + 0.25 * square)][static_cast<unsigned int>(position.x + square + 1)] ||
-                    field[static_cast<unsigned int>(position.y + 0.75 * square)][static_cast<unsigned int>(position.x + square + 1)])
+                if (field[static_cast<unsigned int>(position.y + 0.25 * square)][static_cast<unsigned int>(position.x + square + 1)] == 50||
+                    field[static_cast<unsigned int>(position.y + 0.75 * square)][static_cast<unsigned int>(position.x + square + 1)] == 50)
                     hitbomb = 1;
-
-                right = false;
+                else
+                    right = false;
             }
 		}
 

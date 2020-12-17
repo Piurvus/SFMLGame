@@ -175,9 +175,16 @@ void m_Entity::Player::update(sf::Time deltaTime, std::shared_ptr<std::queue<uns
                 field[static_cast<unsigned int>(position.y + 0.75 * square)][static_cast<unsigned int>(position.x + square + 1)])
 			{
                 //  Bomb collision
-                if (field[static_cast<unsigned int>(position.y + 0.25 * square)][static_cast<unsigned int>(position.x + square + 1)] == 50||
+                if (field[static_cast<unsigned int>(position.y + 0.25 * square)][static_cast<unsigned int>(position.x + square + 1)] == 50 ||
                     field[static_cast<unsigned int>(position.y + 0.75 * square)][static_cast<unsigned int>(position.x + square + 1)] == 50)
+                {
                     hitbomb = 1;
+                    if (position.y + 2 * square >= field.size() - 1 || position.x + 2 * square >= field[0].size())
+                        right = false;
+                    else if (field[static_cast<unsigned int>(position.y + 0.25 * square)][static_cast<unsigned int>(position.x + 2 * square + 1)] ||
+                        field[static_cast<unsigned int>(position.y + 0.75 * square)][static_cast<unsigned int>(position.x + 2 * square + 1)])
+                        right = false;
+                }
                 else
                     right = false;
             }

@@ -104,7 +104,6 @@ void GameState::update(sf::Time deltaTime)
 				case 4:
 					if (m_Bombs[i]->getPos().x == round(pos.x/squaresize)-1 && m_Bombs[i]->getPos().y == round(pos.y/squaresize))
 						m_Bombs[i]->getHit(dir - 1);
-					std::cout << "up" << std::endl;
 					break;
 				}
 			}

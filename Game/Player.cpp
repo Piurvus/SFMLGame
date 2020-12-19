@@ -122,6 +122,11 @@ void m_Entity::Player::update(sf::Time deltaTime, std::shared_ptr<std::queue<uns
         else if (field[static_cast<unsigned int>(position.y - 1)][static_cast<unsigned int>(position.x + 0.25 * square)] || 
             field[static_cast<unsigned int>(position.y - 1)][static_cast<unsigned int>(position.x + 0.75 * square)])
         {
+            if (position.y - square < 1 || position.x + square >= field[0].size())
+                up = false;
+            else if (field[static_cast<unsigned int>(position.y - square - 1)][static_cast<unsigned int>(position.x + 0.25 * square)] ||
+                field[static_cast<unsigned int>(position.y - square - 1)][static_cast<unsigned int>(position.x + 0.75 * square)])
+                up = false;
             //  Bomb collision
             if (field[static_cast<unsigned int>(position.y - 1)][static_cast<unsigned int>(position.x + 0.25 * square)] == 50 ||
                 field[static_cast<unsigned int>(position.y - 1)][static_cast<unsigned int>(position.x + 0.75 * square)] == 50)
@@ -139,6 +144,12 @@ void m_Entity::Player::update(sf::Time deltaTime, std::shared_ptr<std::queue<uns
         else if (field[static_cast<unsigned int>(position.y+square + 1)][static_cast<unsigned int>(position.x + 0.25 * square)] || 
             field[static_cast<unsigned int>(position.y+square + 1)][static_cast<unsigned int>(position.x + 0.75 * square)])
         {
+            if (position.y + 2 * square >= field.size() - 1 || position.x + square >= field[0].size())
+                down = false;
+            else if (field[static_cast<unsigned int>(position.y + 2*square + 1)][static_cast<unsigned int>(position.x + 0.25 * square)] ||
+                field[static_cast<unsigned int>(position.y + 2*square + 1)][static_cast<unsigned int>(position.x + 0.75 * square)])
+                down = false;
+
             //  Bomb collision
             if (field[static_cast<unsigned int>(position.y + square + 1)][static_cast<unsigned int>(position.x + 0.25 * square)] == 50 ||
                 field[static_cast<unsigned int>(position.y + square + 1)][static_cast<unsigned int>(position.x + 0.75 * square)] == 50)

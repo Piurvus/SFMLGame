@@ -17,6 +17,7 @@ void GameState::init()
 	
 	std::shared_ptr<sf::Vector2f> pos = std::move(std::make_shared<sf::Vector2f>(squaresize*1.f, squaresize*1.f));
 	m_Player = std::move(std::make_unique<m_Entity::Player>(m_context, pos, squaresize));
+	m_Player->setPosition({ 0, 0 });
 
 	//	gamefield
 	std::vector<int> row = std::vector<int>(m_context->m_window->getSize().x / squaresize);
@@ -55,8 +56,7 @@ void GameState::update(sf::Time deltaTime)
 	{
 		if (m_Player->isDead())
 		{
-			std::shared_ptr<sf::Vector2f> pos = std::move(std::make_shared<sf::Vector2f>(squaresize*1.f, squaresize*1.f));
-			m_Player = std::move(std::make_unique<m_Entity::Player>(m_context, pos));
+			init();
 		}
 		m_Player->update(deltaTime, keys, m_gamefield, squaresize);
 		if (m_Player->putBomb())
@@ -90,12 +90,17 @@ void GameState::update(sf::Time deltaTime)
 				switch (dir)
 				{
 				case 1:
-					if (m_Bombs[i]->getPos().x == round(pos.x/squaresize) && m_Bombs[i]->getPos().y == round(pos.y/squaresize)+1)
+					if (m_Bombs[i]->getPos().x == round(pos.x / squaresize) && m_Bombs[i]->getPos().y == round(pos.y / squaresize) + 1)
+					{
 						m_Bombs[i]->getHit(dir - 1);
+						//m_Player->setPosition({ round(m_Player->getPos().y/squaresize)*squaresize , -1 });
+					}
 					break;
 				case 2:
-					if (m_Bombs[i]->getPos().x == round(pos.x/squaresize) && m_Bombs[i]->getPos().y == round(pos.y/squaresize)-1)
+					if (m_Bombs[i]->getPos().x == round(pos.x / squaresize) && m_Bombs[i]->getPos().y == round(pos.y / squaresize) - 1)
+					{
 						m_Bombs[i]->getHit(dir - 1);
+					}
 					break;
 				case 3:
 					if (m_Bombs[i]->getPos().x == round(pos.x/squaresize)+1 && m_Bombs[i]->getPos().y == round(pos.y/squaresize))

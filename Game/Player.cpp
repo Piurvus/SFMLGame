@@ -230,3 +230,17 @@ const int m_Entity::Player::hitBomb()
     return buf;
 }
 
+void m_Entity::Player::setPosition(sf::Vector2f p)
+{  
+    sf::Transform matrix = this->pos->getTransform();
+
+    auto position = matrix.transformPoint(this->pos->getPoint(0));
+
+    if (p.y == -1)
+        this->pos->move({ p.x - position.x, 0 });
+    else if (p.x == -1)
+        this->pos->move({ 0, p.y - position.y });
+    else
+        this->pos->move({ p.x - position.x, p.y - position.y });
+}
+

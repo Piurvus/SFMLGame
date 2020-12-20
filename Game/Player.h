@@ -34,5 +34,6 @@ namespace m_Entity
 		void kill();
 		const bool isDead() const;
 		const int hitBomb();
+		void setPosition(sf::Vector2f p);
 	};
 };

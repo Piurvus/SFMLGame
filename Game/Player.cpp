@@ -130,7 +130,10 @@ void m_Entity::Player::update(sf::Time deltaTime, std::shared_ptr<std::queue<uns
             //  Bomb collision
             if (field[static_cast<unsigned int>(position.y - 1)][static_cast<unsigned int>(position.x + 0.25 * square)] == 50 ||
                 field[static_cast<unsigned int>(position.y - 1)][static_cast<unsigned int>(position.x + 0.75 * square)] == 50)
+            {
                 hitbomb = 4;
+                this->setPosition({ -1, round(position.y / square) * square });
+            }
             else
                 up = false;
 
@@ -153,7 +156,10 @@ void m_Entity::Player::update(sf::Time deltaTime, std::shared_ptr<std::queue<uns
             //  Bomb collision
             if (field[static_cast<unsigned int>(position.y + square + 1)][static_cast<unsigned int>(position.x + 0.25 * square)] == 50 ||
                 field[static_cast<unsigned int>(position.y + square + 1)][static_cast<unsigned int>(position.x + 0.75 * square)] == 50)
+            {
                 hitbomb = 3;
+                this->setPosition({ -1, round(position.y / square) * square });
+            }
             else
                 down = false;
         }
@@ -175,9 +181,12 @@ void m_Entity::Player::update(sf::Time deltaTime, std::shared_ptr<std::queue<uns
                  left = false;
 
             //  Bomb collision
-            if (field[static_cast<unsigned int>(position.y + 0.25 * square)][static_cast<unsigned int>(position.x - 1)] == 50 ||
-                field[static_cast<unsigned int>(position.y + 0.75 * square)][static_cast<unsigned int>(position.x - 1)] == 50)
-                hitbomb = 2;
+             if (field[static_cast<unsigned int>(position.y + 0.25 * square)][static_cast<unsigned int>(position.x - 1)] == 50 ||
+                 field[static_cast<unsigned int>(position.y + 0.75 * square)][static_cast<unsigned int>(position.x - 1)] == 50)
+             {
+                 hitbomb = 2;
+                this->setPosition({ round(position.x / square) * square, -1 });
+             }
             else
                 left = false;
         }
@@ -202,6 +211,7 @@ void m_Entity::Player::update(sf::Time deltaTime, std::shared_ptr<std::queue<uns
                     field[static_cast<unsigned int>(position.y + 0.75 * square)][static_cast<unsigned int>(position.x + square + 1)] == 50)
                 {
                     hitbomb = 1;
+                    this->setPosition({ round(position.x / square) * square, -1 });
                 }
                 else
                     right = false;

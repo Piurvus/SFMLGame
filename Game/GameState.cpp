@@ -14,7 +14,12 @@ GameState::~GameState()
 
 void GameState::init()
 {
-	
+	m_context->m_assets->addTexture(PWALK1, "textures/Penguin-images-2/Animations/penguin_walk01.png");
+	m_context->m_assets->addTexture(PWALK2, "textures/Penguin-images-2/Animations/penguin_walk02.png");
+	m_context->m_assets->addTexture(PWALK3, "textures/Penguin-images-2/Animations/penguin_walk03.png");
+	m_context->m_assets->addTexture(PWALK4, "textures/Penguin-images-2/Animations/penguin_walk04.png");
+
+
 	std::shared_ptr<sf::Vector2f> pos = std::move(std::make_shared<sf::Vector2f>(squaresize*1.f, squaresize*1.f));
 	m_Player = std::move(std::make_unique<m_Entity::Player>(m_context, pos, squaresize));
 	m_Player->setPosition({ 0, 0 });

@@ -49,6 +49,36 @@
   <ItemGroup>
     <Font Include="fonts\white_systemattic\White Systemattic.ttf" />
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="textures\Penguin-images-2\Animations\penguin_die01%402x.png" />
+    <Image Include="textures\Penguin-images-2\Animations\penguin_die01.png" />
+    <Image Include="textures\Penguin-images-2\Animations\penguin_die02%402x.png" />
+    <Image Include="textures\Penguin-images-2\Animations\penguin_die02.png" />
+    <Image Include="textures\Penguin-images-2\Animations\penguin_die03%402x.png" />
+    <Image Include="textures\Penguin-images-2\Animations\penguin_die03.png" />
+    <Image Include="textures\Penguin-images-2\Animations\penguin_die04%402x.png" />
+    <Image Include="textures\Penguin-images-2\Animations\penguin_die04.png" />
+    <Image Include="textures\Penguin-images-2\Animations\penguin_hurt%402x.png" />
+    <Image Include="textures\Penguin-images-2\Animations\penguin_hurt.png" />
+    <Image Include="textures\Penguin-images-2\Animations\penguin_jump01%402x.png" />
+    <Image Include="textures\Penguin-images-2\Animations\penguin_jump01.png" />
+    <Image Include="textures\Penguin-images-2\Animations\penguin_jump02%402x.png" />
+    <Image Include="textures\Penguin-images-2\Animations\penguin_jump02.png" />
+    <Image Include="textures\Penguin-images-2\Animations\penguin_jump03%402x.png" />
+    <Image Include="textures\Penguin-images-2\Animations\penguin_jump03.png" />
+    <Image Include="textures\Penguin-images-2\Animations\penguin_slide01%402x.png" />
+    <Image Include="textures\Penguin-images-2\Animations\penguin_slide01.png" />
+    <Image Include="textures\Penguin-images-2\Animations\penguin_slide02%402x.png" />
+    <Image Include="textures\Penguin-images-2\Animations\penguin_slide02.png" />
+    <Image Include="textures\Penguin-images-2\Animations\penguin_walk01%402x.png" />
+    <Image Include="textures\Penguin-images-2\Animations\penguin_walk01.png" />
+    <Image Include="textures\Penguin-images-2\Animations\penguin_walk02%402x.png" />
+    <Image Include="textures\Penguin-images-2\Animations\penguin_walk02.png" />
+    <Image Include="textures\Penguin-images-2\Animations\penguin_walk03%402x.png" />
+    <Image Include="textures\Penguin-images-2\Animations\penguin_walk03.png" />
+    <Image Include="textures\Penguin-images-2\Animations\penguin_walk04%402x.png" />
+    <Image Include="textures\Penguin-images-2\Animations\penguin_walk04.png" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
@@ -120,6 +150,7 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>C:\SFML-2.5.1\include;</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

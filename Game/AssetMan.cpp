@@ -1,4 +1,5 @@
 #include "AssetMan.hpp"
+#include <iostream>
 
 Engine::AssetMan::AssetMan() 
 {
@@ -36,13 +37,12 @@ void Engine::AssetMan::addTexture(unsigned int id, const std::string &filePath)
         return;
     
     //  load it
-    texture->loadFromFile(filePath);
+    if (!texture->loadFromFile(filePath))
+        return;
 
     //  make sure there is enough space
-	while (id >= m_fonts.size())
-        m_fonts.push_back(nullptr);
-
-
+	while (id >= m_textures.size())
+        m_textures.push_back(nullptr);
     m_textures[id] = std::move(texture);
 
 }

@@ -21,6 +21,12 @@
     <Filter Include="Entities">
       <UniqueIdentifier>{90cd4fc9-291e-42a7-9ab6-e245317695ed}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Ressourcendateien\Textures">
+      <UniqueIdentifier>{4cf97bb1-c4ab-42ea-9279-cbb848e1477a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ressourcendateien\Textures\Pengu">
+      <UniqueIdentifier>{e0067574-9146-4623-9f07-4af39279a153}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AssetMan.cpp">
@@ -96,5 +102,91 @@
     <Font Include="fonts\white_systemattic\White Systemattic.ttf">
       <Filter>Ressourcendateien\Fonts</Filter>
     </Font>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="textures\Penguin-images-2\Animations\penguin_jump01.png">
+      <Filter>Ressourcendateien\Textures\Pengu</Filter>
+    </Image>
+    <Image Include="textures\Penguin-images-2\Animations\penguin_jump01%402x.png">
+      <Filter>Ressourcendateien\Textures\Pengu</Filter>
+    </Image>
+    <Image Include="textures\Penguin-images-2\Animations\penguin_jump02.png">
+      <Filter>Ressourcendateien\Textures\Pengu</Filter>
+    </Image>
+    <Image Include="textures\Penguin-images-2\Animations\penguin_jump02%402x.png">
+      <Filter>Ressourcendateien\Textures\Pengu</Filter>
+    </Image>
+    <Image Include="textures\Penguin-images-2\Animations\penguin_jump03.png">
+      <Filter>Ressourcendateien\Textures\Pengu</Filter>
+    </Image>
+    <Image Include="textures\Penguin-images-2\Animations\penguin_jump03%402x.png">
+      <Filter>Ressourcendateien\Textures\Pengu</Filter>
+    </Image>
+    <Image Include="textures\Penguin-images-2\Animations\penguin_slide01.png">
+      <Filter>Ressourcendateien\Textures\Pengu</Filter>
+    </Image>
+    <Image Include="textures\Penguin-images-2\Animations\penguin_slide01%402x.png">
+      <Filter>Ressourcendateien\Textures\Pengu</Filter>
+    </Image>
+    <Image Include="textures\Penguin-images-2\Animations\penguin_slide02.png">
+      <Filter>Ressourcendateien\Textures\Pengu</Filter>
+    </Image>
+    <Image Include="textures\Penguin-images-2\Animations\penguin_slide02%402x.png">
+      <Filter>Ressourcendateien\Textures\Pengu</Filter>
+    </Image>
+    <Image Include="textures\Penguin-images-2\Animations\penguin_walk01.png">
+      <Filter>Ressourcendateien\Textures\Pengu</Filter>
+    </Image>
+    <Image Include="textures\Penguin-images-2\Animations\penguin_walk01%402x.png">
+      <Filter>Ressourcendateien\Textures\Pengu</Filter>
+    </Image>
+    <Image Include="textures\Penguin-images-2\Animations\penguin_walk02.png">
+      <Filter>Ressourcendateien\Textures\Pengu</Filter>
+    </Image>
+    <Image Include="textures\Penguin-images-2\Animations\penguin_walk02%402x.png">
+      <Filter>Ressourcendateien\Textures\Pengu</Filter>
+    </Image>
+    <Image Include="textures\Penguin-images-2\Animations\penguin_walk03.png">
+      <Filter>Ressourcendateien\Textures\Pengu</Filter>
+    </Image>
+    <Image Include="textures\Penguin-images-2\Animations\penguin_walk03%402x.png">
+      <Filter>Ressourcendateien\Textures\Pengu</Filter>
+    </Image>
+    <Image Include="textures\Penguin-images-2\Animations\penguin_walk04.png">
+      <Filter>Ressourcendateien\Textures\Pengu</Filter>
+    </Image>
+    <Image Include="textures\Penguin-images-2\Animations\penguin_walk04%402x.png">
+      <Filter>Ressourcendateien\Textures\Pengu</Filter>
+    </Image>
+    <Image Include="textures\Penguin-images-2\Animations\penguin_die01.png">
+      <Filter>Ressourcendateien\Textures\Pengu</Filter>
+    </Image>
+    <Image Include="textures\Penguin-images-2\Animations\penguin_die01%402x.png">
+      <Filter>Ressourcendateien\Textures\Pengu</Filter>
+    </Image>
+    <Image Include="textures\Penguin-images-2\Animations\penguin_die02.png">
+      <Filter>Ressourcendateien\Textures\Pengu</Filter>
+    </Image>
+    <Image Include="textures\Penguin-images-2\Animations\penguin_die02%402x.png">
+      <Filter>Ressourcendateien\Textures\Pengu</Filter>
+    </Image>
+    <Image Include="textures\Penguin-images-2\Animations\penguin_die03.png">
+      <Filter>Ressourcendateien\Textures\Pengu</Filter>
+    </Image>
+    <Image Include="textures\Penguin-images-2\Animations\penguin_die03%402x.png">
+      <Filter>Ressourcendateien\Textures\Pengu</Filter>
+    </Image>
+    <Image Include="textures\Penguin-images-2\Animations\penguin_die04.png">
+      <Filter>Ressourcendateien\Textures\Pengu</Filter>
+    </Image>
+    <Image Include="textures\Penguin-images-2\Animations\penguin_die04%402x.png">
+      <Filter>Ressourcendateien\Textures\Pengu</Filter>
+    </Image>
+    <Image Include="textures\Penguin-images-2\Animations\penguin_hurt.png">
+      <Filter>Ressourcendateien\Textures\Pengu</Filter>
+    </Image>
+    <Image Include="textures\Penguin-images-2\Animations\penguin_hurt%402x.png">
+      <Filter>Ressourcendateien\Textures\Pengu</Filter>
+    </Image>
   </ItemGroup>
 </Project>

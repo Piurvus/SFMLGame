@@ -10,6 +10,12 @@ enum IDF
 //  ID for textures
 enum IDT
 {
+    PWALK1,
+    PWALK2,
+    PWALK3,
+    PWALK4
+
+
 
 };
 

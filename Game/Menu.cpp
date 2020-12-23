@@ -76,6 +76,7 @@ void Menu::render()
 {
     m_context->m_window->clear({200, 200, 200, 0});
     //  m_m_context->m_window->draw()
+
     m_context->m_window->draw(m_gameTitle);
     m_context->m_window->draw(m_playButton);
     m_context->m_window->draw(m_exitButton);

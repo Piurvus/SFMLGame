@@ -2,6 +2,26 @@
 #include <iostream>
 
 
+void m_Entity::Player::init()
+{
+    sf::Sprite s1;
+    sf::Sprite s2;
+    sf::Sprite s3;
+    sf::Sprite s4;
+    s1.setTexture(m_context->m_assets->getTexture(PWALK1));
+    s2.setTexture(m_context->m_assets->getTexture(PWALK2));
+    s3.setTexture(m_context->m_assets->getTexture(PWALK3));
+    s4.setTexture(m_context->m_assets->getTexture(PWALK4));
+    s1.setScale({ 1.5, 1.5 });
+    s2.setScale({ 1.5, 1.5 });
+    s3.setScale({ 1.5, 1.5 });
+    s4.setScale({ 1.5, 1.5 });
+    m_Sprites.push_back(s1);
+    m_Sprites.push_back(s2);
+    m_Sprites.push_back(s3);
+    m_Sprites.push_back(s4);
+}
+
 m_Entity::Player::~Player()
 {
 }
@@ -22,8 +42,10 @@ void m_Entity::Player::render()
     if (!this->isDead())
     {
         //  m_context->m_window->draw()
-        this->pos->setFillColor({ 0, 50, 150 });
-        m_context->m_window->draw(*pos);
+        //this->pos->setFillColor({ 0, 50, 150 });
+        //m_context->m_window->draw(*pos);
+        m_Sprites[static_cast<int>(this->index)].setPosition({this->getPos().y, this->getPos().x});
+        m_context->m_window->draw(m_Sprites[static_cast<int>(this->index)]);
     }
 }
 
@@ -39,6 +61,15 @@ void m_Entity::Player::update(sf::Time deltaTime)
     float y = this->getPos().x;
 
     float newy = round(y / square) * square;
+
+    if (up || left || right || down)
+    {
+        if (this->index <= 3.9f)
+            this->index += 0.1f;
+        else
+            this->index = 0.0f;
+    }
+
 
     if (up)
     {

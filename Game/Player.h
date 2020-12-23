@@ -16,12 +16,18 @@ namespace m_Entity
 		bool dead;
 		unsigned int square;
 		int hitbomb;
+		std::vector<sf::Sprite> m_Sprites;
+		float index;
+
+		void init();
 
 	public:
 		Player(std::shared_ptr<Context> m_context, std::shared_ptr<sf::Vector2f> pos, unsigned int squaresize) : 
 			Entity(m_context, pos, 100, squaresize), keys(nullptr), left(false), right(false),
 			up(false), down(false), speed(10.f), bomb(false), bombs(999), dead(false), square(0),
-			hitbomb(0){};
+			hitbomb(0), index(0.0f) {
+			init();
+		};
 		//	really confused why is this even needed???? buggy code lol
 		Player(std::shared_ptr<Context> m_context, std::shared_ptr<sf::Vector2f> pos) :
 			Player(m_context, pos, 100) {};

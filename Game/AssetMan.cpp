@@ -45,6 +45,8 @@ void Engine::AssetMan::addTexture(unsigned int id, const std::string &filePath)
         m_textures.push_back(nullptr);
     m_textures[id] = std::move(texture);
 
+    m_textures[id]->setSmooth(true);
+
 }
 
 

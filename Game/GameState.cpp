@@ -18,6 +18,10 @@ void GameState::init()
 	m_context->m_assets->addTexture(PWALK2, "textures/Penguin-images-2/Animations/penguin_walk02.png");
 	m_context->m_assets->addTexture(PWALK3, "textures/Penguin-images-2/Animations/penguin_walk03.png");
 	m_context->m_assets->addTexture(PWALK4, "textures/Penguin-images-2/Animations/penguin_walk04.png");
+	m_context->m_assets->addTexture(PWALK5, "textures/Penguin-images-2/Animations/penguin_walk05.png");
+	m_context->m_assets->addTexture(PWALK6, "textures/Penguin-images-2/Animations/penguin_walk06.png");
+	m_context->m_assets->addTexture(PWALK7, "textures/Penguin-images-2/Animations/penguin_walk07.png");
+	m_context->m_assets->addTexture(PWALK8, "textures/Penguin-images-2/Animations/penguin_walk08.png");
 
 
 	std::shared_ptr<sf::Vector2f> pos = std::move(std::make_shared<sf::Vector2f>(squaresize*1.f, squaresize*1.f));

@@ -8,18 +8,34 @@ void m_Entity::Player::init()
     sf::Sprite s2;
     sf::Sprite s3;
     sf::Sprite s4;
+    sf::Sprite s5;
+    sf::Sprite s6;
+    sf::Sprite s7;
+    sf::Sprite s8;
     s1.setTexture(m_context->m_assets->getTexture(PWALK1));
     s2.setTexture(m_context->m_assets->getTexture(PWALK2));
     s3.setTexture(m_context->m_assets->getTexture(PWALK3));
     s4.setTexture(m_context->m_assets->getTexture(PWALK4));
+    s5.setTexture(m_context->m_assets->getTexture(PWALK5));
+    s6.setTexture(m_context->m_assets->getTexture(PWALK6));
+    s7.setTexture(m_context->m_assets->getTexture(PWALK7));
+    s8.setTexture(m_context->m_assets->getTexture(PWALK8));
     s1.setScale({ 1.5, 1.5 });
     s2.setScale({ 1.5, 1.5 });
     s3.setScale({ 1.5, 1.5 });
     s4.setScale({ 1.5, 1.5 });
+    s5.setScale({ 1.5, 1.5 });
+    s6.setScale({ 1.5, 1.5 });
+    s7.setScale({ 1.5, 1.5 });
+    s8.setScale({ 1.5, 1.5 });
     m_Sprites.push_back(s1);
     m_Sprites.push_back(s2);
     m_Sprites.push_back(s3);
     m_Sprites.push_back(s4);
+    m_Sprites.push_back(s5);
+    m_Sprites.push_back(s6);
+    m_Sprites.push_back(s7);
+    m_Sprites.push_back(s8);
 }
 
 m_Entity::Player::~Player()
@@ -44,8 +60,18 @@ void m_Entity::Player::render()
         //  m_context->m_window->draw()
         //this->pos->setFillColor({ 0, 50, 150 });
         //m_context->m_window->draw(*pos);
-        m_Sprites[static_cast<int>(this->index)].setPosition({this->getPos().y, this->getPos().x});
-        m_context->m_window->draw(m_Sprites[static_cast<int>(this->index)]);
+        if (right) {
+            m_Sprites[static_cast<int>(this->index)].setPosition({ this->getPos().y, this->getPos().x });
+            m_context->m_window->draw(m_Sprites[static_cast<int>(this->index)]);
+        }
+        else if (left) {
+            m_Sprites[static_cast<int>(this->index + 4)].setPosition({ this->getPos().y, this->getPos().x });
+            m_context->m_window->draw(m_Sprites[static_cast<int>(this->index + 4)]);
+        }
+        else {
+            m_Sprites[static_cast<int>(this->index)].setPosition({ this->getPos().y, this->getPos().x });
+            m_context->m_window->draw(m_Sprites[static_cast<int>(this->index)]);
+        }
     }
 }
 
@@ -62,7 +88,7 @@ void m_Entity::Player::update(sf::Time deltaTime)
 
     float newy = round(y / square) * square;
 
-    if (up || left || right || down)
+    if (right||left)
     {
         if (this->index <= 3.9f)
             this->index += 0.1f;

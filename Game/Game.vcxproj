@@ -78,6 +78,10 @@
     <Image Include="textures\Penguin-images-2\Animations\penguin_walk03.png" />
     <Image Include="textures\Penguin-images-2\Animations\penguin_walk04%402x.png" />
     <Image Include="textures\Penguin-images-2\Animations\penguin_walk04.png" />
+    <Image Include="textures\Penguin-images-2\Animations\penguin_walk05.png" />
+    <Image Include="textures\Penguin-images-2\Animations\penguin_walk06.png" />
+    <Image Include="textures\Penguin-images-2\Animations\penguin_walk07.png" />
+    <Image Include="textures\Penguin-images-2\Animations\penguin_walk08.png" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

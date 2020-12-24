@@ -13,7 +13,11 @@ enum IDT
     PWALK1,
     PWALK2,
     PWALK3,
-    PWALK4
+    PWALK4,
+    PWALK5,
+    PWALK6,
+    PWALK7,
+    PWALK8
 
 
 

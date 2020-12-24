@@ -188,5 +188,17 @@
     <Image Include="textures\Penguin-images-2\Animations\penguin_hurt%402x.png">
       <Filter>Ressourcendateien\Textures\Pengu</Filter>
     </Image>
+    <Image Include="textures\Penguin-images-2\Animations\penguin_walk07.png">
+      <Filter>Ressourcendateien\Textures\Pengu</Filter>
+    </Image>
+    <Image Include="textures\Penguin-images-2\Animations\penguin_walk08.png">
+      <Filter>Ressourcendateien\Textures\Pengu</Filter>
+    </Image>
+    <Image Include="textures\Penguin-images-2\Animations\penguin_walk05.png">
+      <Filter>Ressourcendateien\Textures\Pengu</Filter>
+    </Image>
+    <Image Include="textures\Penguin-images-2\Animations\penguin_walk06.png">
+      <Filter>Ressourcendateien\Textures\Pengu</Filter>
+    </Image>
   </ItemGroup>
 </Project>

@@ -17,10 +17,8 @@ enum IDT
     PWALK5,
     PWALK6,
     PWALK7,
-    PWALK8
-
-
-
+    PWALK8,
+    BOMB1
 };
 
 namespace Engine

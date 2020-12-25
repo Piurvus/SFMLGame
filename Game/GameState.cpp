@@ -22,6 +22,7 @@ void GameState::init()
 	m_context->m_assets->addTexture(PWALK6, "textures/Penguin-images-2/Animations/penguin_walk06.png");
 	m_context->m_assets->addTexture(PWALK7, "textures/Penguin-images-2/Animations/penguin_walk07.png");
 	m_context->m_assets->addTexture(PWALK8, "textures/Penguin-images-2/Animations/penguin_walk08.png");
+	m_context->m_assets->addTexture(BOMB1, "textures/bombs/bomb1.png");
 
 
 	std::shared_ptr<sf::Vector2f> pos = std::move(std::make_shared<sf::Vector2f>(squaresize*1.f, squaresize*1.f));

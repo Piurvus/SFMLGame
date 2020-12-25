@@ -6,6 +6,11 @@ Bomb::Bomb(std::shared_ptr<Context> context, std::shared_ptr<sf::Vector2f> poss,
 {
     position.setSize({ static_cast<float>(squaresize), static_cast<float>(squaresize) });
     position.setPosition({ pos });
+
+    sf::Sprite s1;
+    s1.setTexture(m_context->m_assets->getTexture(BOMB1));
+    s1.setScale({ 0.4,0.4 });
+    m_Sprites.push_back(s1);
 }
 
 Bomb::~Bomb()
@@ -125,6 +130,7 @@ const int Bomb::getStrength() const
 
 void Bomb::render()
 {
+    /*
     if (health > 80)
         this->position.setFillColor({ 150, 100, 100 });
     else if (health > 60)
@@ -138,6 +144,10 @@ void Bomb::render()
    
 
     this->m_context->m_window->draw(this->position);
+    */
+    m_Sprites[0].setPosition({this->position.getPosition().x, this->position.getPosition().y });
+    m_context->m_window->draw(m_Sprites[0]);
+
 }
 
 bool Bomb::goesBoom() const

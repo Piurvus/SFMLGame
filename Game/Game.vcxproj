@@ -50,6 +50,7 @@
     <Font Include="fonts\white_systemattic\White Systemattic.ttf" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="textures\bombs\bomb1.png" />
     <Image Include="textures\Penguin-images-2\Animations\penguin_die01%402x.png" />
     <Image Include="textures\Penguin-images-2\Animations\penguin_die01.png" />
     <Image Include="textures\Penguin-images-2\Animations\penguin_die02%402x.png" />

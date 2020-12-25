@@ -9,6 +9,7 @@ private:
 	int squaresize;
 	const unsigned int strength;
 	sf::RectangleShape position;
+	std::vector<sf::Sprite> m_Sprites;
 
 public:
 	

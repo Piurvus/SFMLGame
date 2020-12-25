@@ -27,6 +27,9 @@
     <Filter Include="Ressourcendateien\Textures\Pengu">
       <UniqueIdentifier>{e0067574-9146-4623-9f07-4af39279a153}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Ressourcendateien\Textures\Bombs">
+      <UniqueIdentifier>{340a6ecc-7394-4e5c-b04a-6e63286bbe85}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AssetMan.cpp">
@@ -199,6 +202,9 @@
     </Image>
     <Image Include="textures\Penguin-images-2\Animations\penguin_walk06.png">
       <Filter>Ressourcendateien\Textures\Pengu</Filter>
+    </Image>
+    <Image Include="textures\bombs\bomb1.png">
+      <Filter>Ressourcendateien\Textures\Bombs</Filter>
     </Image>
   </ItemGroup>
 </Project>

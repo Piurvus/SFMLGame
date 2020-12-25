@@ -6,7 +6,7 @@
 void Game::InitWindow()
 {
     //  read from file?
-    m_context->m_window->create(sf::VideoMode(1000, 1000), "SFML works!");
+    m_context->m_window->create(sf::VideoMode(1000, 1000), "Bomberman");
     m_context->m_window->setFramerateLimit(120);
     m_context->m_window->setVerticalSyncEnabled(false);
 }

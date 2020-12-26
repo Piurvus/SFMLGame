@@ -22,7 +22,18 @@ void GameState::init()
 	m_context->m_assets->addTexture(PWALK6, "textures/Penguin-images-2/Animations/penguin_walk06.png");
 	m_context->m_assets->addTexture(PWALK7, "textures/Penguin-images-2/Animations/penguin_walk07.png");
 	m_context->m_assets->addTexture(PWALK8, "textures/Penguin-images-2/Animations/penguin_walk08.png");
-	m_context->m_assets->addTexture(BOMB1, "textures/bombs/bomb1.png");
+	m_context->m_assets->addTexture(BOMB11, "textures/bombs/bomb11.png");
+	m_context->m_assets->addTexture(BOMB12, "textures/bombs/bomb12.png");
+	m_context->m_assets->addTexture(BOMB13, "textures/bombs/bomb13.png");
+	m_context->m_assets->addTexture(BOMB14, "textures/bombs/bomb14.png");
+	m_context->m_assets->addTexture(BOMB21, "textures/bombs/bomb21.png");
+	m_context->m_assets->addTexture(BOMB22, "textures/bombs/bomb22.png");
+	m_context->m_assets->addTexture(BOMB23, "textures/bombs/bomb23.png");
+	m_context->m_assets->addTexture(BOMB24, "textures/bombs/bomb24.png");
+	m_context->m_assets->addTexture(BOMB31, "textures/bombs/bomb31.png");
+	m_context->m_assets->addTexture(BOMB32, "textures/bombs/bomb32.png");
+	m_context->m_assets->addTexture(BOMB33, "textures/bombs/bomb33.png");
+	m_context->m_assets->addTexture(BOMB34, "textures/bombs/bomb34.png");
 
 
 	std::shared_ptr<sf::Vector2f> pos = std::move(std::make_shared<sf::Vector2f>(squaresize*1.f, squaresize*1.f));

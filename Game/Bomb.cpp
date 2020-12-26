@@ -2,15 +2,60 @@
 
 Bomb::Bomb(std::shared_ptr<Context> context, std::shared_ptr<sf::Vector2f> poss, unsigned int squaresize, sf::Vector2f pos, unsigned int strength) :
     Entity(context, poss, 100, squaresize), left(false), right(false), up(false), down(false), speed(10.f), squaresize(squaresize), position(sf::RectangleShape()),
-    strength(strength)
+    strength(strength), frame(0.f)
 {
     position.setSize({ static_cast<float>(squaresize), static_cast<float>(squaresize) });
     position.setPosition({ pos });
 
     sf::Sprite s1;
-    s1.setTexture(m_context->m_assets->getTexture(BOMB1));
+    s1.setTexture(m_context->m_assets->getTexture(BOMB11));
     s1.setScale({ 0.4,0.4 });
     m_Sprites.push_back(s1);
+    
+    s1.setTexture(m_context->m_assets->getTexture(BOMB12));
+    s1.setScale({ 0.4,0.4 });
+    m_Sprites.push_back(s1);
+    s1.setTexture(m_context->m_assets->getTexture(BOMB13));
+    s1.setScale({ 0.4,0.4 });
+    m_Sprites.push_back(s1);
+
+    s1.setTexture(m_context->m_assets->getTexture(BOMB14));
+    s1.setScale({ 0.4,0.4 });
+    m_Sprites.push_back(s1);
+
+    s1.setTexture(m_context->m_assets->getTexture(BOMB21));
+    s1.setScale({ 0.4,0.4 });
+    m_Sprites.push_back(s1);
+
+    s1.setTexture(m_context->m_assets->getTexture(BOMB22));
+    s1.setScale({ 0.4,0.4 });
+    m_Sprites.push_back(s1);
+
+    s1.setTexture(m_context->m_assets->getTexture(BOMB23));
+    s1.setScale({ 0.4,0.4 });
+    m_Sprites.push_back(s1);
+
+    s1.setTexture(m_context->m_assets->getTexture(BOMB24));
+    s1.setScale({ 0.4,0.4 });
+    m_Sprites.push_back(s1);
+
+    s1.setTexture(m_context->m_assets->getTexture(BOMB31));
+    s1.setScale({ 0.4,0.4 });
+    m_Sprites.push_back(s1);
+
+    s1.setTexture(m_context->m_assets->getTexture(BOMB32));
+    s1.setScale({ 0.4,0.4 });
+    m_Sprites.push_back(s1);
+
+    s1.setTexture(m_context->m_assets->getTexture(BOMB33));
+    s1.setScale({ 0.4,0.4 });
+    m_Sprites.push_back(s1);
+
+    s1.setTexture(m_context->m_assets->getTexture(BOMB34));
+    s1.setScale({ 0.4,0.4 });
+    m_Sprites.push_back(s1);
+
+
 }
 
 Bomb::~Bomb()
@@ -56,6 +101,9 @@ void Bomb::getHit(int dir)
 
 void Bomb::update(sf::Time deltaTime)
 {
+    if (frame >= 3.9)
+        frame = 0;
+    else frame += 0.1;
     //  collision with player and other bombs or walls?
     if (up)
     {
@@ -130,23 +178,19 @@ const int Bomb::getStrength() const
 
 void Bomb::render()
 {
-    /*
-    if (health > 80)
-        this->position.setFillColor({ 150, 100, 100 });
-    else if (health > 60)
-        this->position.setFillColor({ 200, 100, 100 });
-    else if (health > 40)
-        this->position.setFillColor({ 220, 120, 120 });
-    else if (health > 20)
-        this->position.setFillColor({ 240, 150, 150 });
-    else
-        this->position.setFillColor({ 255, 180, 180 });
-   
-
-    this->m_context->m_window->draw(this->position);
-    */
-    m_Sprites[0].setPosition({this->position.getPosition().x, this->position.getPosition().y });
-    m_context->m_window->draw(m_Sprites[0]);
+    
+    if (health > 66) {
+        m_Sprites[static_cast<int>(frame)].setPosition({this->position.getPosition().x, this->position.getPosition().y });
+        m_context->m_window->draw(m_Sprites[static_cast<int>(frame)]);
+    }
+    else if (health > 33) {
+        m_Sprites[static_cast<int>(frame)+4].setPosition({this->position.getPosition().x, this->position.getPosition().y });
+        m_context->m_window->draw(m_Sprites[static_cast<int>(frame)+4]);
+    }
+    else {
+        m_Sprites[static_cast<int>(frame)+8].setPosition({this->position.getPosition().x, this->position.getPosition().y });
+        m_context->m_window->draw(m_Sprites[static_cast<int>(frame)+8]);
+    }   
 
 }
 

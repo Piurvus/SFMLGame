@@ -8,6 +8,7 @@ private:
 	float speed;
 	int squaresize;
 	const unsigned int strength;
+	float frame;
 	sf::RectangleShape position;
 	std::vector<sf::Sprite> m_Sprites;
 

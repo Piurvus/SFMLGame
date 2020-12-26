@@ -203,7 +203,40 @@
     <Image Include="textures\Penguin-images-2\Animations\penguin_walk06.png">
       <Filter>Ressourcendateien\Textures\Pengu</Filter>
     </Image>
-    <Image Include="textures\bombs\bomb1.png">
+    <Image Include="textures\bombs\bomb22.png">
+      <Filter>Ressourcendateien\Textures\Bombs</Filter>
+    </Image>
+    <Image Include="textures\bombs\bomb23.png">
+      <Filter>Ressourcendateien\Textures\Bombs</Filter>
+    </Image>
+    <Image Include="textures\bombs\bomb24.png">
+      <Filter>Ressourcendateien\Textures\Bombs</Filter>
+    </Image>
+    <Image Include="textures\bombs\bomb31.png">
+      <Filter>Ressourcendateien\Textures\Bombs</Filter>
+    </Image>
+    <Image Include="textures\bombs\bomb32.png">
+      <Filter>Ressourcendateien\Textures\Bombs</Filter>
+    </Image>
+    <Image Include="textures\bombs\bomb33.png">
+      <Filter>Ressourcendateien\Textures\Bombs</Filter>
+    </Image>
+    <Image Include="textures\bombs\bomb34.png">
+      <Filter>Ressourcendateien\Textures\Bombs</Filter>
+    </Image>
+    <Image Include="textures\bombs\bomb11.png">
+      <Filter>Ressourcendateien\Textures\Bombs</Filter>
+    </Image>
+    <Image Include="textures\bombs\bomb12.png">
+      <Filter>Ressourcendateien\Textures\Bombs</Filter>
+    </Image>
+    <Image Include="textures\bombs\bomb13.png">
+      <Filter>Ressourcendateien\Textures\Bombs</Filter>
+    </Image>
+    <Image Include="textures\bombs\bomb14.png">
+      <Filter>Ressourcendateien\Textures\Bombs</Filter>
+    </Image>
+    <Image Include="textures\bombs\bomb21.png">
       <Filter>Ressourcendateien\Textures\Bombs</Filter>
     </Image>
   </ItemGroup>

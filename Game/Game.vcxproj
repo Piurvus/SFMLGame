@@ -50,7 +50,18 @@
     <Font Include="fonts\white_systemattic\White Systemattic.ttf" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="textures\bombs\bomb1.png" />
+    <Image Include="textures\bombs\bomb11.png" />
+    <Image Include="textures\bombs\bomb12.png" />
+    <Image Include="textures\bombs\bomb13.png" />
+    <Image Include="textures\bombs\bomb14.png" />
+    <Image Include="textures\bombs\bomb21.png" />
+    <Image Include="textures\bombs\bomb22.png" />
+    <Image Include="textures\bombs\bomb23.png" />
+    <Image Include="textures\bombs\bomb24.png" />
+    <Image Include="textures\bombs\bomb31.png" />
+    <Image Include="textures\bombs\bomb32.png" />
+    <Image Include="textures\bombs\bomb33.png" />
+    <Image Include="textures\bombs\bomb34.png" />
     <Image Include="textures\Penguin-images-2\Animations\penguin_die01%402x.png" />
     <Image Include="textures\Penguin-images-2\Animations\penguin_die01.png" />
     <Image Include="textures\Penguin-images-2\Animations\penguin_die02%402x.png" />

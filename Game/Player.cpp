@@ -36,6 +36,18 @@ void m_Entity::Player::init()
     m_Sprites.push_back(s6);
     m_Sprites.push_back(s7);
     m_Sprites.push_back(s8);
+    s1.setTexture(m_context->m_assets->getTexture(PDIE1));
+    s2.setTexture(m_context->m_assets->getTexture(PDIE2));
+    s3.setTexture(m_context->m_assets->getTexture(PDIE3));
+    s4.setTexture(m_context->m_assets->getTexture(PDIE4));
+    s1.setScale({ 1.5, 1.5 });
+    s2.setScale({ 1.5, 1.5 });
+    s3.setScale({ 1.5, 1.5 });
+    s4.setScale({ 1.5, 1.5 });
+    m_Sprites.push_back(s1);
+    m_Sprites.push_back(s2);
+    m_Sprites.push_back(s3);
+    m_Sprites.push_back(s4);
 }
 
 m_Entity::Player::~Player()
@@ -72,6 +84,10 @@ void m_Entity::Player::render()
             m_Sprites[static_cast<int>(this->index)].setPosition({ this->getPos().y, this->getPos().x });
             m_context->m_window->draw(m_Sprites[static_cast<int>(this->index)]);
         }
+    }
+    else {
+         m_Sprites[static_cast<int>(this->index)].setPosition({ this->getPos().y, this->getPos().x });
+         m_context->m_window->draw(m_Sprites[static_cast<int>(this->index)]);
     }
 }
 
@@ -119,6 +135,8 @@ void m_Entity::Player::update(sf::Time deltaTime, std::shared_ptr<std::queue<uns
     this->square = square;
     if (this->isDead())
     {
+        if (this->index <= 11.0f)
+            this->index += 0.2f;
         return;
     }
     //  update the key strokes
@@ -286,6 +304,7 @@ void m_Entity::Player::update(sf::Time deltaTime, std::shared_ptr<std::queue<uns
 void m_Entity::Player::kill()
 {
     this->dead = true;
+    this->index = 8.0f;
 }
 
 const bool m_Entity::Player::isDead() const

@@ -29,7 +29,11 @@ enum IDT
     BOMB31,
     BOMB32,
     BOMB33,
-    BOMB34
+    BOMB34,
+    PDIE1,
+    PDIE2,
+    PDIE3,
+    PDIE4
 };
 
 namespace Engine

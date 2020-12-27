@@ -34,6 +34,10 @@ void GameState::init()
 	m_context->m_assets->addTexture(BOMB32, "textures/bombs/bomb32.png");
 	m_context->m_assets->addTexture(BOMB33, "textures/bombs/bomb33.png");
 	m_context->m_assets->addTexture(BOMB34, "textures/bombs/bomb34.png");
+	m_context->m_assets->addTexture(PDIE1, "textures/Penguin-images-2/Animations/penguin_die01.png");
+	m_context->m_assets->addTexture(PDIE2, "textures/Penguin-images-2/Animations/penguin_die02.png");
+	m_context->m_assets->addTexture(PDIE3, "textures/Penguin-images-2/Animations/penguin_die03.png");
+	m_context->m_assets->addTexture(PDIE4, "textures/Penguin-images-2/Animations/penguin_die04.png");
 
 
 	std::shared_ptr<sf::Vector2f> pos = std::move(std::make_shared<sf::Vector2f>(squaresize*1.f, squaresize*1.f));
@@ -77,7 +81,8 @@ void GameState::update(sf::Time deltaTime)
 	{
 		if (m_Player->isDead())
 		{
-			init();
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter))
+				init();
 		}
 		m_Player->update(deltaTime, keys, m_gamefield, squaresize);
 		if (m_Player->putBomb())

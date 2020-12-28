@@ -38,7 +38,10 @@ void GameState::init()
 	m_context->m_assets->addTexture(PDIE2, "textures/Penguin-images-2/Animations/penguin_die02.png");
 	m_context->m_assets->addTexture(PDIE3, "textures/Penguin-images-2/Animations/penguin_die03.png");
 	m_context->m_assets->addTexture(PDIE4, "textures/Penguin-images-2/Animations/penguin_die04.png");
+	m_context->m_assets->addTexture(BLOCK1, "textures/blocks/block1.png");
 
+	block1.setTexture(m_context->m_assets->getTexture(BLOCK1));
+	block1.setScale({ 0.4, 0.4 });
 
 	std::shared_ptr<sf::Vector2f> pos = std::move(std::make_shared<sf::Vector2f>(squaresize*1.f, squaresize*1.f));
 	m_Player = std::move(std::make_unique<m_Entity::Player>(m_context, pos, squaresize));
@@ -289,11 +292,11 @@ void GameState::render()
 
 	m_context->m_window->draw(line);
 
-
+	/*
 	sf::RectangleShape obst;
 	obst.setSize({ static_cast<float>(squaresize), static_cast<float>(squaresize) });
 	obst.setFillColor({ 150, 255, 255 });
-
+	*/
 	//	new field drawing
 	for (unsigned int y = 0; y < m_gamefield.size(); y+= squaresize)
 	{
@@ -303,9 +306,11 @@ void GameState::render()
 			{
 				if (m_gamefield[y][x] == 99)
 				{
-					obst.setPosition({ static_cast<float>(x), static_cast<float>(y) });
-					obst.setFillColor({ 150, 255, 255 });
-					m_context->m_window->draw(obst);
+					//obst.setPosition({ static_cast<float>(x), static_cast<float>(y) });
+					//obst.setFillColor({ 150, 255, 255 });
+					//m_context->m_window->draw(obst);
+					block1.setPosition({ static_cast<float>(x), static_cast<float>(y) });
+					m_context->m_window->draw(block1);
 				}
 			}
 		}

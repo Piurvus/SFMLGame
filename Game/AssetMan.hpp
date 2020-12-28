@@ -33,7 +33,8 @@ enum IDT
     PDIE1,
     PDIE2,
     PDIE3,
-    PDIE4
+    PDIE4,
+    BLOCK1
 };
 
 namespace Engine

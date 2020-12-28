@@ -30,6 +30,9 @@
     <Filter Include="Ressourcendateien\Textures\Bombs">
       <UniqueIdentifier>{340a6ecc-7394-4e5c-b04a-6e63286bbe85}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Ressourcendateien\Textures\blocks">
+      <UniqueIdentifier>{5213c741-3f72-4bd4-b24b-20075bc064e0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AssetMan.cpp">
@@ -238,6 +241,9 @@
     </Image>
     <Image Include="textures\bombs\bomb21.png">
       <Filter>Ressourcendateien\Textures\Bombs</Filter>
+    </Image>
+    <Image Include="textures\blocks\block1.png">
+      <Filter>Ressourcendateien\Textures\blocks</Filter>
     </Image>
   </ItemGroup>
 </Project>

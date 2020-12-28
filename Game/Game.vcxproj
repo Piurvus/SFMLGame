@@ -50,6 +50,7 @@
     <Font Include="fonts\white_systemattic\White Systemattic.ttf" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="textures\blocks\block1.png" />
     <Image Include="textures\bombs\bomb11.png" />
     <Image Include="textures\bombs\bomb12.png" />
     <Image Include="textures\bombs\bomb13.png" />

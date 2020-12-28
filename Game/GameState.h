@@ -21,6 +21,7 @@ private:
 	int squaresize;
 	bool pause;
 	std::vector<std::unique_ptr<Shock>> m_Shock;
+	sf::Sprite block1;
 	//std::vector<std::unique_ptr<Entity>> m_entities;
 
 public:

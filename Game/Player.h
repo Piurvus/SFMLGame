@@ -18,6 +18,7 @@ namespace m_Entity
 		int hitbomb;
 		std::vector<sf::Sprite> m_Sprites;
 		float index;
+		bool preright, preleft;
 
 		void init();
 
@@ -25,7 +26,7 @@ namespace m_Entity
 		Player(std::shared_ptr<Context> m_context, std::shared_ptr<sf::Vector2f> pos, unsigned int squaresize) : 
 			Entity(m_context, pos, 100, squaresize), keys(nullptr), left(false), right(false),
 			up(false), down(false), speed(10.f), bomb(false), bombs(999), dead(false), square(0),
-			hitbomb(0), index(0.0f) {
+			hitbomb(0), index(0.0f), preright(true), preleft(false) {
 			init();
 		};
 		//	really confused why is this even needed???? buggy code lol

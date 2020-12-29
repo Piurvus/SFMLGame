@@ -102,13 +102,6 @@ void GameState::update(sf::Time deltaTime)
 					m_gamefield[static_cast<unsigned int>(pos->y+i)][static_cast<unsigned int>(pos->x+j)] = 50;
 		}
 		
-		/*	
-			todo:
-			- implement better logic for hitting bombs (you need to be able to move back to the square of the bomb without hitting it
-			- you should be able to move with the bomb if you hit it (combos)
-			- ...
-		*/
-		
 		// r, l, d, u
 		int dir = m_Player->hitBomb();
 		if (dir)
@@ -269,34 +262,7 @@ void GameState::render()
 	{
 		m_Shock[i]->render();
 	}
-
-	sf::VertexArray line(sf::LinesStrip, 2);
-	//	rows
-	for (unsigned int i = 0; i < m_context->m_window->getSize().y; i+=squaresize)
-	{
-		line[0].position = sf::Vector2f(0.f, static_cast<float>(i));
-		line[1].position = sf::Vector2f(static_cast<float>(m_context->m_window->getSize().x), static_cast<float>(i));
-
-		m_context->m_window->draw(line);
-	}
-
-	//	columns
-	for (unsigned int i = 0; i < m_context->m_window->getSize().x; i+=squaresize)
-	{
-		line[0].position = sf::Vector2f(static_cast<float>(i), 0.f);
-		line[1].position = sf::Vector2f(static_cast<float>(i), static_cast<float>(m_context->m_window->getSize().y));
-
-		m_context->m_window->draw(line);
-	}
-
-
-	m_context->m_window->draw(line);
-
-	/*
-	sf::RectangleShape obst;
-	obst.setSize({ static_cast<float>(squaresize), static_cast<float>(squaresize) });
-	obst.setFillColor({ 150, 255, 255 });
-	*/
+	
 	//	new field drawing
 	for (unsigned int y = 0; y < m_gamefield.size(); y+= squaresize)
 	{
@@ -304,11 +270,7 @@ void GameState::render()
 		{
 			if(m_gamefield.size() > 0)
 			{
-				if (m_gamefield[y][x] == 99)
-				{
-					//obst.setPosition({ static_cast<float>(x), static_cast<float>(y) });
-					//obst.setFillColor({ 150, 255, 255 });
-					//m_context->m_window->draw(obst);
+				if (m_gamefield[y][x] == 99) {
 					block1.setPosition({ static_cast<float>(x), static_cast<float>(y) });
 					m_context->m_window->draw(block1);
 				}

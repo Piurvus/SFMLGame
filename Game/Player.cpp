@@ -67,23 +67,32 @@ const bool m_Entity::Player::putBomb()
 
 void m_Entity::Player::render()
 {
-    if (!this->isDead())
-    {
-        //  m_context->m_window->draw()
-        //this->pos->setFillColor({ 0, 50, 150 });
-        //m_context->m_window->draw(*pos);
+    if (!this->isDead()) {
         if (right) {
             m_Sprites[static_cast<int>(this->index)].setPosition({ this->getPos().y, this->getPos().x });
             m_context->m_window->draw(m_Sprites[static_cast<int>(this->index)]);
+            preright = true;
+            preleft = false;
         }
         else if (left) {
             m_Sprites[static_cast<int>(this->index + 4)].setPosition({ this->getPos().y, this->getPos().x });
             m_context->m_window->draw(m_Sprites[static_cast<int>(this->index + 4)]);
+            preleft = true;
+            preright = false;
         }
-        else {
+        else if (up || down) {
             m_Sprites[static_cast<int>(this->index)].setPosition({ this->getPos().y, this->getPos().x });
             m_context->m_window->draw(m_Sprites[static_cast<int>(this->index)]);
         }
+        else if (preright) {
+            m_Sprites[static_cast<int>(this->index)].setPosition({ this->getPos().y, this->getPos().x });
+            m_context->m_window->draw(m_Sprites[static_cast<int>(this->index)]);
+        }
+        else if (preleft) {
+            m_Sprites[static_cast<int>(this->index)+4].setPosition({ this->getPos().y, this->getPos().x });
+            m_context->m_window->draw(m_Sprites[static_cast<int>(this->index) + 4]);
+        }
+
     }
     else {
          m_Sprites[static_cast<int>(this->index)].setPosition({ this->getPos().y, this->getPos().x });

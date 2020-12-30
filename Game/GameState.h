@@ -22,6 +22,7 @@ private:
 	bool pause;
 	std::vector<std::unique_ptr<Shock>> m_Shock;
 	sf::Sprite block1;
+	sf::Sprite background;
 	//std::vector<std::unique_ptr<Entity>> m_entities;
 
 public:

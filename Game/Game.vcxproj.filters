@@ -245,5 +245,11 @@
     <Image Include="textures\blocks\block1.png">
       <Filter>Ressourcendateien\Textures\blocks</Filter>
     </Image>
+    <Image Include="textures\blocks\back2.jpg">
+      <Filter>Ressourcendateien\Textures\blocks</Filter>
+    </Image>
+    <Image Include="textures\blocks\back1.jpg">
+      <Filter>Ressourcendateien\Textures\blocks</Filter>
+    </Image>
   </ItemGroup>
 </Project>

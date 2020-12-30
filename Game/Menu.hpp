@@ -13,6 +13,7 @@ private:
     sf::Text m_gameTitle;
     sf::Text m_playButton;
     sf::Text m_exitButton;
+    sf::Sprite background;
 
     bool playIsSelected;
     bool playIsClicked;

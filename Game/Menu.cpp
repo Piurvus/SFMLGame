@@ -46,7 +46,10 @@ void Menu::init()
                           textRect3.top + textRect3.height / 2.0f);
     m_exitButton.setPosition(sf::Vector2f(m_context->m_window->getSize().x / 2.0f, m_context->m_window->getSize().y/ 2.0f + m_context->m_window->getSize().y / 5.0f));
 
-
+    m_context->m_assets->addTexture(BACKGROUND1, "textures/blocks/back1.jpg");
+    m_context->m_assets->addTexture(BACKGROUND2, "textures/blocks/back2.jpg");
+    background.setTexture(m_context->m_assets->getTexture(BACKGROUND1));
+    background.setColor({ 255, 255, 255 });
 
 } 
 void Menu::update(sf::Time deltaTime)
@@ -74,9 +77,9 @@ void Menu::update(sf::Time deltaTime)
 } 
 void Menu::render()
 {
-    m_context->m_window->clear({200, 200, 200, 0});
+    m_context->m_window->clear();
     //  m_m_context->m_window->draw()
-
+    m_context->m_window->draw(background);
     m_context->m_window->draw(m_gameTitle);
     m_context->m_window->draw(m_playButton);
     m_context->m_window->draw(m_exitButton);

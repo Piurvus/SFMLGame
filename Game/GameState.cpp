@@ -43,6 +43,9 @@ void GameState::init()
 	block1.setTexture(m_context->m_assets->getTexture(BLOCK1));
 	block1.setScale({ 0.4, 0.4 });
 
+	background.setTexture(m_context->m_assets->getTexture(BACKGROUND1));
+	background.setScale({ 0.4, 0.4 });
+
 	std::shared_ptr<sf::Vector2f> pos = std::move(std::make_shared<sf::Vector2f>(squaresize*1.f, squaresize*1.f));
 	m_Player = std::move(std::make_unique<m_Entity::Player>(m_context, pos, squaresize));
 	m_Player->setPosition({ 0, 0 });
@@ -84,6 +87,7 @@ void GameState::update(sf::Time deltaTime)
 	{
 		if (m_Player->isDead())
 		{
+			background.setTexture(m_context->m_assets->getTexture(BACKGROUND2));
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter))
 				init();
 		}
@@ -251,7 +255,9 @@ void GameState::processInput()
 
 void GameState::render() 
 {
-	m_context->m_window->clear({ 200, 200, 200, 0 });
+	m_context->m_window->clear();
+
+	m_context->m_window->draw(background);
 
 	for (unsigned int i = 0; i < m_Bombs.size(); i++)
 	{

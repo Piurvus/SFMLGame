@@ -9,50 +9,50 @@ Bomb::Bomb(std::shared_ptr<Context> context, std::shared_ptr<sf::Vector2f> poss,
 
     sf::Sprite s1;
     s1.setTexture(m_context->m_assets->getTexture(BOMB11));
-    s1.setScale({ 0.4,0.4 });
+    s1.setScale({ 0.4f,0.4f });
     m_Sprites.push_back(s1);
     
     s1.setTexture(m_context->m_assets->getTexture(BOMB12));
-    s1.setScale({ 0.4,0.4 });
+    s1.setScale({ 0.4f,0.4f });
     m_Sprites.push_back(s1);
     s1.setTexture(m_context->m_assets->getTexture(BOMB13));
-    s1.setScale({ 0.4,0.4 });
+    s1.setScale({ 0.4f,0.4f });
     m_Sprites.push_back(s1);
 
     s1.setTexture(m_context->m_assets->getTexture(BOMB14));
-    s1.setScale({ 0.4,0.4 });
+    s1.setScale({ 0.4f,0.4f });
     m_Sprites.push_back(s1);
 
     s1.setTexture(m_context->m_assets->getTexture(BOMB21));
-    s1.setScale({ 0.4,0.4 });
+    s1.setScale({ 0.4f,0.4f });
     m_Sprites.push_back(s1);
 
     s1.setTexture(m_context->m_assets->getTexture(BOMB22));
-    s1.setScale({ 0.4,0.4 });
+    s1.setScale({ 0.4f,0.4f });
     m_Sprites.push_back(s1);
 
     s1.setTexture(m_context->m_assets->getTexture(BOMB23));
-    s1.setScale({ 0.4,0.4 });
+    s1.setScale({ 0.4f,0.4f });
     m_Sprites.push_back(s1);
 
     s1.setTexture(m_context->m_assets->getTexture(BOMB24));
-    s1.setScale({ 0.4,0.4 });
+    s1.setScale({ 0.4f,0.4f });
     m_Sprites.push_back(s1);
 
     s1.setTexture(m_context->m_assets->getTexture(BOMB31));
-    s1.setScale({ 0.4,0.4 });
+    s1.setScale({ 0.4f,0.4f });
     m_Sprites.push_back(s1);
 
     s1.setTexture(m_context->m_assets->getTexture(BOMB32));
-    s1.setScale({ 0.4,0.4 });
+    s1.setScale({ 0.4f,0.4f });
     m_Sprites.push_back(s1);
 
     s1.setTexture(m_context->m_assets->getTexture(BOMB33));
-    s1.setScale({ 0.4,0.4 });
+    s1.setScale({ 0.4f,0.4f });
     m_Sprites.push_back(s1);
 
     s1.setTexture(m_context->m_assets->getTexture(BOMB34));
-    s1.setScale({ 0.4,0.4 });
+    s1.setScale({ 0.4f,0.4f });
     m_Sprites.push_back(s1);
 
 
@@ -101,9 +101,9 @@ void Bomb::getHit(int dir)
 
 void Bomb::update(sf::Time deltaTime)
 {
-    if (frame >= 3.9)
-        frame = 0;
-    else frame += 0.1;
+    if (frame >= 3.9f)
+        frame = 0.f;
+    else frame += 0.1f;
     //  collision with player and other bombs or walls?
     if (up)
     {
@@ -149,8 +149,8 @@ void Bomb::update(sf::Time deltaTime, std::vector<std::vector<int>> &m_Field)
     }
     if (up || down || left || right)
     {
-        for (int i = 0; i < squaresize; i++)
-            for (int j = 0; j < squaresize; j++)
+        for (unsigned int i = 0; i < squaresize; i++)
+            for (unsigned int j = 0; j < squaresize; j++)
                 m_Field[poss.x*squaresize + i][poss.y*squaresize + j] = 0;
     }
     update(deltaTime);
@@ -159,8 +159,8 @@ void Bomb::update(sf::Time deltaTime, std::vector<std::vector<int>> &m_Field)
 
     if (up || down || left || right)
     {
-        for (int i = 0; i < squaresize; i++)
-            for (int j = 0; j < squaresize; j++)
+        for (unsigned int i = 0; i < squaresize; i++)
+            for (unsigned int j = 0; j < squaresize; j++)
                 m_Field[poss.x*squaresize+i][poss.y*squaresize + j] = 50;
 
     }

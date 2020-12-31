@@ -6,7 +6,7 @@ class Bomb : public Entity
 private:
 	bool left, right, up, down;
 	float speed;
-	int squaresize;
+	unsigned int squaresize;
 	const unsigned int strength;
 	float frame;
 	sf::RectangleShape position;

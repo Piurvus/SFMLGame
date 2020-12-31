@@ -35,6 +35,7 @@ enum IDT
     PDIE3,
     PDIE4,
     BLOCK1,
+    BLOCK2,
     BACKGROUND1,
     BACKGROUND2
 };

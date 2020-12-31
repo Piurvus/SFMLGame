@@ -39,16 +39,17 @@ void GameState::init()
 	m_context->m_assets->addTexture(PDIE3, "textures/Penguin-images-2/Animations/penguin_die03.png");
 	m_context->m_assets->addTexture(PDIE4, "textures/Penguin-images-2/Animations/penguin_die04.png");
 	m_context->m_assets->addTexture(BLOCK1, "textures/blocks/block1.png");
+	m_context->m_assets->addTexture(BLOCK1, "textures/blocks/block2.png");
 
 	block1.setTexture(m_context->m_assets->getTexture(BLOCK1));
-	block1.setScale({ 0.4, 0.4 });
+	block1.setScale({ 0.4f, 0.4f });
 
 	background.setTexture(m_context->m_assets->getTexture(BACKGROUND1));
-	background.setScale({ 0.4, 0.4 });
+	background.setScale({ 0.4f, 0.4f });
 
 	std::shared_ptr<sf::Vector2f> pos = std::move(std::make_shared<sf::Vector2f>(squaresize*1.f, squaresize*1.f));
 	m_Player = std::move(std::make_unique<m_Entity::Player>(m_context, pos, squaresize));
-	m_Player->setPosition({ 0, 0 });
+	m_Player->setPosition({ 0.f, 0.f });
 
 	//	gamefield
 	std::vector<int> row = std::vector<int>(m_context->m_window->getSize().x / squaresize);
@@ -165,7 +166,7 @@ void GameState::update(sf::Time deltaTime)
 			//	first search horizontal
 			if (!(pos.x % 2))
 			{
-				for (int k = pos.y - power+1; k < pos.y + power; k++) {
+				for (unsigned int k = pos.y - power+1; k < static_cast<unsigned int>(pos.y + power); k++) {
 					if (k < 0)
 						continue;
 					else if (k >= m_gamefield[0].size())
@@ -195,7 +196,7 @@ void GameState::update(sf::Time deltaTime)
 			}
 			if (!(pos.y % 2))
 			{
-				for (int k = pos.x - power + 1; k < pos.x + power; k++) {
+				for (unsigned int k = pos.x - power + 1; k < static_cast<unsigned int>(pos.x + power); k++) {
 					if (k < 0)
 						continue;
 					else if (k >= m_gamefield[0].size())

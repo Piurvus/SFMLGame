@@ -65,6 +65,9 @@
     <ClCompile Include="Shock.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="Block.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AssetMan.hpp">
@@ -101,6 +104,9 @@
       <Filter>Entities</Filter>
     </ClInclude>
     <ClInclude Include="Shock.h">
+      <Filter>Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Block.h">
       <Filter>Entities</Filter>
     </ClInclude>
   </ItemGroup>

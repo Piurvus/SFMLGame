@@ -6,6 +6,7 @@
 #include "Pause.hpp"
 #include "Bomb.h"
 #include "Shock.h"
+#include "Block.h"
 
 class GameState : public Engine::State
 {
@@ -23,6 +24,7 @@ private:
 	std::vector<std::unique_ptr<Shock>> m_Shock;
 	sf::Sprite block1;
 	sf::Sprite background;
+	std::vector<std::unique_ptr<Block>> m_Blocks;
 	//std::vector<std::unique_ptr<Entity>> m_entities;
 
 public:

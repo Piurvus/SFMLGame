@@ -11,6 +11,13 @@ void Block::update(sf::Time deltatime)
 {
 }
 
+const int Block::getHit() const
+{
+	//	returns a int according to powerup.
+
+	return 0;
+}
+
 void Block::render()
 {
 	m_context->m_window->draw(sprite);

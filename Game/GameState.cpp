@@ -39,7 +39,7 @@ void GameState::init()
 	m_context->m_assets->addTexture(PDIE3, "textures/Penguin-images-2/Animations/penguin_die03.png");
 	m_context->m_assets->addTexture(PDIE4, "textures/Penguin-images-2/Animations/penguin_die04.png");
 	m_context->m_assets->addTexture(BLOCK1, "textures/blocks/block1.png");
-	m_context->m_assets->addTexture(BLOCK1, "textures/blocks/block2.png");
+	m_context->m_assets->addTexture(BLOCK2, "textures/blocks/block2.png");
 
 	block1.setTexture(m_context->m_assets->getTexture(BLOCK1));
 	block1.setScale({ 0.4f, 0.4f });
@@ -47,7 +47,7 @@ void GameState::init()
 	background.setTexture(m_context->m_assets->getTexture(BACKGROUND1));
 	background.setScale({ 0.4f, 0.4f });
 
-	std::shared_ptr<sf::Vector2f> pos = std::move(std::make_shared<sf::Vector2f>(squaresize*1.f, squaresize*1.f));
+	std::shared_ptr<sf::Vector2f> pos = std::move(std::make_shared<sf::Vector2f>(squaresize * 1.f, squaresize * 1.f));
 	m_Player = std::move(std::make_unique<m_Entity::Player>(m_context, pos, squaresize));
 	m_Player->setPosition({ 0.f, 0.f });
 
@@ -75,6 +75,12 @@ void GameState::init()
 			}
 		}
 	}
+
+	//	PUT DOWN BLOCKS
+	pos = std::move(std::make_shared<sf::Vector2f>(0.f, squaresize*3));
+
+	std::unique_ptr<Block> b = std::move(std::make_unique<Block>(m_context, pos, squaresize));
+	m_Blocks.push_back(std::move(b));
 }
 
 void GameState::update(sf::Time deltaTime)
@@ -270,6 +276,11 @@ void GameState::render()
 		m_Shock[i]->render();
 	}
 	
+	for (unsigned int i = 0; i < m_Blocks.size(); i++)
+	{
+		m_Blocks[i]->render();
+	}
+
 	//	new field drawing
 	for (unsigned int y = 0; y < m_gamefield.size(); y+= squaresize)
 	{

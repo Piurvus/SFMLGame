@@ -13,7 +13,7 @@ private:
 public:
 
 
-	Block(std::shared_ptr<Context> context, std::shared_ptr<sf::Vector2f> poss, unsigned int health, unsigned int squaresize) : Entity(context, poss, health, squaresize) 
+	Block(std::shared_ptr<Context> context, std::shared_ptr<sf::Vector2f> poss, unsigned int squaresize) : Entity(context, poss, 100, squaresize) 
 	{
 		init();
 	};
@@ -25,5 +25,5 @@ public:
 
 	void render();
 
-
+	const int getHit() const;
 };

@@ -1,5 +1,7 @@
 #include "GameState.h"
 #include <iostream>
+#include <cstdlib>
+#include <ctime>
 
 GameState::GameState(std::shared_ptr<Context>& m_context) :
 	m_context(m_context), m_event(sf::Event()), keys(std::make_shared<std::queue<unsigned int>>()), m_Player(nullptr),
@@ -77,10 +79,31 @@ void GameState::init()
 	}
 
 	//	PUT DOWN BLOCKS
-	pos = std::move(std::make_shared<sf::Vector2f>(0.f, squaresize*3));
+	srand((unsigned)time(0));
+	unsigned int sizex = m_context->m_window->getSize().x;
+	unsigned sizey = m_context->m_window->getSize().y;
 
-	std::unique_ptr<Block> b = std::move(std::make_unique<Block>(m_context, pos, squaresize));
-	m_Blocks.push_back(std::move(b));
+	for (int i = 0; i < 40; i++) {
+
+		unsigned int x = (rand() % sizex);
+		unsigned int y = (rand() % sizey);
+		
+		if (x / squaresize < 3 && y / squaresize < 3) {
+			i--;
+			continue;
+		}
+
+
+		std::cout << x << " " << y << std::endl;
+
+		pos = std::move(std::make_shared<sf::Vector2f>(static_cast<float>(round(y/squaresize)*squaresize), 
+			static_cast<float>(round(x/squaresize)*squaresize)));
+
+		std::unique_ptr<Block> b = std::move(std::make_unique<Block>(m_context, pos, squaresize));
+		m_Blocks.push_back(std::move(b));
+
+	}
+
 }
 
 void GameState::update(sf::Time deltaTime)

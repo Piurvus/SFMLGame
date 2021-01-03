@@ -93,14 +93,16 @@ void GameState::init()
 			continue;
 		}
 
-
-		std::cout << x << " " << y << std::endl;
-
 		pos = std::move(std::make_shared<sf::Vector2f>(static_cast<float>(round(y/squaresize)*squaresize), 
 			static_cast<float>(round(x/squaresize)*squaresize)));
 
 		std::unique_ptr<Block> b = std::move(std::make_unique<Block>(m_context, pos, squaresize));
 		m_Blocks.push_back(std::move(b));
+
+		for (int i = 0; i < squaresize; i++)
+			for (int j = 0; j < squaresize; j++)
+				m_gamefield[static_cast<unsigned int>(pos->x+i)][static_cast<unsigned int>(pos->y+j)] = 20;
+
 
 	}
 
@@ -221,6 +223,21 @@ void GameState::update(sf::Time deltaTime)
 						if (m_Bombs[j]->getPos().x == pos.x && m_Bombs[j]->getPos().y == k)
 							m_Bombs[j]->goBoom();
 					}
+					for (unsigned int j = 0; j < m_Blocks.size(); j++) {
+						if (j == i)
+							continue;
+						if (m_Blocks[j]->getPos(squaresize).y == pos.x && m_Blocks[j]->getPos(squaresize).x == k) {
+							//	BLOCK PUF
+							m_Blocks.erase(m_Blocks.begin() + j);
+							sf::Vector2f posss = m_Blocks[j]->getPos();
+							//	delete object in field
+
+							for (int i = 0; i < squaresize; i++)
+								for (int j = 0; j < squaresize; j++)
+									m_gamefield[static_cast<unsigned int>(posss.x+i)][static_cast<unsigned int>(posss.y+j)] = 0;
+
+						}
+					}
 				}
 			}
 			if (!(pos.y % 2))
@@ -245,6 +262,21 @@ void GameState::update(sf::Time deltaTime)
 							continue;
 						if (m_Bombs[j]->getPos().y == pos.y && m_Bombs[j]->getPos().x == k)
 							m_Bombs[j]->goBoom();
+					}
+					for (unsigned int j = 0; j < m_Blocks.size(); j++) {
+						if (j == i)
+							continue;
+						if (m_Blocks[j]->getPos(squaresize).x == pos.y && m_Blocks[j]->getPos(squaresize).y == k) {
+							m_Blocks.erase(m_Blocks.begin() + j);
+							sf::Vector2f posss = m_Blocks[j]->getPos();
+							//	delete object in field
+
+							for (int i = 0; i < squaresize; i++)
+								for (int j = 0; j < squaresize; j++)
+									m_gamefield[static_cast<unsigned int>(posss.x+i)][static_cast<unsigned int>(posss.y+j)] = 0;
+
+
+						}
 					}
 				}
 			}

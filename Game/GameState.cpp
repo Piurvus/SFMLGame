@@ -88,7 +88,7 @@ void GameState::init()
 		unsigned int x = (rand() % sizex);
 		unsigned int y = (rand() % sizey);
 		
-		if (x / squaresize < 3 && y / squaresize < 3) {
+		if (x / squaresize < 3 && y / squaresize < 3 || ((x / squaresize) % 2 && (y / squaresize) % 2)) {
 			i--;
 			continue;
 		}
@@ -228,13 +228,13 @@ void GameState::update(sf::Time deltaTime)
 							continue;
 						if (m_Blocks[j]->getPos(squaresize).y == pos.x && m_Blocks[j]->getPos(squaresize).x == k) {
 							//	BLOCK PUF
+							sf::Vector2i posss = m_Blocks[j]->getPos(squaresize);
 							m_Blocks.erase(m_Blocks.begin() + j);
-							sf::Vector2f posss = m_Blocks[j]->getPos();
 							//	delete object in field
 
 							for (int i = 0; i < squaresize; i++)
 								for (int j = 0; j < squaresize; j++)
-									m_gamefield[static_cast<unsigned int>(posss.x+i)][static_cast<unsigned int>(posss.y+j)] = 0;
+									m_gamefield[posss.y*squaresize+i][posss.x*squaresize+j] = 0;
 
 						}
 					}
@@ -267,13 +267,13 @@ void GameState::update(sf::Time deltaTime)
 						if (j == i)
 							continue;
 						if (m_Blocks[j]->getPos(squaresize).x == pos.y && m_Blocks[j]->getPos(squaresize).y == k) {
+							sf::Vector2i posss = m_Blocks[j]->getPos(squaresize);
 							m_Blocks.erase(m_Blocks.begin() + j);
-							sf::Vector2f posss = m_Blocks[j]->getPos();
 							//	delete object in field
 
 							for (int i = 0; i < squaresize; i++)
 								for (int j = 0; j < squaresize; j++)
-									m_gamefield[static_cast<unsigned int>(posss.x+i)][static_cast<unsigned int>(posss.y+j)] = 0;
+									m_gamefield[posss.y*squaresize+i][posss.x*squaresize+j] = 0;
 
 
 						}

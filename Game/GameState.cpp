@@ -197,22 +197,36 @@ void GameState::update(sf::Time deltaTime)
 			//	first search horizontal
 			if (!(pos.x % 2))
 			{
-				for (unsigned int k = pos.y - power+1; k < static_cast<unsigned int>(pos.y + power); k++) {
-					if (k < 0)
+				bool stopl = false;
+				bool stopu = false;
+				//for (unsigned int k = pos.y - power+1; k < static_cast<unsigned int>(pos.y + power); k++) {
+				for (unsigned int k = 0; k < power; k++) {
+					unsigned int u = pos.y + k;
+					unsigned int l = pos.y - k;
+
+					if (l < 0)
 						continue;
-					else if (k >= m_gamefield[0].size())
+					else if (u >= m_gamefield[0].size())
 						break;
 					//	maybe make shock class for the beam? so we can shock[i]->render(); and collision test and so forth,,,,
 
-					std::shared_ptr<sf::Vector2f> position = std::move(std::make_shared<sf::Vector2f>
-						( static_cast<float>(k*squaresize), static_cast<float>(pos.x*squaresize) ));
+					std::shared_ptr<sf::Vector2f> position1 = std::move(std::make_shared<sf::Vector2f>
+						( static_cast<float>(u*squaresize), static_cast<float>(pos.x*squaresize) ));
+					std::shared_ptr<sf::Vector2f> position2 = std::move(std::make_shared<sf::Vector2f>
+						( static_cast<float>(l*squaresize), static_cast<float>(pos.x*squaresize) ));
+
 
 					//std::unique_ptr<Shock> shock = std::move(std::make_unique<Shock>(m_context, position, 100));
 
-					m_Shock.push_back(std::move(std::make_unique<Shock>(m_context, position, 25, squaresize)));
+					if (!stopu)
+						m_Shock.push_back(std::move(std::make_unique<Shock>(m_context, position1, 25, squaresize)));
+					if (u != l && !stopl)
+						m_Shock.push_back(std::move(std::make_unique<Shock>(m_context, position2, 25, squaresize)));
 
 
-					if (round(m_Player->getPos().x/squaresize) == pos.x && round(m_Player->getPos().y/squaresize) == k)
+					if (round(m_Player->getPos().x/squaresize) == pos.x && round(m_Player->getPos().y/squaresize) == l && !stopl)
+						m_Player->kill();
+					if (round(m_Player->getPos().x/squaresize) == pos.x && round(m_Player->getPos().y/squaresize) == u && !stopu)
 						m_Player->kill();
 
 					//	look for other objects in the way
@@ -220,16 +234,32 @@ void GameState::update(sf::Time deltaTime)
 						if (j == i)
 							continue;
 						//std::cout <<"K: " << k << " " << m_Bombs[j]->getPos().y << std::endl;
-						if (m_Bombs[j]->getPos().x == pos.x && m_Bombs[j]->getPos().y == k)
+						if (m_Bombs[j]->getPos().x == pos.x && m_Bombs[j]->getPos().y == u && !stopu)
+							m_Bombs[j]->goBoom();
+						if (m_Bombs[j]->getPos().x == pos.x && m_Bombs[j]->getPos().y == l && !stopl)
 							m_Bombs[j]->goBoom();
 					}
 					for (unsigned int j = 0; j < m_Blocks.size(); j++) {
 						if (j == i)
 							continue;
-						if (m_Blocks[j]->getPos(squaresize).y == pos.x && m_Blocks[j]->getPos(squaresize).x == k) {
+						if (m_Blocks[j]->getPos(squaresize).y == pos.x && m_Blocks[j]->getPos(squaresize).x == u && !stopu) {
 							//	BLOCK PUF
+							stopu = true;
 							sf::Vector2i posss = m_Blocks[j]->getPos(squaresize);
 							m_Blocks.erase(m_Blocks.begin() + j);
+							//	delete object in field
+
+							for (int i = 0; i < squaresize; i++)
+								for (int j = 0; j < squaresize; j++)
+									m_gamefield[posss.y*squaresize+i][posss.x*squaresize+j] = 0;
+
+						}
+						if (m_Blocks[j]->getPos(squaresize).y == pos.x && m_Blocks[j]->getPos(squaresize).x == l && !stopl) {
+							//	BLOCK PUF
+							stopl = true;
+							sf::Vector2i posss = m_Blocks[j]->getPos(squaresize);
+							m_Blocks.erase(m_Blocks.begin() + j);
+							std::cout << j;
 							//	delete object in field
 
 							for (int i = 0; i < squaresize; i++)
